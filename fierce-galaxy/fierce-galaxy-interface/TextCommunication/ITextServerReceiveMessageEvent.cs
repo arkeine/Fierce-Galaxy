@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace fierce_galaxy_interface.fierce_galaxy_interface
+namespace FierceGalaxyInterface.TextCommunication
 {
     /// <summary>
     /// Event emit when the text server receive a message from the text client

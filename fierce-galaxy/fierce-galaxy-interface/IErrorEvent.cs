@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace fierce_galaxy_interface.fierce_galaxy_interface
+namespace FierceGalaxyInterface
 {
     /// <summary>
     /// Asynchronus Error

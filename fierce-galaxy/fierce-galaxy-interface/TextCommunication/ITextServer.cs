@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace fierce_galaxy_interface.fierce_galaxy_interface
+namespace FierceGalaxyInterface.TextCommunication
 {
     /// <summary>
     /// Network server which can receive text data from a text client

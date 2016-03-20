@@ -1,7 +1,7 @@
-﻿using fierce_galaxy_interface.fierce_galaxy_interface;
+﻿
 using System;
 
-namespace fierce_galaxy_interface.text_communication
+namespace FierceGalaxyInterface
 {
     /// <summary>
     /// Should be implement by classes which need to throw exception asynchronly 
