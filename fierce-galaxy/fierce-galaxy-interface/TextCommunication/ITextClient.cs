@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace FierceGalaxyInterface.TextCommunication
+namespace FierceGalaxyInterface.Communication
 {
     /// <summary>
     /// Network client which can send text data to a text server

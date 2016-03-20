@@ -7,8 +7,8 @@
     <ProjectGuid>{10FC4531-BD9C-4CBA-B478-00C2EC04EB7A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>fierce_galaxy_interface</RootNamespace>
-    <AssemblyName>fierce-galaxy-interface</AssemblyName>
+    <RootNamespace>FierceGalaxyInterface</RootNamespace>
+    <AssemblyName>FierceGalaxyInterface</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,12 +41,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IErrorThrower.cs" />
-    <Compile Include="text-communication\ITextClient.cs" />
-    <Compile Include="text-communication\ITextServerEvent.cs" />
+    <Compile Include="TextCommunication\ITextClient.cs" />
     <Compile Include="IErrorEvent.cs" />
-    <Compile Include="text-communication\ITextServerReceiveMessageEvent.cs" />
+    <Compile Include="TextCommunication\ITextServerReceiveMessageEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="text-communication\ITextServer.cs" />
+    <Compile Include="TextCommunication\ITextServer.cs" />
+    <Compile Include="UserManagement\IUser.cs" />
+    <Compile Include="UserManagement\IUserManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PacketParser\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

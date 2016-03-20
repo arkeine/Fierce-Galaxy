@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace FierceGalaxyInterface.TextCommunication
+namespace FierceGalaxyInterface.Communication
 {
     /// <summary>
     /// Event emit when the text server receive a message from the text client
@@ -14,6 +14,11 @@ namespace FierceGalaxyInterface.TextCommunication
         }
 
         IPAddress IPSource
+        {
+            get;
+        }
+
+        int Port
         {
             get;
         }
