@@ -43,7 +43,7 @@
     <Compile Include="IErrorThrower.cs" />
     <Compile Include="text-communication\ITextClient.cs" />
     <Compile Include="text-communication\ITextServerEvent.cs" />
-    <Compile Include="text-communication\ITextServerErrorEvent.cs" />
+    <Compile Include="IErrorEvent.cs" />
     <Compile Include="text-communication\ITextServerReceiveMessageEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="text-communication\ITextServer.cs" />

@@ -50,10 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\fierce-galaxy-interface\fierce-galaxy-interface.csproj">
+    <ProjectReference Include="..\fierce-galaxy-interface\FierceGalaxyInterface.csproj">
       <Project>{10fc4531-bd9c-4cba-b478-00c2ec04eb7a}</Project>
-      <Name>fierce-galaxy-interface</Name>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Name>FierceGalaxyInterface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

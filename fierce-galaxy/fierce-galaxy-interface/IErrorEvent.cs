@@ -1,9 +1,11 @@
-﻿using fierce_galaxy_interface.text_communication;
-using System;
+﻿using System;
 
 namespace fierce_galaxy_interface.fierce_galaxy_interface
 {
-    public interface ITextServerErrorEvent : ITextServerEvent
+    /// <summary>
+    /// Asynchronus Error
+    /// </summary>
+    public interface IErrorEvent 
     {
         Exception Exception
         {

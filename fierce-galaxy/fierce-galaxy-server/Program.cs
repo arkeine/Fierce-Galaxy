@@ -1,7 +1,4 @@
-﻿
-using System;
-
-namespace fierce_galaxy_server
+﻿namespace fierce_galaxy_server
 {
     class Program
     {
