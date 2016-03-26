@@ -9,5 +9,6 @@ namespace FierceGalaxyInterface.Communication
     {
         bool initTextServer(int port);
         event EventHandler<ITextServerReceiveMessageEvent> MessageReceive;
+        event EventHandler<ITextServerReceiveMessageEvent> ErrorOccured;
     }
 }

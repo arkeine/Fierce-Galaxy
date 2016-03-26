@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FierceGalaxyInterface", "fierce-galaxy-interface\FierceGalaxyInterface.csproj", "{10FC4531-BD9C-4CBA-B478-00C2EC04EB7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FierceGalaxyServer", "fierce-galaxy-server\FierceGalaxyServer.csproj", "{28080C54-A11E-403D-ACC2-B197534A4DE6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FierceGalaxyServer", "FierceGalaxyServer\FierceGalaxyServer.csproj", "{70AF6D59-A5DB-43FF-863D-3ED8DF4F82CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{10FC4531-BD9C-4CBA-B478-00C2EC04EB7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10FC4531-BD9C-4CBA-B478-00C2EC04EB7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10FC4531-BD9C-4CBA-B478-00C2EC04EB7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{28080C54-A11E-403D-ACC2-B197534A4DE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{28080C54-A11E-403D-ACC2-B197534A4DE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{28080C54-A11E-403D-ACC2-B197534A4DE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{28080C54-A11E-403D-ACC2-B197534A4DE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70AF6D59-A5DB-43FF-863D-3ED8DF4F82CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70AF6D59-A5DB-43FF-863D-3ED8DF4F82CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70AF6D59-A5DB-43FF-863D-3ED8DF4F82CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70AF6D59-A5DB-43FF-863D-3ED8DF4F82CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
