@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="FierceGalaxyServer.ConnexionModule.ConnexionService" CodeBehind="ConnexionService.svc.cs" %>
