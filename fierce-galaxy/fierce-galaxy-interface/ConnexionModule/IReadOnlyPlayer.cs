@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FierceGalaxyInterface.GameModule
+namespace FierceGalaxyInterface.ConnexionModule
 {
     public enum Color { Red, Blue, Green, Yellow, Orange, Cyan, Purple, Pink }
 

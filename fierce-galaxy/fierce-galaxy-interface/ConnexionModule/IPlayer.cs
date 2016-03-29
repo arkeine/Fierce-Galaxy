@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FierceGalaxyInterface.GameModule
+namespace FierceGalaxyInterface.ConnexionModule
 {
     public interface IPlayer : IReadOnlyPlayer
     {   
