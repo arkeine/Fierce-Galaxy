@@ -1,10 +1,10 @@
 ﻿using System.ServiceModel;
 
-namespace FierceGalaxyServer.ConnexionModule
+namespace FierceGalaxyServer.CommunicationModule
 {
 
     [ServiceContract]
-    public interface IConnexionService
+    public interface IConnexionService 
     {
         /// <summary>
         /// Create the player's session if the credentials are correct

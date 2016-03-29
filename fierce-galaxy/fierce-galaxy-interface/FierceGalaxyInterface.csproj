@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommunicationModule\IConnexionService.cs" />
     <Compile Include="ConnexionModule\IPlayerManagement.cs" />
     <Compile Include="ConnexionModule\IReadOnlyPlayer.cs" />
     <Compile Include="GameModule\Board\IReadOnlyMap.cs" />

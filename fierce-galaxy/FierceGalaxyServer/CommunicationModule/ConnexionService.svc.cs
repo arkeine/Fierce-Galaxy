@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
-namespace FierceGalaxyServer.ConnexionModule
+namespace FierceGalaxyServer.CommunicationModule
 {
     public class ConnexionService : IConnexionService
     {
