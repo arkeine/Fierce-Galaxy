@@ -1,4 +1,4 @@
-﻿using FierceGalaxyInterface.GameModule;
+﻿using FierceGalaxyInterface.ConnexionModule;
 using System;
 
 namespace FierceGalaxyServer.ConnexionModule

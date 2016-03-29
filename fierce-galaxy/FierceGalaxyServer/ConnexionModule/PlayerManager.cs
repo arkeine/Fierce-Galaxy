@@ -1,5 +1,4 @@
 ﻿using FierceGalaxyInterface.ConnexionModule;
-using FierceGalaxyInterface.GameModule;
 using System.Collections.Generic;
 
 namespace FierceGalaxyServer.ConnexionModule
@@ -8,7 +7,7 @@ namespace FierceGalaxyServer.ConnexionModule
     /// Singleton class
     /// Access the database to check player credentials
     /// </summary>
-    public class PlayerManagement : IPlayerManagement
+    public class PlayerManager : IPlayerManager
     {
         //======================================================
         // Field
@@ -20,19 +19,19 @@ namespace FierceGalaxyServer.ConnexionModule
         // Singleton
         //======================================================
 
-        private static PlayerManagement singleton;
+        private static PlayerManager singleton;
 
-        public static PlayerManagement GetInstance()
+        public static PlayerManager GetInstance()
         {
             if (singleton == null)
             {
-                singleton = new PlayerManagement();
+                singleton = new PlayerManager();
             }
 
             return singleton;
         }
 
-        private PlayerManagement()
+        private PlayerManager()
         {
             // Nothing
         }

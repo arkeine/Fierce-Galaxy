@@ -1,11 +1,9 @@
-﻿using FierceGalaxyInterface.GameModule;
-
-namespace FierceGalaxyInterface.ConnexionModule
+﻿namespace FierceGalaxyInterface.ConnexionModule
 {
     /// <summary>
     /// Manage the authentification of players
     /// </summary>
-    public interface IPlayerManagement
+    public interface IPlayerManager
     {
         /// <summary>
         /// Authenticate the player
