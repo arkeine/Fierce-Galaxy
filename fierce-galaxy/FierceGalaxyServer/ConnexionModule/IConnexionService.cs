@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
+﻿using System.ServiceModel;
 
 namespace FierceGalaxyServer.ConnexionModule
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IConnexionService" in both code and config file together.
+
     [ServiceContract]
     public interface IConnexionService
     {
-        [OperationContract]
-        void DoWork();
+        /// <summary>
+        /// Create the player's session if the credentials are correct
+        /// </summary>
+        [OperationContract(IsInitiating = true)]
+        void Connect(string playerID, string playerPW);
+
+        /// <summary>
+        /// Disconnect the player and close the session
+        /// </summary>
+        [OperationContract(IsTerminating = true)]
+        void Disconnect();
     }
 }

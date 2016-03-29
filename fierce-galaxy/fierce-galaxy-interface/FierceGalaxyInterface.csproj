@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnexionModule\IPlayerManagement.cs" />
-    <Compile Include="GameModule\IReadOnlyPlayer.cs" />
+    <Compile Include="ConnexionModule\IReadOnlyPlayer.cs" />
     <Compile Include="GameModule\Board\IReadOnlyMap.cs" />
     <Compile Include="GameModule\Board\IReadOnlyLink.cs" />
     <Compile Include="GameModule\Board\ILink.cs" />
@@ -58,7 +58,7 @@
     <Compile Include="MatchingModule\ByLobby\ILobbyManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TCPCommunication\TextCommunication\ITextServer.cs" />
-    <Compile Include="GameModule\IPlayer.cs" />
+    <Compile Include="ConnexionModule\IPlayer.cs" />
     <Compile Include="TCPCommunication\UserManagement\IUserManager.cs" />
   </ItemGroup>
   <ItemGroup>
