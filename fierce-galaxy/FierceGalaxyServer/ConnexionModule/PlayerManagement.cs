@@ -1,6 +1,6 @@
 ﻿using FierceGalaxyInterface.ConnexionModule;
 using FierceGalaxyInterface.GameModule;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace FierceGalaxyServer.ConnexionModule
 {
@@ -14,7 +14,7 @@ namespace FierceGalaxyServer.ConnexionModule
         // Field
         //======================================================
 
-        private IDictionary mapCachedPlayer = new Hashtable();
+        private IDictionary<string, IPlayer> mapCachedPlayer = new Dictionary<string, IPlayer>();
 
         //======================================================
         // Singleton
@@ -50,14 +50,16 @@ namespace FierceGalaxyServer.ConnexionModule
         {
             if(IsCredentialsCorrect(playerID, playerPW))
             {
-
-                return mapCachedPlayer.Try Player(); // Create a new player with the right datas
+                if(!mapCachedPlayer.ContainsKey(playerID))
+                {
+                    mapCachedPlayer[playerID] = LoadPlayerFromDatabase(playerID);
+                }
+                return mapCachedPlayer[playerID];
             }
             else
             {
                 return null;
             }
-
         }
 
         //======================================================
@@ -71,7 +73,12 @@ namespace FierceGalaxyServer.ConnexionModule
 
         private bool IsCredentialsCorrect(string playerID, string playerPW)
         {
-            //TODO Check if the player's credentials are correct
+            return false; //TODO Check if the player's credentials are correct 
+        }
+
+        private IPlayer LoadPlayerFromDatabase(string playerID)
+        {
+            return new Player(); //TODO Create a new player with the right datas (from database)
         }
     }
 }
