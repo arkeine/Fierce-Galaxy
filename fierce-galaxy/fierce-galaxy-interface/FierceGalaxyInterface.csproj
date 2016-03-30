@@ -43,11 +43,6 @@
     <Compile Include="ConnexionModule\IPlayerManager.cs" />
     <Compile Include="ConnexionModule\IReadOnlyPlayer.cs" />
     <Compile Include="ConnexionModule\ITokenManager.cs" />
-    <Compile Include="GameModule\Rules\IRulesManager.cs" />
-    <Compile Include="GameModule\Rules\ILinkEnterUpdate.cs" />
-    <Compile Include="GameModule\Rules\INodeUpdate.cs" />
-    <Compile Include="GameModule\Rules\IPower.cs" />
-    <Compile Include="GameModule\Rules\IPowerUpdate.cs" />
     <Compile Include="GameModule\Map\IReadOnlyMap.cs" />
     <Compile Include="GameModule\Map\IReadOnlyNode.cs" />
     <Compile Include="GameModule\Map\INode.cs" />
