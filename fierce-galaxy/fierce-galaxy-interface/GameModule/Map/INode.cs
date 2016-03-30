@@ -1,15 +1,10 @@
-﻿using System;
+﻿using FierceGalaxyInterface.ConnexionModule;
+using System;
 
 namespace FierceGalaxyInterface.GameModule
 {
     public interface INode : IReadOnlyNode
     {
-        void SendRessources(ILink node);
-        void ReciveRessourcesFrom(IPlayer owner, int amount);
-
-        event EventHandler OwnerChange;
-        event EventHandler MaxCapacityReach;
-
         new int InitialCapacity
         {
             get;
