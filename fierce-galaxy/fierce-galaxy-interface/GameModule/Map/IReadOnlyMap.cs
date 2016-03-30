@@ -4,6 +4,11 @@ namespace FierceGalaxyInterface.GameModule
 {
     public interface IReadOnlyMap
     {
+        /// <summary>
+        /// Return the nodes acessible from the source node
+        /// </summary>
+        IReadOnlyList<IReadOnlyNode> GetLinkFrom(IReadOnlyNode source);
+
         string Name
         {
             get;

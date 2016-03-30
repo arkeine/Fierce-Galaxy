@@ -49,24 +49,14 @@
     <Compile Include="GameModule\Rules\IPower.cs" />
     <Compile Include="GameModule\Rules\IPowerUpdate.cs" />
     <Compile Include="GameModule\Map\IReadOnlyMap.cs" />
-    <Compile Include="GameModule\Map\IReadOnlyLink.cs" />
-    <Compile Include="GameModule\Map\ILink.cs" />
     <Compile Include="GameModule\Map\IReadOnlyNode.cs" />
     <Compile Include="GameModule\Map\INode.cs" />
-    <Compile Include="TCPCommunication\JsonParser\IJSonParser.cs" />
-    <Compile Include="TimeModule\NetworkTime.cs" />
-    <Compile Include="TCPCommunication\TextCommunication\ITextServerReceiveMessageEvent.cs" />
-    <Compile Include="TCPCommunication\IErrorThrower.cs" />
-    <Compile Include="TCPCommunication\TextCommunication\ITextClient.cs" />
-    <Compile Include="TCPCommunication\IErrorEvent.cs" />
-    <Compile Include="TCPCommunication\TextCommunication\ITextServerErrorOccuredEvent.cs" />
     <Compile Include="GameModule\Map\IMap.cs" />
     <Compile Include="MatchingModule\ByLobby\ILobby.cs" />
     <Compile Include="MatchingModule\ByLobby\ILobbyManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TCPCommunication\TextCommunication\ITextServer.cs" />
     <Compile Include="ConnexionModule\IPlayer.cs" />
-    <Compile Include="TCPCommunication\UserManagement\IUserManager.cs" />
+    <Compile Include="TimeModule\NetworkTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameModule\Scheduler\" />

@@ -1,14 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using FierceGalaxyInterface.ConnexionModule;
+using System.Collections.Generic;
 
 namespace FierceGalaxyInterface.GameModule
 {
     public interface IReadOnlyNode
     {
-        IReadOnlyList<ILink> Links
-        {
-            get;
-        }
-
         int InitialCapacity
         {
             get;
