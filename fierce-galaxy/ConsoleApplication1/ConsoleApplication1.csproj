@@ -51,7 +51,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\fierce-galaxy-interface\FierceGalaxyInterface.csproj">
+    <ProjectReference Include="..\FierceGalaxyInterface\FierceGalaxyInterface.csproj">
       <Project>{10fc4531-bd9c-4cba-b478-00c2ec04eb7a}</Project>
       <Name>FierceGalaxyInterface</Name>
     </ProjectReference>

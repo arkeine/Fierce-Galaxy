@@ -51,7 +51,7 @@
     <Compile Include="MatchingModule\ByLobby\ILobbyManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConnexionModule\IPlayer.cs" />
-    <Compile Include="TimeModule\NetworkTime.cs" />
+    <Compile Include="TimeModule\INetworkTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameModule\Scheduler\" />

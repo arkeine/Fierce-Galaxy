@@ -1,4 +1,5 @@
-﻿using FierceGalaxyInterface.GameModule;
+﻿using FierceGalaxyInterface.ConnexionModule;
+using FierceGalaxyInterface.GameModule;
 using System;
 using System.Collections.Generic;
 
