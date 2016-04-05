@@ -1,9 +1,13 @@
 ﻿using FierceGalaxyInterface.ConnexionModule;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FierceGalaxyServer.ConnexionModule
 {
+    /// <summary>
+    /// Manage the temporary connection token
+    /// </summary>
     public class TokenManager : ITokenManager
     {
         //======================================================
@@ -50,7 +54,7 @@ namespace FierceGalaxyServer.ConnexionModule
             {
                 IReadOnlyPlayer player = mapPlayerToken.GetOther(token);
                 
-                if ((mapValidityTime[player] - DateTime.Now) <= maxGap)
+                if (IsTimeValid(mapValidityTime[player]))
                 {
                     result = true;
                 }
@@ -87,15 +91,38 @@ namespace FierceGalaxyServer.ConnexionModule
         }
 
         //======================================================
+        // public
+        //======================================================
+
+        public void CleanToken()
+        {
+            var list = mapValidityTime.ToList();
+
+            foreach (var v in list)
+            {
+                if(!IsTimeValid(v.Value))
+                {
+                    mapValidityTime.Remove(v.Key);
+                    mapPlayerToken.Remove(v.Key);
+                }
+            }
+        }
+
+        //======================================================
         // Private
         //======================================================
 
-        long GenerateRandomToken()
+        private bool IsTimeValid(DateTime t)
+        {
+            return ((t - DateTime.Now) <= maxGap);
+        }
+
+        private long GenerateRandomToken()
         {
             return LongRandom(long.MinValue, long.MaxValue, new Random());
         }
 
-        long LongRandom(long min, long max, Random rand)
+        private long LongRandom(long min, long max, Random rand)
         {
             long result = rand.Next((Int32)(min >> 32), (Int32)(max >> 32));
             result = (result << 32);
