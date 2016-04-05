@@ -43,6 +43,7 @@
     <Compile Include="ConnexionModule\IPlayerManager.cs" />
     <Compile Include="ConnexionModule\IReadOnlyPlayer.cs" />
     <Compile Include="ConnexionModule\ITokenManager.cs" />
+    <Compile Include="GameModule\IGame.cs" />
     <Compile Include="MapModule\IReadOnlyMap.cs" />
     <Compile Include="MapModule\IReadOnlyNode.cs" />
     <Compile Include="MapModule\INode.cs" />
@@ -53,9 +54,7 @@
     <Compile Include="ConnexionModule\IPlayer.cs" />
     <Compile Include="TimeModule\INetworkTime.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GameModule\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
