@@ -108,6 +108,7 @@
     <Compile Include="ConnexionModule\PlayerManager.cs" />
     <Compile Include="ConnexionModule\TokenDictionary.cs" />
     <Compile Include="ConnexionModule\TokenManager.cs" />
+    <Compile Include="DoubleDictionary.cs" />
     <Compile Include="DBModule\DBPlayer.cs" />
     <Compile Include="DBModule\JsonSerialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

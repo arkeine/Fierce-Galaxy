@@ -1,5 +1,6 @@
 ﻿using FierceGalaxyInterface.ConnexionModule;
 using System;
+using System.Collections.Generic;
 
 namespace FierceGalaxyServer.ConnexionModule
 {
@@ -9,7 +10,11 @@ namespace FierceGalaxyServer.ConnexionModule
         // Field
         //======================================================
 
-        private TokenDictionary mapPlayerToken = new TokenDictionary();
+        //Link timestamp and player
+        private DoubleDictionary<IReadOnlyPlayer, Int64> mapPlayerToken = new DoubleDictionary<IReadOnlyPlayer, Int64>();
+        //Timestamp of the tokens
+        private IDictionary<IReadOnlyPlayer, DateTime> mapValidityTime = new Dictionary<IReadOnlyPlayer, DateTime>();
+        //Validity time range of a new token
         private TimeSpan maxGap = new TimeSpan(0, 0, 30);
 
         //======================================================
@@ -43,14 +48,15 @@ namespace FierceGalaxyServer.ConnexionModule
 
             if (mapPlayerToken.Contains(token))
             {
-                IPlayer p = mapPlayerToken.GetPlayer(token);
+                IReadOnlyPlayer player = mapPlayerToken.GetOther(token);
                 
-                if ((mapPlayerToken.GetTimestamp(p) - DateTime.Now) <= maxGap)
+                if ((mapValidityTime[player] - DateTime.Now) <= maxGap)
                 {
                     result = true;
                 }
 
-                mapPlayerToken.RemoveToken(p);
+                mapPlayerToken.Remove(player);
+                mapValidityTime.Remove(player);
             }
 
             return result;
@@ -58,7 +64,7 @@ namespace FierceGalaxyServer.ConnexionModule
 
         public long GenerateToken(IPlayer player)
         {
-            mapPlayerToken.RemoveToken(player);
+            mapPlayerToken.Remove(player);
 
             bool tokenValid = false;
             long token;
@@ -66,15 +72,18 @@ namespace FierceGalaxyServer.ConnexionModule
             do
             {
                 token = GenerateRandomToken();
-                tokenValid = mapPlayerToken.AddToken(player, token);
+                tokenValid = mapPlayerToken.Add(player, token);
             } while (!tokenValid);
+
+            mapValidityTime[player] = DateTime.Now;
 
             return token;
         }
 
         public void RemoveToken(IPlayer player)
         {
-            mapPlayerToken.RemoveToken(player);
+            mapPlayerToken.Remove(player);
+            mapValidityTime.Remove(player);
         }
 
         //======================================================
