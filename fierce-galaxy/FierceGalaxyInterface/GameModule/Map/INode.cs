@@ -1,5 +1,4 @@
 ﻿using FierceGalaxyInterface.ConnexionModule;
-using System;
 
 namespace FierceGalaxyInterface.GameModule
 {
