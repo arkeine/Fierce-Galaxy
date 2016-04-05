@@ -103,6 +103,7 @@
     <Compile Include="ConnexionModule\PlayerManager.cs" />
     <Compile Include="ConnexionModule\TokenDictionary.cs" />
     <Compile Include="ConnexionModule\TokenManager.cs" />
+    <Compile Include="DoubleDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeModule\NetworkTime.cs" />
   </ItemGroup>
