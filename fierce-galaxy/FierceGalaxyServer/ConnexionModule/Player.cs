@@ -6,7 +6,7 @@ namespace FierceGalaxyServer.ConnexionModule
     public class Player : IPlayer
     {
         private Color color;
-        private String pseudo;
+        private String publicPseudo;
 
         public Color Color
         {
@@ -21,16 +21,16 @@ namespace FierceGalaxyServer.ConnexionModule
             }
         }
 
-        public string Pseudo
+        public string PublicPseudo
         {
             get
             {
-                return pseudo;
+                return publicPseudo;
             }
 
             set
             {
-                pseudo = value;
+                publicPseudo = value;
             }
         }
     }

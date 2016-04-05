@@ -4,7 +4,7 @@ namespace FierceGalaxyInterface.ConnexionModule
 {
     public interface IPlayer : IReadOnlyPlayer
     {   
-        new String Pseudo
+        new String PublicPseudo
         {
             set;
             get;

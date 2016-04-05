@@ -1,4 +1,5 @@
 ﻿using FierceGalaxyInterface.ConnexionModule;
+using FierceGalaxyServer.DBModule;
 using System.Collections.Generic;
 
 namespace FierceGalaxyServer.ConnexionModule
@@ -12,8 +13,9 @@ namespace FierceGalaxyServer.ConnexionModule
         //======================================================
         // Field
         //======================================================
-
-        private IDictionary<string, IPlayer> mapCachedPlayer = new Dictionary<string, IPlayer>();
+        
+        private Dictionary<string, DBPlayer> mapDBPlayers { get; set; }
+        private string dbFilePath;
 
         //======================================================
         // Singleton
@@ -33,27 +35,28 @@ namespace FierceGalaxyServer.ConnexionModule
 
         private PlayerManager()
         {
-            // Nothing
+            dbFilePath = "C:\\temp\\dbManager.txt";
+            //mapDBPlayers = new Dictionary<string, DBPlayer>();
+
+            mapDBPlayers = JsonSerialization.ReadFromJsonFile<Dictionary<string, DBPlayer>>(this.dbFilePath);
+            
         }
 
         //======================================================
         // Override
         //======================================================
 
-        public IPlayer CreatePlayer(string playerID, string playerPW, string publicPseudo)
+        public IPlayer CreatePlayer(string pseudo, string playerPW, string publicPseudo)
         {
-            return Login(playerID, playerPW);
+            CreatePlayerInDatabase(pseudo, playerPW, publicPseudo);
+            return Login(pseudo, playerPW);
         }
 
-        public IPlayer Login(string playerID, string playerPW)
+        public IPlayer Login(string pseudo, string playerPW)
         {
-            if(IsCredentialsCorrect(playerID, playerPW))
+            if(IsCredentialsCorrect(pseudo, playerPW))
             {
-                if(!mapCachedPlayer.ContainsKey(playerID))
-                {
-                    mapCachedPlayer[playerID] = LoadPlayerFromDatabase(playerID);
-                }
-                return mapCachedPlayer[playerID];
+                return LoadPlayerFromDatabase(pseudo);
             }
             else
             {
@@ -65,19 +68,40 @@ namespace FierceGalaxyServer.ConnexionModule
         // Private
         //======================================================
 
-        private void CreatePlayerInDatabase(string playerID, string playerPW, string publicPseudo)
+        private void CreatePlayerInDatabase(string pseudo, string playerPW, string publicPseudo)
         {
-            //TODO Create a player in the database with credential
+            //TODO check if pseudo already exist
+            DBPlayer newPlayer = new DBPlayer(mapDBPlayers.Count+1, pseudo, playerPW, publicPseudo);
+
+            mapDBPlayers.Add(pseudo,newPlayer);
+            
+            JsonSerialization.WriteToJsonFile<Dictionary<string, DBPlayer>>(dbFilePath, mapDBPlayers);
         }
 
-        private bool IsCredentialsCorrect(string playerID, string playerPW)
+        private bool IsCredentialsCorrect(string pseudo, string playerPW)
         {
-            return false; //TODO Check if the player's credentials are correct 
+            if (mapDBPlayers.ContainsKey(pseudo))
+            {
+                var dbplayer = mapDBPlayers[pseudo];
+                if (dbplayer.playerPW == playerPW)
+                    return true;
+            }
+
+            return false; 
         }
 
-        private IPlayer LoadPlayerFromDatabase(string playerID)
+        private IPlayer LoadPlayerFromDatabase(string pseudo)
         {
-            return new Player(); //TODO Create a new player with the right datas (from database)
+            if (this.mapDBPlayers.ContainsKey(pseudo))
+            {
+                var dbplayer = this.mapDBPlayers[pseudo];
+                var player = new Player();
+                player.PublicPseudo = dbplayer.publicPseudo;
+
+                return player;
+            }
+
+            return null;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace FierceGalaxyInterface.ConnexionModule
 
     public interface IReadOnlyPlayer
     {   
-        String Pseudo
+        String PublicPseudo
         {
             get;
         }

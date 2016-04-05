@@ -3,8 +3,14 @@
 namespace FierceGalaxyServer.CommunicationModule
 {
     [ServiceContract]
-    public interface IMainFacadeService 
+    public interface IMainFacadeService
     {
+        /// <summary>
+        /// Create the player in database if conditions are met
+        /// </summary>
+        [OperationContract(IsInitiating = true)]
+        void NewPlayer(string playerID, string playerPW, string publicPseudo);
+
         /// <summary>
         /// Create the player's session if the credentials are correct
         /// </summary>
