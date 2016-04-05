@@ -1,4 +1,4 @@
-﻿namespace FierceGalaxyInterface.GameModule
+﻿namespace FierceGalaxyInterface.MapModule
 {
     /// <summary>
     /// The map manage the nodes and connexions between them in a coerente way

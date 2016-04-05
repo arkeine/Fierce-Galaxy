@@ -1,7 +1,7 @@
 ﻿using FierceGalaxyInterface.ConnexionModule;
 using System;
 
-namespace FierceGalaxyInterface.GameModule
+namespace FierceGalaxyInterface.MapModule
 {
     public interface INode : IReadOnlyNode
     {

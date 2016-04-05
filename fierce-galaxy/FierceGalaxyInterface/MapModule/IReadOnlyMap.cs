@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FierceGalaxyInterface.GameModule
+namespace FierceGalaxyInterface.MapModule
 {
     public interface IReadOnlyMap
     {
