@@ -14,7 +14,6 @@ namespace FierceGalaxyServer.DBModule
 
         public DBPlayer()
         {
-
         }
 
         public DBPlayer(string pseudo, string playerPW, string publicPseudo = "newPlayer", double score = 0.0)

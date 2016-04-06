@@ -24,9 +24,7 @@ namespace ConsoleApplication1
         {
 
             PlayerManager playerManager = PlayerManager.GetInstance();
-
-
-
+            
 
             try
             {
