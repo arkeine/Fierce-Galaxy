@@ -54,10 +54,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FierceGalaxyInterface\FierceGalaxyInterface.csproj">
-      <Project>{10FC4531-BD9C-4CBA-B478-00C2EC04EB7A}</Project>
-      <Name>FierceGalaxyInterface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FierceGalaxyServer\FierceGalaxyServer.csproj">
       <Project>{70af6d59-a5db-43ff-863d-3ed8df4f82cf}</Project>
       <Name>FierceGalaxyServer</Name>

@@ -16,7 +16,7 @@ namespace FierceGalaxyServer.ConnexionModule
         // Field
         //======================================================
         
-        public Dictionary<string, DBPlayer> MapDBPlayers { get; set; }
+        private Dictionary<string, DBPlayer> mapDBPlayers { get; set; }
         private string dbFilePath;
 
         //======================================================
@@ -41,7 +41,7 @@ namespace FierceGalaxyServer.ConnexionModule
             //mapDBPlayers = new Dictionary<string, DBPlayer>();
             validateDBExist(dbFilePath);
 
-            MapDBPlayers = JsonSerialization.ReadFromJsonFile<Dictionary<string, DBPlayer>>(this.dbFilePath);
+            mapDBPlayers = JsonSerialization.ReadFromJsonFile<Dictionary<string, DBPlayer>>(this.dbFilePath);
 
         }
 
@@ -57,9 +57,9 @@ namespace FierceGalaxyServer.ConnexionModule
 
         public IPlayer Login(string pseudo, string playerPW)
         {
-            if (this.MapDBPlayers.ContainsKey(pseudo))
+            if (this.mapDBPlayers.ContainsKey(pseudo))
             {
-                var dbplayer = MapDBPlayers[pseudo];
+                var dbplayer = mapDBPlayers[pseudo];
                 if (dbplayer.playerPW == playerPW)
                 {
                     var player = new Player();
@@ -85,14 +85,14 @@ namespace FierceGalaxyServer.ConnexionModule
 
         private void CreatePlayerInDatabase(string pseudo, string playerPW, string publicPseudo)
         {
-            DBPlayer newPlayer = new DBPlayer(MapDBPlayers.Count + 1, pseudo, playerPW, publicPseudo);
+            DBPlayer newPlayer = new DBPlayer(mapDBPlayers.Count + 1, pseudo, playerPW, publicPseudo);
 
-            if(MapDBPlayers.ContainsKey(pseudo))
+            if(mapDBPlayers.ContainsKey(pseudo))
                 throw new System.ArgumentException("Pseudo '" + pseudo + "' is already used", "pseudo");
             else
-                MapDBPlayers.Add(pseudo, newPlayer);
+                mapDBPlayers.Add(pseudo, newPlayer);
                         
-            JsonSerialization.WriteToJsonFile<Dictionary<string, DBPlayer>>(dbFilePath, MapDBPlayers);
+            JsonSerialization.WriteToJsonFile<Dictionary<string, DBPlayer>>(dbFilePath, mapDBPlayers);
         }
     }
 }
