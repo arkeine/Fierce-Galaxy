@@ -3,12 +3,11 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 
+/// <summary>
+/// Source :  http://stackoverflow.com/questions/1193955/how-to-query-an-ntp-server-using-c
+/// </summary>
 namespace FierceGalaxyServer.TimeModule
 {
-    /// <summary>
-    /// Source : 
-    /// http://stackoverflow.com/questions/1193955/how-to-query-an-ntp-server-using-c
-    /// </summary>
     public class NetworkTime : INetworkTime
     {
         //======================================================
