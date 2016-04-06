@@ -36,7 +36,7 @@ namespace FierceGalaxyServer.ConnexionModule
 
         private PlayerManager()
         {
-            dbFilePath = "C:\\temp\\dbManager.txt";
+            dbFilePath = Properties.Settings.Default.JsonDBPath;
             //mapDBPlayers = new Dictionary<string, DBPlayer>();
 
             mapDBPlayers = JsonSerialization.ReadFromJsonFile<Dictionary<string, DBPlayer>>(this.dbFilePath);
