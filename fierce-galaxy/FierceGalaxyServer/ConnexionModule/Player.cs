@@ -21,6 +21,14 @@ namespace FierceGalaxyServer.ConnexionModule
             }
         }
 
+        public bool IsPlayervalid
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public string PublicPseudo
         {
             get
@@ -32,6 +40,13 @@ namespace FierceGalaxyServer.ConnexionModule
             {
                 publicPseudo = value;
             }
+        }
+
+        public event EventHandler OnInvalidate;
+
+        public void Invalidate()
+        {
+            throw new NotImplementedException();
         }
     }
 }
