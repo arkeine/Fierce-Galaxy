@@ -2,6 +2,7 @@
 using FierceGalaxyServer.DBModule;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace FierceGalaxyServer.ConnexionModule
 {
@@ -36,11 +37,12 @@ namespace FierceGalaxyServer.ConnexionModule
 
         private PlayerManager()
         {
+
             dbFilePath = "C:\\temp\\dbManager.txt";
             //mapDBPlayers = new Dictionary<string, DBPlayer>();
 
             mapDBPlayers = JsonSerialization.ReadFromJsonFile<Dictionary<string, DBPlayer>>(this.dbFilePath);
-            
+
         }
 
         //======================================================
