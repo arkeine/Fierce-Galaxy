@@ -1,6 +1,5 @@
 ﻿using FierceGalaxyInterface.ConnexionModule;
 using FierceGalaxyServer.DBModule;
-using System;
 using System.Collections.Generic;
 
 namespace FierceGalaxyServer.ConnexionModule
@@ -40,7 +39,7 @@ namespace FierceGalaxyServer.ConnexionModule
             //mapDBPlayers = new Dictionary<string, DBPlayer>();
 
             mapDBPlayers = JsonSerialization.ReadFromJsonFile<Dictionary<string, DBPlayer>>(this.dbFilePath);
-            
+
         }
 
         //======================================================
