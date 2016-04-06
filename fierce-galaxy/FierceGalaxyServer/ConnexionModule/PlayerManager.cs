@@ -1,5 +1,6 @@
 ﻿using FierceGalaxyInterface.ConnexionModule;
 using FierceGalaxyServer.DBModule;
+using System;
 using System.Collections.Generic;
 
 namespace FierceGalaxyServer.ConnexionModule
@@ -70,11 +71,13 @@ namespace FierceGalaxyServer.ConnexionModule
 
         private void CreatePlayerInDatabase(string pseudo, string playerPW, string publicPseudo)
         {
-            //TODO check if pseudo already exist
-            DBPlayer newPlayer = new DBPlayer(mapDBPlayers.Count+1, pseudo, playerPW, publicPseudo);
+            DBPlayer newPlayer = new DBPlayer(mapDBPlayers.Count + 1, pseudo, playerPW, publicPseudo);
 
-            mapDBPlayers.Add(pseudo,newPlayer);
-            
+            if(mapDBPlayers.ContainsKey(pseudo))
+                throw new System.ArgumentException("Pseudo '" + pseudo + "' is already used", "pseudo");
+            else
+                mapDBPlayers.Add(pseudo, newPlayer);
+                        
             JsonSerialization.WriteToJsonFile<Dictionary<string, DBPlayer>>(dbFilePath, mapDBPlayers);
         }
 

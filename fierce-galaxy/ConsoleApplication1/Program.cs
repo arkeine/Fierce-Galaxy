@@ -25,11 +25,21 @@ namespace ConsoleApplication1
 
             PlayerManager playerManager = PlayerManager.GetInstance();
 
-            playerManager.CreatePlayer("toto", "tata", "publictoto");
-            playerManager.CreatePlayer("titi", "tata", "publictoto");
-            playerManager.CreatePlayer("tutu", "tata", "publictoto");
 
-            Console.WriteLine(playerManager.Login("toto", "tata").PublicPseudo + " loogued successfully");
+
+
+            try
+            {
+                playerManager.CreatePlayer("toto", "tata", "publictoto");
+                playerManager.CreatePlayer("titi", "tata", "publictiti");
+                playerManager.CreatePlayer("tutu", "tata", "publictutu");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Pseudo déjà utilisé!");
+            }
+
+            Console.WriteLine(playerManager.Login("toto", "tata").PublicPseudo + " loggued successfully");
             Console.ReadLine();
 
         }
