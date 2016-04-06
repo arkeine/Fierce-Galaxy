@@ -51,9 +51,7 @@ namespace FierceGalaxyServer.DBModule
         /// <returns>Returns a new instance of the object read from the Json file.</returns>
         public static T ReadFromJsonFile<T>(string filePath) where T : new()
         {
-            using (StreamWriter w = File.AppendText(filePath)) ;
-
-                TextReader reader = null;
+            TextReader reader = null;
             try
             {
                 reader = new StreamReader(filePath);

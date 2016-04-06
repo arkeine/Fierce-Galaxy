@@ -1,6 +1,8 @@
 ﻿using FierceGalaxyInterface.ConnexionModule;
 using FierceGalaxyServer.DBModule;
 using System.Collections.Generic;
+using System;
+using System.IO;
 
 namespace FierceGalaxyServer.ConnexionModule
 {
@@ -37,6 +39,7 @@ namespace FierceGalaxyServer.ConnexionModule
         {
             dbFilePath = Properties.Settings.Default.JsonDBPath;
             //mapDBPlayers = new Dictionary<string, DBPlayer>();
+            validateDBExist(dbFilePath);
 
             mapDBPlayers = JsonSerialization.ReadFromJsonFile<Dictionary<string, DBPlayer>>(this.dbFilePath);
 
@@ -67,6 +70,12 @@ namespace FierceGalaxyServer.ConnexionModule
         //======================================================
         // Private
         //======================================================
+        
+        private void validateDBExist(string dbFilePath)
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(dbFilePath));
+            using (StreamWriter w = File.AppendText(dbFilePath)) ;
+        }
 
         private void CreatePlayerInDatabase(string pseudo, string playerPW, string publicPseudo)
         {
