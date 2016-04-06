@@ -44,6 +44,7 @@
     <Compile Include="ConnexionModule\IReadOnlyPlayer.cs" />
     <Compile Include="ConnexionModule\ITokenManager.cs" />
     <Compile Include="GameModule\IGame.cs" />
+    <Compile Include="MapModule\IMapManager.cs" />
     <Compile Include="MapModule\IReadOnlyMap.cs" />
     <Compile Include="MapModule\IReadOnlyNode.cs" />
     <Compile Include="MapModule\INode.cs" />

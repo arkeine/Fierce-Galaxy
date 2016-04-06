@@ -5,15 +5,10 @@ namespace FierceGalaxyInterface.ConnexionModule
     public enum Color { Red, Blue, Green, Yellow, Orange, Cyan, Purple, Pink }
 
     public interface IReadOnlyPlayer
-    {   
-        String PublicPseudo
-        {
-            get;
-        }
-
-        Color Color
-        {
-            get;
-        }
+    {
+        event EventHandler OnInvalidate;
+        bool IsPlayervalid { get; }
+        String PublicPseudo { get; }
+        Color Color { get; }
     }
 }

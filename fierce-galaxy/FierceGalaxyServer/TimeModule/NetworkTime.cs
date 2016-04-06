@@ -3,16 +3,34 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 
+/// <summary>
+/// Source :  http://stackoverflow.com/questions/1193955/how-to-query-an-ntp-server-using-c
+/// </summary>
 namespace FierceGalaxyServer.TimeModule
 {
     public class NetworkTime : INetworkTime
     {
-        public DateTime GetNetworkTime()
-        {
-            return GetNetworkTime(NtpDefaultServer);
-        }
+        //======================================================
+        // Field
+        //======================================================
 
-        public DateTime GetNetworkTime(string serverURL)
+        private int timeout = 3000;
+        private int port = 123;
+        private string serverURL = "ch.pool.ntp.org";
+
+        //======================================================
+        // Access
+        //======================================================
+
+        public int Timeout { get { return timeout; } set { timeout = value; } }
+        public int Port { get { return port; } set { port = value; } }
+        public string ServerURL { get { return serverURL; } set { serverURL = value; } }
+
+        //======================================================
+        // Override
+        //======================================================
+
+        public DateTime GetNetworkTime()
         {
             // NTP message size - 16 bytes of the digest (RFC 2030)
             var ntpData = new byte[48];
@@ -23,14 +41,14 @@ namespace FierceGalaxyServer.TimeModule
             var addresses = Dns.GetHostEntry(serverURL).AddressList;
 
             //The UDP port number assigned to NTP is 123
-            var ipEndPoint = new IPEndPoint(addresses[0], 123);
+            var ipEndPoint = new IPEndPoint(addresses[0], Port);
             //NTP uses UDP
             var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
             socket.Connect(ipEndPoint);
 
             //Stops code hang if NTP is blocked
-            socket.ReceiveTimeout = 3000;
+            socket.ReceiveTimeout = timeout;
 
             socket.Send(ntpData);
             socket.Receive(ntpData);
@@ -57,7 +75,11 @@ namespace FierceGalaxyServer.TimeModule
 
             return networkDateTime.ToLocalTime();
         }
-
+        
+        //======================================================
+        // Private
+        //======================================================
+        
         private uint SwapEndianness(ulong x)
         {
             return (uint)(((x & 0x000000ff) << 24) +
@@ -65,8 +87,5 @@ namespace FierceGalaxyServer.TimeModule
                            ((x & 0x00ff0000) >> 8) +
                            ((x & 0xff000000) >> 24));
         }
-
-        //private const string NtpDefaultServer = "time.windows.com";
-        private const string NtpDefaultServer = "ch.pool.ntp.org";
     }
 }
