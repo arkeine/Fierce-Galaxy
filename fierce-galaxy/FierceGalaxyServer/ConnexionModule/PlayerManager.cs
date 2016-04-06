@@ -57,14 +57,20 @@ namespace FierceGalaxyServer.ConnexionModule
 
         public IPlayer Login(string pseudo, string playerPW)
         {
-            if(IsCredentialsCorrect(pseudo, playerPW))
+            if (this.mapDBPlayers.ContainsKey(pseudo))
             {
-                return LoadPlayerFromDatabase(pseudo);
+                var dbplayer = mapDBPlayers[pseudo];
+                if (dbplayer.playerPW == playerPW)
+                {
+                    var player = new Player();
+                    player.PublicPseudo = dbplayer.publicPseudo;
+                    return player;
+                }
+                else
+                    throw new System.ArgumentException("Password for pseudo '" + pseudo + "' is incorrect", "playerPW");
             }
             else
-            {
-                return null;
-            }
+                throw new System.ArgumentException("Pseudo '" + pseudo + "' does not exist", "pseudo");
         }
 
         //======================================================
@@ -87,32 +93,6 @@ namespace FierceGalaxyServer.ConnexionModule
                 mapDBPlayers.Add(pseudo, newPlayer);
                         
             JsonSerialization.WriteToJsonFile<Dictionary<string, DBPlayer>>(dbFilePath, mapDBPlayers);
-        }
-
-        private bool IsCredentialsCorrect(string pseudo, string playerPW)
-        {
-            if (mapDBPlayers.ContainsKey(pseudo))
-            {
-                var dbplayer = mapDBPlayers[pseudo];
-                if (dbplayer.playerPW == playerPW)
-                    return true;
-            }
-
-            return false; 
-        }
-
-        private IPlayer LoadPlayerFromDatabase(string pseudo)
-        {
-            if (this.mapDBPlayers.ContainsKey(pseudo))
-            {
-                var dbplayer = this.mapDBPlayers[pseudo];
-                var player = new Player();
-                player.PublicPseudo = dbplayer.publicPseudo;
-
-                return player;
-            }
-
-            return null;
         }
     }
 }
