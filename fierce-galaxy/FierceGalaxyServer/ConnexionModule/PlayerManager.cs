@@ -86,12 +86,13 @@ namespace FierceGalaxyServer.ConnexionModule
 
         private void CreatePlayerInDatabase(string pseudo, string playerPW, string publicPseudo)
         {
-            DBPlayer newPlayer = new DBPlayer(MapDBPlayers.Count + 1, pseudo, playerPW, publicPseudo);
-
             if(MapDBPlayers.ContainsKey(pseudo))
                 throw new System.ArgumentException("Pseudo '" + pseudo + "' is already used", "pseudo");
             else
+            {
+                DBPlayer newPlayer = new DBPlayer(MapDBPlayers.Count + 1, pseudo, playerPW, publicPseudo);
                 MapDBPlayers.Add(pseudo, newPlayer);
+            }
                         
             JsonSerialization.WriteToJsonFile<Dictionary<string, DBPlayer>>(dbFilePath, MapDBPlayers);
         }
