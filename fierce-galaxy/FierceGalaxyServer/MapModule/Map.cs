@@ -6,11 +6,24 @@ namespace FierceGalaxyServer.MapModule
 {
     public class Map : IMap
     {
+        //======================================================
+        // Field
+        //======================================================
+        
+        private string name;
+        private string description;
+        private List<Node> listNodes;
+        private List<Node> listSpawnNodes;
+
+        //======================================================
+        // Override
+        //======================================================
+
         public string Description
         {
             get
             {
-                throw new NotImplementedException();
+                return description;
             }
         }
 
@@ -18,7 +31,7 @@ namespace FierceGalaxyServer.MapModule
         {
             get
             {
-                throw new NotImplementedException();
+                return name;
             }
         }
 
@@ -26,7 +39,7 @@ namespace FierceGalaxyServer.MapModule
         {
             get
             {
-                throw new NotImplementedException();
+                return (IReadOnlyList<Node>)listNodes;
             }
         }
 
@@ -34,7 +47,7 @@ namespace FierceGalaxyServer.MapModule
         {
             get
             {
-                throw new NotImplementedException();
+                return (IReadOnlyList<Node>)listSpawnNodes;
             }
         }
 
@@ -67,5 +80,11 @@ namespace FierceGalaxyServer.MapModule
         {
             throw new NotImplementedException();
         }
+
+
+        //======================================================
+        // Private
+        //======================================================
+
     }
 }
