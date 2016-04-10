@@ -16,7 +16,8 @@ namespace FierceGalaxyServer.ConnexionModule
         // Field
         //======================================================
         
-        private Dictionary<string, DBPlayer> mapDBPlayers { get; set; }
+        public Dictionary<string, DBPlayer> MapDBPlayers { get; set; }
+
         private string dbFilePath;
 
         //======================================================
@@ -41,7 +42,7 @@ namespace FierceGalaxyServer.ConnexionModule
             //mapDBPlayers = new Dictionary<string, DBPlayer>();
             validateDBExist(dbFilePath);
 
-            mapDBPlayers = JsonSerialization.ReadFromJsonFile<Dictionary<string, DBPlayer>>(this.dbFilePath);
+            MapDBPlayers = JsonSerialization.ReadFromJsonFile<Dictionary<string, DBPlayer>>(this.dbFilePath);
 
         }
 
@@ -57,14 +58,20 @@ namespace FierceGalaxyServer.ConnexionModule
 
         public IPlayer Login(string pseudo, string playerPW)
         {
-            if(IsCredentialsCorrect(pseudo, playerPW))
+            if (this.MapDBPlayers.ContainsKey(pseudo))
             {
-                return LoadPlayerFromDatabase(pseudo);
+                var dbplayer = MapDBPlayers[pseudo];
+                if (dbplayer.playerPW == playerPW)
+                {
+                    var player = new Player();
+                    player.PublicPseudo = dbplayer.publicPseudo;
+                    return player;
+                }
+                else
+                    throw new System.ArgumentException("Password for pseudo '" + pseudo + "' is incorrect", "playerPW");
             }
             else
-            {
-                return null;
-            }
+                throw new System.ArgumentException("Pseudo '" + pseudo + "' does not exist", "pseudo");
         }
 
         //======================================================
@@ -79,40 +86,15 @@ namespace FierceGalaxyServer.ConnexionModule
 
         private void CreatePlayerInDatabase(string pseudo, string playerPW, string publicPseudo)
         {
-            DBPlayer newPlayer = new DBPlayer(mapDBPlayers.Count + 1, pseudo, playerPW, publicPseudo);
-
-            if(mapDBPlayers.ContainsKey(pseudo))
+            if(MapDBPlayers.ContainsKey(pseudo))
                 throw new System.ArgumentException("Pseudo '" + pseudo + "' is already used", "pseudo");
             else
-                mapDBPlayers.Add(pseudo, newPlayer);
+            {
+                DBPlayer newPlayer = new DBPlayer(MapDBPlayers.Count + 1, pseudo, playerPW, publicPseudo);
+                MapDBPlayers.Add(pseudo, newPlayer);
+            }
                         
-            JsonSerialization.WriteToJsonFile<Dictionary<string, DBPlayer>>(dbFilePath, mapDBPlayers);
-        }
-
-        private bool IsCredentialsCorrect(string pseudo, string playerPW)
-        {
-            if (mapDBPlayers.ContainsKey(pseudo))
-            {
-                var dbplayer = mapDBPlayers[pseudo];
-                if (dbplayer.playerPW == playerPW)
-                    return true;
-            }
-
-            return false; 
-        }
-
-        private IPlayer LoadPlayerFromDatabase(string pseudo)
-        {
-            if (this.mapDBPlayers.ContainsKey(pseudo))
-            {
-                var dbplayer = this.mapDBPlayers[pseudo];
-                var player = new Player();
-                player.PublicPseudo = dbplayer.publicPseudo;
-
-                return player;
-            }
-
-            return null;
+            JsonSerialization.WriteToJsonFile<Dictionary<string, DBPlayer>>(dbFilePath, MapDBPlayers);
         }
     }
 }

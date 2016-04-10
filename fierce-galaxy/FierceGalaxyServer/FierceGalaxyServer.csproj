@@ -107,6 +107,10 @@
     <Compile Include="ConnexionModule\Player.cs" />
     <Compile Include="ConnexionModule\PlayerManager.cs" />
     <Compile Include="ConnexionModule\TokenManager.cs" />
+    <Compile Include="DBModule\DBMap.cs" />
+    <Compile Include="MapModule\Map.cs" />
+    <Compile Include="MapModule\MapManager.cs" />
+    <Compile Include="MapModule\Node.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
