@@ -6,9 +6,8 @@ namespace FierceGalaxyInterface.ConnexionModule
 
     public interface IReadOnlyPlayer
     {
-        event EventHandler OnInvalidate;
-        bool IsPlayervalid { get; }
         String PublicPseudo { get; }
+
         Color Color { get; }
     }
 }

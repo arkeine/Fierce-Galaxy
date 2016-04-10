@@ -5,8 +5,32 @@ namespace FierceGalaxyServer.ConnexionModule
 {
     public class Player : IPlayer
     {
+        //======================================================
+        // Field
+        //======================================================
+
         private Color color;
-        private String publicPseudo;
+        private String publicPseudo = "";
+        private bool valid = true;
+
+        //======================================================
+        // Override
+        //======================================================
+
+        public event EventHandler OnInvalidate;
+
+        public bool IsPlayervalid
+        {
+            get
+            {
+                return valid;
+            }
+        }
+
+        public void Invalidate()
+        {
+            valid = false;
+        }
 
         public Color Color
         {
