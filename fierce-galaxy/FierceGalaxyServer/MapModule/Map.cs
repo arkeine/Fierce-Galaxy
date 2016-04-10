@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace FierceGalaxyServer.MapModule
+namespace FierceGalaxyServer
 {
     public class Map : IMap
     {

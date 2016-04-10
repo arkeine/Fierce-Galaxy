@@ -1,7 +1,7 @@
 ﻿using FierceGalaxyInterface;
 using System;
 
-namespace FierceGalaxyServer.ConnexionModule
+namespace FierceGalaxyServer
 {
     public class Player : IPlayer, IInvalidable
     {

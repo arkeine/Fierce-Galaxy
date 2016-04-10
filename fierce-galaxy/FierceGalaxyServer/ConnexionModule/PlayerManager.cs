@@ -1,9 +1,8 @@
 ﻿using FierceGalaxyInterface;
-using FierceGalaxyServer.DBModule;
 using System.Collections.Generic;
 using System.IO;
 
-namespace FierceGalaxyServer.ConnexionModule
+namespace FierceGalaxyServer
 {
     /// <summary>
     /// Singleton class

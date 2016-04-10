@@ -1,6 +1,5 @@
 ﻿using ConsoleApplication1.TimeModule;
 using System;
-using FierceGalaxyServer.ConnexionModule;
 
 namespace ConsoleApplication1
 {

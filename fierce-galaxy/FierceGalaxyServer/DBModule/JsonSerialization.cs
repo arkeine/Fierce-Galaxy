@@ -4,7 +4,7 @@
 /// Source: http://blog.danskingdom.com/saving-and-loading-a-c-objects-data-to-an-xml-json-or-binary-file/
 /// </summary>
 
-namespace FierceGalaxyServer.DBModule
+namespace FierceGalaxyServer
 {
 
     /// <summary>

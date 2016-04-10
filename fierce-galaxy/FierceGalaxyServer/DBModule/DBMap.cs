@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FierceGalaxyServer.DBModule
+namespace FierceGalaxyServer
 {
     public class DBMap
     {

@@ -1,6 +1,6 @@
 ﻿using System.ServiceModel;
 
-namespace FierceGalaxyServer.CommunicationModule
+namespace FierceGalaxyServer
 {
     [ServiceContract]
     public interface IMainFacadeService

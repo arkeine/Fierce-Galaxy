@@ -1,7 +1,7 @@
 ﻿using FierceGalaxyInterface;
 using System;
 
-namespace FierceGalaxyServer.MapModule
+namespace FierceGalaxyServer
 {
     public class Node : INode
     {
