@@ -1,4 +1,5 @@
 ﻿using ConsoleApplication1.TimeModule;
+using FierceGalaxyServer;
 using System;
 
 namespace ConsoleApplication1
@@ -7,7 +8,7 @@ namespace ConsoleApplication1
     {
         static int Main(string[] args)
         {
-            var time = new NetworkTime().GetNetworkTime();
+            var time = new FierceGalaxyServer.NetworkTime().GetNetworkTime();
             var myTime = DateTime.Now;
             var diffTime = time - myTime;
             

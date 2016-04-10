@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FierceGalaxyServer", "Fierc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{A323AE3D-E3B4-49FE-8CBA-E42E454F946D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{1B824FE6-21E2-490C-AF13-564D4511D6E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FierceGalaxyUnitTest", "FierceGalaxyUnitTest\FierceGalaxyUnitTest.csproj", "{1B824FE6-21E2-490C-AF13-564D4511D6E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
