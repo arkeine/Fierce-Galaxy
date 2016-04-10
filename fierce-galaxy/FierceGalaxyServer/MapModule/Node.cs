@@ -1,6 +1,5 @@
-﻿using FierceGalaxyInterface.MapModule;
+﻿using FierceGalaxyInterface;
 using System;
-using FierceGalaxyInterface.ConnexionModule;
 
 namespace FierceGalaxyServer.MapModule
 {

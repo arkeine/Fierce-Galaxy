@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FierceGalaxyInterface.MatchingModule
+namespace FierceGalaxyInterface
 {
     /// <summary>
     /// Manage the custom lobby

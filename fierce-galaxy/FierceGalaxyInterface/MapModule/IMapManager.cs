@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FierceGalaxyInterface.MapModule
+namespace FierceGalaxyInterface
 {
     /// <summary>
     /// The MapManager load/save the map from/to the disk

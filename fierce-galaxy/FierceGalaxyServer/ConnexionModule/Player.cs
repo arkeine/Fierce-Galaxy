@@ -1,9 +1,9 @@
-﻿using FierceGalaxyInterface.ConnexionModule;
+﻿using FierceGalaxyInterface;
 using System;
 
 namespace FierceGalaxyServer.ConnexionModule
 {
-    public class Player : IPlayer
+    public class Player : IPlayer, IInvalidable
     {
         //======================================================
         // Field
@@ -19,14 +19,13 @@ namespace FierceGalaxyServer.ConnexionModule
 
         public event EventHandler OnInvalidate;
 
-        public bool IsPlayervalid
+        public bool IsValid
         {
             get
             {
                 return valid;
             }
         }
-
         public void Invalidate()
         {
             valid = false;
@@ -45,14 +44,6 @@ namespace FierceGalaxyServer.ConnexionModule
             }
         }
 
-        public bool IsPlayervalid
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         public string PublicPseudo
         {
             get
@@ -64,13 +55,6 @@ namespace FierceGalaxyServer.ConnexionModule
             {
                 publicPseudo = value;
             }
-        }
-
-        public event EventHandler OnInvalidate;
-
-        public void Invalidate()
-        {
-            throw new NotImplementedException();
         }
     }
 }

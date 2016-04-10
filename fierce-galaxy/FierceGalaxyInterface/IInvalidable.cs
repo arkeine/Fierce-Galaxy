@@ -2,7 +2,7 @@
 
 namespace FierceGalaxyInterface
 {
-    interface IInvalidable
+    public interface IInvalidable
     {
         event EventHandler OnInvalidate;
 

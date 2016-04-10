@@ -1,4 +1,4 @@
-﻿using FierceGalaxyInterface.MapModule;
+﻿using FierceGalaxyInterface;
 using System;
 using System.Collections.Generic;
 

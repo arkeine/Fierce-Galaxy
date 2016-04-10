@@ -1,7 +1,6 @@
-﻿using FierceGalaxyInterface.ConnexionModule;
+﻿using FierceGalaxyInterface;
 using FierceGalaxyServer.DBModule;
 using System.Collections.Generic;
-using System;
 using System.IO;
 
 namespace FierceGalaxyServer.ConnexionModule
