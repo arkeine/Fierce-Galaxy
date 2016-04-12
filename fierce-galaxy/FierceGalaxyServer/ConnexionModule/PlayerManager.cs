@@ -14,22 +14,15 @@ namespace FierceGalaxyServer
         // Field
         //======================================================
         
-        public Dictionary<string, DBPlayer> MapDBPlayers { get; set; }
-
-        private string dbFilePath;
+        private IDBManager dBManager;
 
         //======================================================
         // Constructor
         //======================================================
-        
-        public PlayerManager()
+
+        public PlayerManager(IDBManager dBManager)
         {
-            dbFilePath = Properties.Settings.Default.JsonDBPath;
-            //mapDBPlayers = new Dictionary<string, DBPlayer>();
-            validateDBExist(dbFilePath);
-
-            MapDBPlayers = JsonSerialization.ReadFromJsonFile<Dictionary<string, DBPlayer>>(this.dbFilePath);
-
+            this.dBManager = dBManager;
         }
 
         //======================================================
@@ -44,43 +37,47 @@ namespace FierceGalaxyServer
 
         public IPlayer Login(string pseudo, string playerPW)
         {
-            if (this.MapDBPlayers.ContainsKey(pseudo))
+            if (dBManager.ContainsPlayer(pseudo))
             {
-                var dbplayer = MapDBPlayers[pseudo];
-                if (dbplayer.playerPW == playerPW)
+                var dbPlayer = dBManager.GetPlayer(pseudo);
+
+                if (dbPlayer.playerPW == playerPW)
                 {
-                    var player = new Player();
-                    player.PublicPseudo = dbplayer.publicPseudo;
-                    return player;
+                    return CreatePlayerFromDBPlayer(dbPlayer);
                 }
                 else
+                {
                     throw new System.ArgumentException("Password for pseudo '" + pseudo + "' is incorrect", "playerPW");
+                }                    
             }
             else
+            {
                 throw new System.ArgumentException("Pseudo '" + pseudo + "' does not exist", "pseudo");
+            }
         }
 
         //======================================================
         // Private
         //======================================================
         
-        private void validateDBExist(string dbFilePath)
+        private IPlayer CreatePlayerFromDBPlayer(DBPlayer dbPlayer)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(dbFilePath));
-            using (StreamWriter w = File.AppendText(dbFilePath)) ;
+            var player = new Player();
+            player.PublicPseudo = dbPlayer.publicPseudo;
+            return player;
         }
 
         private void CreatePlayerInDatabase(string pseudo, string playerPW, string publicPseudo)
         {
-            if(MapDBPlayers.ContainsKey(pseudo))
-                throw new System.ArgumentException("Pseudo '" + pseudo + "' is already used", "pseudo");
+            if(!dBManager.ContainsPlayer(pseudo))
+            {
+                DBPlayer newPlayer = new DBPlayer(pseudo, playerPW, publicPseudo);
+                dBManager.SetPlayer(pseudo, newPlayer);
+            }
             else
             {
-                DBPlayer newPlayer = new DBPlayer(MapDBPlayers.Count + 1, pseudo, playerPW, publicPseudo);
-                MapDBPlayers.Add(pseudo, newPlayer);
+                throw new System.ArgumentException("Pseudo '" + pseudo + "' is already used", "pseudo");
             }
-                        
-            JsonSerialization.WriteToJsonFile<Dictionary<string, DBPlayer>>(dbFilePath, MapDBPlayers);
         }
     }
 }

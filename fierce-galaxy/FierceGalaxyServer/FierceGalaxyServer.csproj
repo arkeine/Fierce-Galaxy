@@ -104,10 +104,11 @@
       <DependentUpon>MainFacadeService.svc</DependentUpon>
     </Compile>
     <Compile Include="CommunicationModule\IMainFacadeService.cs" />
-    <Compile Include="ConnexionModule\Player.cs" />
+    <Compile Include="DBModule\DBJsonManager.cs" />
+    <Compile Include="DBModule\IDBManager.cs" />
+    <Compile Include="Global\Player.cs" />
     <Compile Include="ConnexionModule\PlayerManager.cs" />
     <Compile Include="ConnexionModule\TokenManager.cs" />
-    <Compile Include="DBModule\DBMap.cs" />
     <Compile Include="Global\GameFacade.cs" />
     <Compile Include="MapModule\Map.cs" />
     <Compile Include="MapModule\MapManager.cs" />

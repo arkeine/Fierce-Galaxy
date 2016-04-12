@@ -4,7 +4,7 @@ namespace FierceGalaxyServer
 {
     public class DBPlayer
     {   
-        public int playerID { get; set; }
+        public Nullable<int> playerID { get; set; }
         public String pseudo { get; set; }
         public String playerPW { get; set; }
         public string publicPseudo { get; set; }
@@ -12,19 +12,11 @@ namespace FierceGalaxyServer
 
         public DBPlayer()
         {
+            playerID = null;
         }
 
         public DBPlayer(string pseudo, string playerPW, string publicPseudo = "newPlayer", double score = 0.0)
         {
-            this.pseudo = pseudo;
-            this.playerPW = playerPW;
-            this.publicPseudo = publicPseudo;
-            this.score = score;
-        }
-
-        public DBPlayer(int playerID, string pseudo, string playerPW, string publicPseudo = "newPlayer", double score = 0.0)
-        {
-            this.playerID = playerID;
             this.pseudo = pseudo;
             this.playerPW = playerPW;
             this.publicPseudo = publicPseudo;

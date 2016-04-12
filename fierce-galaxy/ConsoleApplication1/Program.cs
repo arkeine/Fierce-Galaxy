@@ -14,31 +14,8 @@ namespace ConsoleApplication1
             
             //Console.WriteLine(time.ToString() + " / diff : " +diffTime.TotalMilliseconds.ToString());
             //Console.ReadLine();
-
-            testUser();
-            return 0;
-
-        }
-
-        private static void testUser()
-        {
-
-            PlayerManager playerManager = new PlayerManager();
             
-
-            try
-            {
-                playerManager.CreatePlayer("toto", "tata", "publictoto");
-                playerManager.CreatePlayer("titi", "tata", "publictiti");
-                playerManager.CreatePlayer("tutu", "tata", "publictutu");
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Pseudo déjà utilisé!");
-            }
-
-            Console.WriteLine(playerManager.Login("toto", "tata").PublicPseudo + " loggued successfully");
-            Console.ReadLine();
+            return 0;
 
         }
     }

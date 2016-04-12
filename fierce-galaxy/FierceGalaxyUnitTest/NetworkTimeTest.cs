@@ -10,7 +10,7 @@ namespace FierceGalaxyUnitTest
         [TestMethod]
         public void CompareNetworkTimeToSystemTime()
         {
-            const double epsilon = 0.2;
+            TimeSpan epsilon = new TimeSpan(0, 0, 0, 0, 200);
 
             var networkTime= new NetworkTime().GetNetworkTime();
             var systemTime = DateTime.Now;

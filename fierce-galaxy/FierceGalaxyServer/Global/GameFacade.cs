@@ -28,7 +28,8 @@ namespace FierceGalaxyServer
 
         private GameFacade()
         {
-            playerManager = new PlayerManager();
+            string dbFilePath = Properties.Settings.Default.JsonDBPath;
+            playerManager = new PlayerManager(new DBJsonManager(dbFilePath));
         }
 
         //======================================================
