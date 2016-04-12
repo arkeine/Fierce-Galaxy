@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FierceGalaxyServer;
 
-namespace UnitTestProject1
+namespace FierceGalaxyUnitTest
 {
     [TestClass]
     public class PlayerMangerTest
