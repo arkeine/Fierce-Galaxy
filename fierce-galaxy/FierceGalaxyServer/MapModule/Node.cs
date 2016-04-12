@@ -1,156 +1,35 @@
 ﻿using FierceGalaxyInterface.MapModule;
 using System;
 using FierceGalaxyInterface.ConnexionModule;
+using System.Collections.Generic;
 
 namespace FierceGalaxyServer.MapModule
 {
     public class Node : INode
     {
-        public int CurrentCapacity
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        //======================================================
+        // Properties
+        //======================================================
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public List<Node> ListLinkedNodes { get; set; }
 
-        public IPlayer CurrentOwner
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public int CurrentCapacity { get; set; }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IPlayer CurrentOwner { get; set; }
 
-        public int InitialCapacity
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public int InitialCapacity { get; set; }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public int MaxCapacity { get; set; }
 
-        public int MaxCapacity
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public double Radius { get; set; }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public double X { get; set; }
 
-        public double Radius
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public double Y { get; set; }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public double X
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public double Y
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        int IReadOnlyNode.CurrentCapacity
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        IPlayer IReadOnlyNode.CurrentOwner
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        int IReadOnlyNode.InitialCapacity
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        int IReadOnlyNode.MaxCapacity
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        double IReadOnlyNode.Radius
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        double IReadOnlyNode.X
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        double IReadOnlyNode.Y
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        //======================================================
+        // Private
+        //======================================================
+        
     }
 }

@@ -1,64 +1,62 @@
 ﻿using FierceGalaxyInterface.MapModule;
 using System;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.GraphModel;
 
 namespace FierceGalaxyServer.MapModule
 {
     public class Map : IMap
     {
         //======================================================
-        // Field
+        // Properties
         //======================================================
         
-        private string name;
-        private string description;
-        private List<Node> listNodes;
-        private List<Node> listSpawnNodes;
+        public IListLinkedNodes ListLinkedList { get; set; }
+
+        public string Description { get; set; }
+
+        public string Name { get; set; }
+
+        public IList<IReadOnlyNode> ListNodes { get; set; }
+
+        public IList<IReadOnlyNode> ListSpawnNodes { get; set; }
+
+        IReadOnlyList<IReadOnlyNode> IReadOnlyMap.Nodes { get; }
+
+        IReadOnlyList<IReadOnlyNode> IReadOnlyMap.SpawnNodes { get; }
 
         //======================================================
         // Override
         //======================================================
-
-        public string Description
+        
+        public bool AddNode(IReadOnlyNode node)
         {
-            get
+            if (!ListNodes.Contains(node))
             {
-                return description;
+                ListNodes.Add(node);
+                return true;
             }
+            return false;
         }
 
-        public string Name
+        public bool RemoveNode(IReadOnlyNode node)
         {
-            get
+            if (ListNodes.Contains((Node)node))
             {
-                return name;
+                ListNodes.Remove((Node)node);
+                
+                return ListLinkedList.removeAllLinksForNode(node);
             }
-        }
-
-        public IReadOnlyList<IReadOnlyNode> Nodes
-        {
-            get
-            {
-                return (IReadOnlyList<Node>)listNodes;
-            }
-        }
-
-        public IReadOnlyList<IReadOnlyNode> SpawnNodes
-        {
-            get
-            {
-                return (IReadOnlyList<Node>)listSpawnNodes;
-            }
+            return false;
         }
 
         public bool AddLink(IReadOnlyNode node1, IReadOnlyNode node2)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool AddNode(IReadOnlyNode node)
-        {
-            throw new NotImplementedException();
+            if (ListNodes.Contains(node1) && ListNodes.Contains(node2))
+            {
+                return ListLinkedList.addLink(node1, node2);
+            }
+            return false;
         }
 
         public IReadOnlyList<IReadOnlyNode> GetLinkFrom(IReadOnlyNode source)
@@ -68,23 +66,26 @@ namespace FierceGalaxyServer.MapModule
 
         public bool RemoveLink(IReadOnlyNode node1, IReadOnlyNode node2)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool RemoveNode(IReadOnlyNode node)
-        {
-            throw new NotImplementedException();
+            if (ListNodes.Contains(node1) && ListNodes.Contains(node2))
+            {
+                return ListLinkedList.removeLink(node1, node2);
+            }
+            return false;
         }
 
         public bool SetSpawnNode(IReadOnlyNode node, bool isSpawn)
         {
-            throw new NotImplementedException();
+            if (!ListSpawnNodes.Contains((Node)node)){
+                ListSpawnNodes.Add((Node)node);
+                return true;
+            }
+            return false;
         }
 
 
         //======================================================
         // Private
         //======================================================
-
+        
     }
 }

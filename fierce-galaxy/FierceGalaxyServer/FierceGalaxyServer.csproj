@@ -70,6 +70,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.GraphModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -108,6 +109,7 @@
     <Compile Include="ConnexionModule\PlayerManager.cs" />
     <Compile Include="ConnexionModule\TokenManager.cs" />
     <Compile Include="DBModule\DBMap.cs" />
+    <Compile Include="MapModule\IListLinkedNodes.cs" />
     <Compile Include="MapModule\Map.cs" />
     <Compile Include="MapModule\MapManager.cs" />
     <Compile Include="MapModule\Node.cs" />
@@ -116,11 +118,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Tools\DoubleDictionarySameType.cs" />
     <Compile Include="Tools\DoubleDictionary.cs" />
     <Compile Include="DBModule\DBPlayer.cs" />
     <Compile Include="DBModule\JsonSerialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeModule\NetworkTime.cs" />
+    <Compile Include="Tools\MultiMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
