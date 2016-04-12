@@ -28,34 +28,30 @@ namespace FierceGalaxyServer
         // Override
         //======================================================
         
-        public bool AddNode(IReadOnlyNode node)
+        public void AddNode(IReadOnlyNode node)
         {
             if (!ListNodes.Contains(node))
             {
                 ListNodes.Add(node);
-                return true;
             }
-            return false;
         }
 
-        public bool RemoveNode(IReadOnlyNode node)
+        public void RemoveNode(IReadOnlyNode node)
         {
             if (ListNodes.Contains((Node)node))
             {
                 ListNodes.Remove((Node)node);
                 
-                return ListLinkedList.removeAllLinksForNode(node);
+                ListLinkedList.RemoveAllLinksForNode(node);
             }
-            return false;
         }
 
-        public bool AddLink(IReadOnlyNode node1, IReadOnlyNode node2)
+        public void AddLink(IReadOnlyNode node1, IReadOnlyNode node2)
         {
             if (ListNodes.Contains(node1) && ListNodes.Contains(node2))
             {
-                return ListLinkedList.addLink(node1, node2);
+                ListLinkedList.AddLink(node1, node2);
             }
-            return false;
         }
 
         public IReadOnlyList<IReadOnlyNode> GetLinkFrom(IReadOnlyNode source)
@@ -63,22 +59,19 @@ namespace FierceGalaxyServer
             throw new NotImplementedException();
         }
 
-        public bool RemoveLink(IReadOnlyNode node1, IReadOnlyNode node2)
+        public void RemoveLink(IReadOnlyNode node1, IReadOnlyNode node2)
         {
             if (ListNodes.Contains(node1) && ListNodes.Contains(node2))
             {
-                return ListLinkedList.removeLink(node1, node2);
+                ListLinkedList.RemoveLink(node1, node2);
             }
-            return false;
         }
 
-        public bool SetSpawnNode(IReadOnlyNode node, bool isSpawn)
+        public void SetSpawnNode(IReadOnlyNode node, bool isSpawn)
         {
             if (!ListSpawnNodes.Contains((Node)node)){
                 ListSpawnNodes.Add((Node)node);
-                return true;
             }
-            return false;
         }
 
 
