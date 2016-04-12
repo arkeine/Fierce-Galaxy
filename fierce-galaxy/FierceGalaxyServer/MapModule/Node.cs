@@ -1,9 +1,9 @@
-﻿using FierceGalaxyInterface.MapModule;
+﻿using FierceGalaxyInterface;
 using System;
 using FierceGalaxyInterface.ConnexionModule;
 using System.Collections.Generic;
 
-namespace FierceGalaxyServer.MapModule
+namespace FierceGalaxyServer
 {
     public class Node : INode
     {
@@ -30,6 +30,6 @@ namespace FierceGalaxyServer.MapModule
         //======================================================
         // Private
         //======================================================
-        
+
     }
 }

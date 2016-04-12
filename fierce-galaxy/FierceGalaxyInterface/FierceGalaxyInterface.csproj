@@ -41,9 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnexionModule\IPlayerManager.cs" />
-    <Compile Include="ConnexionModule\IReadOnlyPlayer.cs" />
+    <Compile Include="IReadOnlyPlayer.cs" />
     <Compile Include="ConnexionModule\ITokenManager.cs" />
     <Compile Include="GameModule\IGame.cs" />
+    <Compile Include="IInvalidable.cs" />
     <Compile Include="MapModule\IMapManager.cs" />
     <Compile Include="MapModule\IReadOnlyMap.cs" />
     <Compile Include="MapModule\IReadOnlyNode.cs" />
@@ -52,7 +53,7 @@
     <Compile Include="MatchingModule\ByLobby\ILobby.cs" />
     <Compile Include="MatchingModule\ByLobby\ILobbyManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ConnexionModule\IPlayer.cs" />
+    <Compile Include="IPlayer.cs" />
     <Compile Include="TimeModule\INetworkTime.cs" />
   </ItemGroup>
   <ItemGroup />

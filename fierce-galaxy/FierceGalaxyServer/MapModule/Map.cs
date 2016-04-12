@@ -1,9 +1,9 @@
-﻿using FierceGalaxyInterface.MapModule;
+﻿using FierceGalaxyInterface;
 using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.GraphModel;
 
-namespace FierceGalaxyServer.MapModule
+namespace FierceGalaxyServer
 {
     public class Map : IMap
     {

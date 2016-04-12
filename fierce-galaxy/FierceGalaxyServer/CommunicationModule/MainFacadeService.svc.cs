@@ -1,7 +1,6 @@
 ﻿using System;
-using FierceGalaxyServer.ConnexionModule;
 
-namespace FierceGalaxyServer.CommunicationModule
+namespace FierceGalaxyServer
 {
     public class MainFacadeService : IMainFacadeService
     {

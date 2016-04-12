@@ -1,4 +1,4 @@
-﻿namespace FierceGalaxyInterface.ConnexionModule
+﻿namespace FierceGalaxyInterface
 {
     /// <summary>
     /// Manage the authentification of players

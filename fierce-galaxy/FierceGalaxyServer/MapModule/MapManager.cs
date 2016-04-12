@@ -1,8 +1,8 @@
-﻿using FierceGalaxyInterface.MapModule;
+﻿using FierceGalaxyInterface;
 using System;
 using System.Collections.Generic;
 
-namespace FierceGalaxyServer.MapModule
+namespace FierceGalaxyServer
 {
     public class MapManager : IMapManager
     {

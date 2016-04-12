@@ -1,4 +1,4 @@
-﻿namespace FierceGalaxyInterface.ConnexionModule
+﻿namespace FierceGalaxyInterface
 {
     public interface ITokenManager
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FierceGalaxyInterface.TimeModule
+namespace FierceGalaxyInterface
 {
     public interface INetworkTime
     {

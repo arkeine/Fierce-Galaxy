@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace FierceGalaxyInterface.ConnexionModule
+namespace FierceGalaxyInterface
 {
     public interface IPlayer : IReadOnlyPlayer
-    {   
+    {
         new String PublicPseudo { set; get; }
+
         new Color Color { set; get; }
-        void Invalidate();
     }
 }

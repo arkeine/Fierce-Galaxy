@@ -1,9 +1,7 @@
-﻿using FierceGalaxyInterface.ConnexionModule;
-using FierceGalaxyInterface.MapModule;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace FierceGalaxyInterface.MatchingModule
+namespace FierceGalaxyInterface
 {
     public interface ILobby
     {

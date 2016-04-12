@@ -1,12 +1,35 @@
-﻿using FierceGalaxyInterface.ConnexionModule;
+﻿using FierceGalaxyInterface;
 using System;
 
-namespace FierceGalaxyServer.ConnexionModule
+namespace FierceGalaxyServer
 {
-    public class Player : IPlayer
+    public class Player : IPlayer, IInvalidable
     {
+        //======================================================
+        // Field
+        //======================================================
+
         private Color color;
-        private String publicPseudo;
+        private String publicPseudo = "";
+        private bool valid = true;
+
+        //======================================================
+        // Override
+        //======================================================
+
+        public event EventHandler OnInvalidate;
+
+        public bool IsValid
+        {
+            get
+            {
+                return valid;
+            }
+        }
+        public void Invalidate()
+        {
+            valid = false;
+        }
 
         public Color Color
         {
@@ -21,14 +44,6 @@ namespace FierceGalaxyServer.ConnexionModule
             }
         }
 
-        public bool IsPlayervalid
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         public string PublicPseudo
         {
             get
@@ -40,13 +55,6 @@ namespace FierceGalaxyServer.ConnexionModule
             {
                 publicPseudo = value;
             }
-        }
-
-        public event EventHandler OnInvalidate;
-
-        public void Invalidate()
-        {
-            throw new NotImplementedException();
         }
     }
 }

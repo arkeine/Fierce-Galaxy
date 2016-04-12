@@ -1,6 +1,4 @@
-﻿using FierceGalaxyInterface.ConnexionModule;
-
-namespace FierceGalaxyInterface.MapModule
+﻿namespace FierceGalaxyInterface
 {
     public interface IReadOnlyNode
     {

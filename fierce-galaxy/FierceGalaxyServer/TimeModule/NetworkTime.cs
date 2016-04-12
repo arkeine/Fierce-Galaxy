@@ -1,4 +1,4 @@
-﻿using FierceGalaxyInterface.TimeModule;
+﻿using FierceGalaxyInterface;
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -6,7 +6,7 @@ using System.Net.Sockets;
 /// <summary>
 /// Source :  http://stackoverflow.com/questions/1193955/how-to-query-an-ntp-server-using-c
 /// </summary>
-namespace FierceGalaxyServer.TimeModule
+namespace FierceGalaxyServer
 {
     public class NetworkTime : INetworkTime
     {

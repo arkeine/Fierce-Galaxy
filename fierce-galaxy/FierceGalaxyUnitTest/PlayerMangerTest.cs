@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FierceGalaxyServer.ConnexionModule;
+using FierceGalaxyServer;
 
 namespace UnitTestProject1
 {
@@ -64,6 +64,7 @@ namespace UnitTestProject1
             }
             catch (Exception)
             {
+
             }
             playerManager.Login(pseudo, "pass12");
         }

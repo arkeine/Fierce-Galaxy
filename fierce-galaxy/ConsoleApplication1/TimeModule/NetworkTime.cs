@@ -1,4 +1,4 @@
-﻿using FierceGalaxyInterface.TimeModule;
+﻿using FierceGalaxyInterface;
 using System;
 using System.Net;
 using System.Net.Sockets;

@@ -1,7 +1,6 @@
-﻿using FierceGalaxyInterface.ConnexionModule;
-using System;
+﻿using System;
 
-namespace FierceGalaxyInterface.GameModule
+namespace FierceGalaxyInterface
 {
     public delegate void OnNodeUpdate(DateTime timestamp, int nodeID, IReadOnlyPlayer owner, int ressourcesOffset);
     public delegate void OnSquadLeaving(DateTime timestamp, int sourceNodeID, int targetNodeID, IReadOnlyPlayer owner, int ressources);
