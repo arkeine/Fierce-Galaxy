@@ -13,7 +13,7 @@ namespace FierceGalaxyUnitTest
             string pseudo = "Dany";
             string playerPW = "pass123";
             string publicPseudo = "shotgun";
-            PlayerManager playerManager = PlayerManager.GetInstance();
+            PlayerManager playerManager = new PlayerManager();
 
             if (playerManager.MapDBPlayers.ContainsKey(pseudo))
                 playerManager.MapDBPlayers.Remove(pseudo);
@@ -35,7 +35,7 @@ namespace FierceGalaxyUnitTest
             string pseudo = "Dany";
             string playerPW = "pass123";
             string publicPseudo = "shotgun";
-            PlayerManager playerManager = PlayerManager.GetInstance();
+            PlayerManager playerManager = new PlayerManager();
 
             try
             {
@@ -56,7 +56,7 @@ namespace FierceGalaxyUnitTest
             string pseudo = "Dany";
             string playerPW = "pass123";
             string publicPseudo = "shotgun";
-            PlayerManager playerManager = PlayerManager.GetInstance();
+            PlayerManager playerManager = new PlayerManager();
 
             try
             {
@@ -77,7 +77,7 @@ namespace FierceGalaxyUnitTest
             string pseudo = "Dany";
             string playerPW = "pass123";
             string publicPseudo = "shotgun";
-            PlayerManager playerManager = PlayerManager.GetInstance();
+            PlayerManager playerManager = new PlayerManager();
 
             try
             {

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnexionModule\IPlayerManager.cs" />
+    <Compile Include="IGameFacade.cs" />
     <Compile Include="IReadOnlyPlayer.cs" />
     <Compile Include="ConnexionModule\ITokenManager.cs" />
     <Compile Include="GameModule\IGame.cs" />

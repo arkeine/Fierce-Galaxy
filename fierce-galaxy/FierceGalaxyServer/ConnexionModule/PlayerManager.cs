@@ -19,22 +19,10 @@ namespace FierceGalaxyServer
         private string dbFilePath;
 
         //======================================================
-        // Singleton
+        // Constructor
         //======================================================
-
-        private static PlayerManager singleton;
-
-        public static PlayerManager GetInstance()
-        {
-            if (singleton == null)
-            {
-                singleton = new PlayerManager();
-            }
-
-            return singleton;
-        }
-
-        private PlayerManager()
+        
+        public PlayerManager()
         {
             dbFilePath = Properties.Settings.Default.JsonDBPath;
             //mapDBPlayers = new Dictionary<string, DBPlayer>();

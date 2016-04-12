@@ -6,7 +6,7 @@ namespace FierceGalaxyServer
     {
         public void NewPlayer(string pseudo, string playerPW, string publicPseudo)
         {
-            PlayerManager.GetInstance().CreatePlayer(pseudo, playerPW, publicPseudo);
+            GameFacade.GetInstance().PlayerManager.CreatePlayer(pseudo, playerPW, publicPseudo);
             throw new NotImplementedException();
         }
 

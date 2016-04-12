@@ -108,6 +108,7 @@
     <Compile Include="ConnexionModule\PlayerManager.cs" />
     <Compile Include="ConnexionModule\TokenManager.cs" />
     <Compile Include="DBModule\DBMap.cs" />
+    <Compile Include="Global\GameFacade.cs" />
     <Compile Include="MapModule\Map.cs" />
     <Compile Include="MapModule\MapManager.cs" />
     <Compile Include="MapModule\Node.cs" />

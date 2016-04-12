@@ -23,7 +23,7 @@ namespace ConsoleApplication1
         private static void testUser()
         {
 
-            PlayerManager playerManager = PlayerManager.GetInstance();
+            PlayerManager playerManager = new PlayerManager();
             
 
             try

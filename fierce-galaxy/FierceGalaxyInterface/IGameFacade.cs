@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FierceGalaxyInterface
+﻿namespace FierceGalaxyInterface
 {
-    interface IGameFacade
+    public interface IGameFacade
     {
         IPlayerManager PlayerManager { get; }
     }
