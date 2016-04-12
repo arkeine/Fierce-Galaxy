@@ -1,9 +1,4 @@
-﻿using FierceGalaxyInterface.MapModule;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FierceGalaxyInterface;
 
 namespace FierceGalaxyServer.MapModule
 {
@@ -16,5 +11,6 @@ namespace FierceGalaxyServer.MapModule
         bool removeLink(IReadOnlyNode n1, IReadOnlyNode n2);
 
         bool removeAllLinksForNode(IReadOnlyNode n);
+        //TODO
     }
 }
