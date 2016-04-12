@@ -1,7 +1,6 @@
 ﻿using FierceGalaxyInterface;
 using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.GraphModel;
 
 namespace FierceGalaxyServer
 {

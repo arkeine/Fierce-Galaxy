@@ -1,6 +1,4 @@
 ﻿using FierceGalaxyInterface;
-using System;
-using FierceGalaxyInterface.ConnexionModule;
 using System.Collections.Generic;
 
 namespace FierceGalaxyServer
