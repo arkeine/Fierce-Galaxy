@@ -11,5 +11,6 @@ namespace FierceGalaxyServer
         bool removeLink(IReadOnlyNode n1, IReadOnlyNode n2);
 
         bool removeAllLinksForNode(IReadOnlyNode n);
+        //TODO
     }
 }
