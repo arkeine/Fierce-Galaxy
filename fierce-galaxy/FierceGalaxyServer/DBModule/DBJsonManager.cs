@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace FierceGalaxyServer
@@ -24,7 +25,7 @@ namespace FierceGalaxyServer
         }
 
         //======================================================
-        // Access
+        // Override
         //======================================================
 
         public bool ContainsPlayer(string key)
@@ -47,7 +48,31 @@ namespace FierceGalaxyServer
             DBPlayer p;
             dbJson.DicDBPlayers.TryGetValue(key, out p);
             return p;
-        }        
+        }
+
+
+        public DBMap GetMap(string key)
+        {
+            DBMap m;
+            dbJson.DicDBMaps.TryGetValue(key, out m);
+            return m;
+        }
+
+        public bool ContainsMap(string key)
+        {
+            return dbJson.DicDBMaps.ContainsKey(key);
+        }
+
+        public void SetMap(string key, DBMap map)
+        {
+            if (map.mapID == null)
+            {
+                map.mapID = dbJson.CurrentID++;
+            }
+            dbJson.DicDBMaps[key] = map;
+            SaveDB();
+        }
+
 
         //======================================================
         // Private
@@ -82,11 +107,13 @@ namespace FierceGalaxyServer
         class DBJson
         {
             public Dictionary<string, DBPlayer> DicDBPlayers { get; set; }
+            public Dictionary<string, DBMap> DicDBMaps { get; set; }
             public int CurrentID { get; set; }
 
             public DBJson()
             {
                 DicDBPlayers = new Dictionary<string, DBPlayer>();
+                DicDBMaps = new Dictionary<string, DBMap>();
                 CurrentID = 0;
             }
         }

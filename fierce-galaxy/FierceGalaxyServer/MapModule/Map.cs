@@ -7,50 +7,51 @@ namespace FierceGalaxyServer
     public class Map : IMap
     {
         //======================================================
-        // Properties
+        // Field
         //======================================================
-        
-        public IListLinkedNodes ListLinkedList { get; set; }
 
-        public string Description { get; set; }
+        private IListLinkedNodes listLinkedNodes;
+        private IList<IReadOnlyNode> listNode;
+        private IList<IReadOnlyNode> listSpawnNode;
 
-        public string Name { get; set; }
-
-        public IList<IReadOnlyNode> ListNodes { get; set; }
-
-        public IList<IReadOnlyNode> ListSpawnNodes { get; set; }
-
-        IReadOnlyList<IReadOnlyNode> IReadOnlyMap.Nodes { get; }
-
-        IReadOnlyList<IReadOnlyNode> IReadOnlyMap.SpawnNodes { get; }
-        
+        public Map()
+        {
+            listLinkedNodes = new ListLinkedNodes();
+            listNode = new List<IReadOnlyNode>();
+            listSpawnNode = new List<IReadOnlyNode>();
+        }
         //======================================================
         // Override
         //======================================================
 
+        public string Description { get; set; }
+        public string Name { get; set; }
+        IReadOnlyList<IReadOnlyNode> IReadOnlyMap.Nodes { get; }
+        IReadOnlyList<IReadOnlyNode> IReadOnlyMap.SpawnNodes { get; }
+
         public void AddNode(IReadOnlyNode node)
         {
-            if (!ListNodes.Contains(node))
+            if (!listNode.Contains(node))
             {
-                ListNodes.Add(node);
+                listNode.Add(node);
             }
         }
 
         public void RemoveNode(IReadOnlyNode node)
         {
-            if (ListNodes.Contains((Node)node))
+            if (listNode.Contains(node))
             {
-                ListNodes.Remove((Node)node);
+                listNode.Remove(node);
                 
-                ListLinkedList.RemoveAllLinksForNode(node);
+                listLinkedNodes.RemoveAllLinksForNode(node);
             }
         }
 
         public void AddLink(IReadOnlyNode node1, IReadOnlyNode node2)
         {
-            if (ListNodes.Contains(node1) && ListNodes.Contains(node2))
+            if (listNode.Contains(node1) && listNode.Contains(node2))
             {
-                ListLinkedList.AddLink(node1, node2);
+                listLinkedNodes.AddLink(node1, node2);
             }
         }
 
@@ -61,16 +62,16 @@ namespace FierceGalaxyServer
 
         public void RemoveLink(IReadOnlyNode node1, IReadOnlyNode node2)
         {
-            if (ListNodes.Contains(node1) && ListNodes.Contains(node2))
+            if (listNode.Contains(node1) && listNode.Contains(node2))
             {
-                ListLinkedList.RemoveLink(node1, node2);
+                listLinkedNodes.RemoveLink(node1, node2);
             }
         }
 
         public void SetSpawnNode(IReadOnlyNode node, bool isSpawn)
         {
-            if (!ListSpawnNodes.Contains((Node)node)){
-                ListSpawnNodes.Add((Node)node);
+            if (!listSpawnNode.Contains((Node)node)){
+                listSpawnNode.Add((Node)node);
             }
         }
 
