@@ -12,16 +12,6 @@
             get;
         }
 
-        int CurrentCapacity
-        {
-            get;
-        }
-
-        IPlayer CurrentOwner
-        {
-            get;
-        }
-
         double X
         {
             get;

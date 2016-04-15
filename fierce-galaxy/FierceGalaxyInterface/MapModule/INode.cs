@@ -14,18 +14,6 @@
             set;
         }
 
-        new int CurrentCapacity
-        {
-            get;
-            set;
-        }
-
-        new IPlayer CurrentOwner
-        {
-            get;
-            set;
-        }
-
         new double X
         {
             get;
