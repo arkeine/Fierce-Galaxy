@@ -12,13 +12,13 @@ namespace FierceGalaxyServer
         // Field
         //======================================================
         
-        private IDBManager dBManager;
+        private IDBPlayerManager dBManager;
 
         //======================================================
         // Constructor
         //======================================================
 
-        public PlayerManager(IDBManager dBManager)
+        public PlayerManager(IDBPlayerManager dBManager)
         {
             this.dBManager = dBManager;
         }

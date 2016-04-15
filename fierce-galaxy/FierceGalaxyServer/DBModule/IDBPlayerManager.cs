@@ -1,6 +1,9 @@
 ﻿namespace FierceGalaxyServer
 {
-    public interface IDBManager
+    /// <summary>
+    /// Minimal interface that DB must implement in orde rto manage players
+    /// </summary>
+    public interface IDBPlayerManager
     {
         DBPlayer GetPlayer(string key);
 

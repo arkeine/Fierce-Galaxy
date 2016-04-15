@@ -49,7 +49,7 @@ namespace FierceGalaxyUnitTest
             playerManager.Login("Dani", playerPW);
         }
 
-        private IDBManager CreateNewDB()
+        private IDBPlayerManager CreateNewDB()
         {
             string fileName = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + "\\DB.json";
   

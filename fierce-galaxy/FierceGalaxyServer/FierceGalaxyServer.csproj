@@ -106,7 +106,8 @@
     </Compile>
     <Compile Include="CommunicationModule\IMainFacadeService.cs" />
     <Compile Include="DBModule\DBJsonManager.cs" />
-    <Compile Include="DBModule\IDBManager.cs" />
+    <Compile Include="DBModule\IDBMapManager.cs" />
+    <Compile Include="DBModule\IDBPlayerManager.cs" />
     <Compile Include="Global\Player.cs" />
     <Compile Include="ConnexionModule\PlayerManager.cs" />
     <Compile Include="ConnexionModule\TokenManager.cs" />

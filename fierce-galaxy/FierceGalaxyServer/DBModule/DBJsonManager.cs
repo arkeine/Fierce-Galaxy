@@ -3,7 +3,7 @@ using System.IO;
 
 namespace FierceGalaxyServer
 {
-    public class DBJsonManager : IDBManager
+    public class DBJsonManager : IDBPlayerManager, IDBMapManager
     {
         //======================================================
         // Field
@@ -29,7 +29,7 @@ namespace FierceGalaxyServer
 
         public bool ContainsPlayer(string key)
         {
-            return dbJson.MapDBPlayers.ContainsKey(key);
+            return dbJson.DicDBPlayers.ContainsKey(key);
         }
 
         public void SetPlayer(string key, DBPlayer player)
@@ -38,14 +38,14 @@ namespace FierceGalaxyServer
             {
                 player.playerID = dbJson.CurrentID++;
             }
-            dbJson.MapDBPlayers[key] = player;
+            dbJson.DicDBPlayers[key] = player;
             SaveDB();
         }
 
         public DBPlayer GetPlayer(string key)
         {
             DBPlayer p;
-            dbJson.MapDBPlayers.TryGetValue(key, out p);
+            dbJson.DicDBPlayers.TryGetValue(key, out p);
             return p;
         }        
 
@@ -81,12 +81,12 @@ namespace FierceGalaxyServer
 
         class DBJson
         {
-            public Dictionary<string, DBPlayer> MapDBPlayers { get; set; }
+            public Dictionary<string, DBPlayer> DicDBPlayers { get; set; }
             public int CurrentID { get; set; }
 
             public DBJson()
             {
-                MapDBPlayers = new Dictionary<string, DBPlayer>();
+                DicDBPlayers = new Dictionary<string, DBPlayer>();
                 CurrentID = 0;
             }
         }
