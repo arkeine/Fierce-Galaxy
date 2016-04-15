@@ -23,11 +23,11 @@ namespace FierceGalaxyServer
         IReadOnlyList<IReadOnlyNode> IReadOnlyMap.Nodes { get; }
 
         IReadOnlyList<IReadOnlyNode> IReadOnlyMap.SpawnNodes { get; }
-
+        
         //======================================================
         // Override
         //======================================================
-        
+
         public void AddNode(IReadOnlyNode node)
         {
             if (!ListNodes.Contains(node))
