@@ -51,8 +51,9 @@
     <Compile Include="MapModule\IReadOnlyNode.cs" />
     <Compile Include="MapModule\INode.cs" />
     <Compile Include="MapModule\IMap.cs" />
-    <Compile Include="MatchingModule\ByLobby\ILobby.cs" />
-    <Compile Include="MatchingModule\ByLobby\ILobbyManagement.cs" />
+    <Compile Include="MatchingModule\Lobby\IReadOnlyLobby.cs" />
+    <Compile Include="MatchingModule\Lobby\ILobby.cs" />
+    <Compile Include="MatchingModule\Lobby\ILobbyManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="TimeModule\INetworkTime.cs" />
