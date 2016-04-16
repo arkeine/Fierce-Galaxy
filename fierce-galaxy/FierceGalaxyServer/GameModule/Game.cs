@@ -14,7 +14,7 @@ namespace FierceGalaxyServer
         
         private IReadOnlyMap map;
         private INetworkTime ntp;
-        private IDictionary<IReadOnlyNode, Int32> dicNodeValueOffset;
+        private IDictionary<IReadOnlyNode, GameNode> dicGameNodeToMapNode;
 
         //======================================================
         // Constructor
@@ -25,7 +25,7 @@ namespace FierceGalaxyServer
             this.map = map;
             this.ntp = ntp;
 
-            dicNodeValueOffset = new Dictionary<IReadOnlyNode, Int32>();
+            dicGameNodeToMapNode = new Dictionary<IReadOnlyNode, GameNode>();
         }
 
         //======================================================
@@ -44,7 +44,8 @@ namespace FierceGalaxyServer
         public void Move(IReadOnlyPlayer player, int sourceNodeID, int targetNodeID, int ressources)
         {
             // Take ressources from node
-
+            GameNode n;
+            dicGameNodeToMapNode.TryGetValue( , n);
         }
 
         public void UsePowerArmor(IReadOnlyPlayer player, int targetNodeID)
@@ -70,7 +71,6 @@ namespace FierceGalaxyServer
         //======================================================
         // Private
         //======================================================
-        
         
     }
 }
