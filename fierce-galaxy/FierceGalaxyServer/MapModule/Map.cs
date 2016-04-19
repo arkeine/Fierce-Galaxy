@@ -1,4 +1,5 @@
 ﻿using FierceGalaxyInterface;
+using FierceGalaxyServer.MapModule;
 using System;
 using System.Collections.Generic;
 

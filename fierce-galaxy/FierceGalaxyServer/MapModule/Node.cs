@@ -9,8 +9,6 @@ namespace FierceGalaxyServer
         // Properties
         //======================================================
 
-        public List<Node> ListLinkedNodes { get; set; }
-
         public int CurrentCapacity { get; set; }
 
         public IPlayer CurrentOwner { get; set; }
