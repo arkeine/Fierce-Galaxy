@@ -49,8 +49,7 @@ namespace FierceGalaxyServer
             dbJson.DicDBPlayers.TryGetValue(key, out p);
             return p;
         }
-
-
+        
         public DBMap GetMap(string key)
         {
             DBMap m;
@@ -72,7 +71,6 @@ namespace FierceGalaxyServer
             dbJson.DicDBMaps[key] = map;
             SaveDB();
         }
-
 
         //======================================================
         // Private
