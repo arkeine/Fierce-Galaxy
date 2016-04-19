@@ -13,7 +13,7 @@
         /// <returns>
         /// Return the player or null if the credentials are not valid
         /// </returns>
-        IPlayer Login(string pseudo, string playerPW);
+        IReadOnlyPlayer Login(string pseudo, string playerPW);
 
         /// <summary>
         /// Create a new player acount, but dont login him
@@ -24,6 +24,6 @@
         /// <returns>
         /// Return the new player or null if the creation fail
         /// </returns>
-        IPlayer CreatePlayer(string pseudo, string playerPW, string publicPseudo);
+        IReadOnlyPlayer CreatePlayer(string pseudo, string playerPW, string publicPseudo);
     }
 }
