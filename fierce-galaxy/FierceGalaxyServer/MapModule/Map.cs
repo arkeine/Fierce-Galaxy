@@ -76,6 +76,11 @@ namespace FierceGalaxyServer
             }
         }
 
+        public bool AreNodesLinked(IReadOnlyNode n1, IReadOnlyNode n2)
+        {
+            return listLinkedNodes.AreNodesLinked(n1, n2);
+        }
+
 
         //======================================================
         // Private

@@ -45,7 +45,8 @@ namespace FierceGalaxyServer
             }
             else
             {
-                throw new System.ArgumentException("Pseudo '" + pseudo + "' does not exist", "pseudo");
+                return null;
+                //throw new System.ArgumentException("Pseudo '" + pseudo + "' does not exist", "pseudo");
             }
         }
 
