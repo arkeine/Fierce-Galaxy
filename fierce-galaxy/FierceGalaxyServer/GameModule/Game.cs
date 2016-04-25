@@ -1,8 +1,6 @@
 ﻿using FierceGalaxyInterface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace FierceGalaxyServer
 {
@@ -41,29 +39,27 @@ namespace FierceGalaxyServer
         // Override
         //======================================================
 
-        public void Move(IReadOnlyPlayer player, int sourceNodeID, int targetNodeID, int ressources)
-        {
-            // Take ressources from node
-            GameNode n;
-            dicGameNodeToMapNode.TryGetValue( , n);
-        }
-
-        public void UsePowerArmor(IReadOnlyPlayer player, int targetNodeID)
+        public void Move(IReadOnlyPlayer player, IReadOnlyNode sourceNode, IReadOnlyNode targetNode, int ressources)
         {
             throw new NotImplementedException();
         }
 
-        public void UsePowerDestroy(IReadOnlyPlayer player, int targetNodeID)
+        public void UsePowerDestroy(IReadOnlyPlayer player, IReadOnlyNode targetNode)
         {
             throw new NotImplementedException();
         }
 
-        public void UsePowerInvincibility(IReadOnlyPlayer player, int targetNodeID)
+        public void UsePowerInvincibility(IReadOnlyPlayer player, IReadOnlyNode targetNode)
         {
             throw new NotImplementedException();
         }
 
-        public void UsePowerTeleportation(IReadOnlyPlayer player, int sourceNodeID, int targetNodeID, int ressources)
+        public void UsePowerArmor(IReadOnlyPlayer player, IReadOnlyNode targetNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UsePowerTeleportation(IReadOnlyPlayer player, IReadOnlyNode sourceNode, IReadOnlyNode targetNode, int ressources)
         {
             throw new NotImplementedException();
         }
@@ -71,6 +67,6 @@ namespace FierceGalaxyServer
         //======================================================
         // Private
         //======================================================
-        
+
     }
 }
