@@ -38,10 +38,11 @@ namespace FierceGalaxyServer
         public IReadOnlyList<string> ListMap()
         {
                 throw new NotImplementedException();
-            }
+        }
 
         public void LoadMaps()
         {
+            dicMaps = new Dictionary<string, IReadOnlyMap>();
             Directory.CreateDirectory(mapsDirectory);
             string[] fileEntries = Directory.GetFiles(mapsDirectory);
             foreach (string fileName in fileEntries)
@@ -54,9 +55,20 @@ namespace FierceGalaxyServer
 
         public void SaveMap(DBMap map)
         {
+            if(map.Name == null)
+            {
+                throw new System.ArgumentException("Parameter cannot be null", "map.name");
+            }
+
+            if (dicMaps.ContainsKey(map.Name))
+            {
+                throw new System.ArgumentException("Map name already exist", "map.name");
+            }
             Console.Write(mapsDirectory + map.Name);
             JsonSerialization.WriteToJsonFile<DBMap>
                 (mapsDirectory + "\\" + map.Name + ".json", map);
+
+            LoadMaps();
         }
 
         //======================================================

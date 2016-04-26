@@ -18,7 +18,7 @@ namespace FierceGalaxyUnitTest
             
             playerManager.CreatePlayer(pseudo, playerPW, publicPseudo);
             IReadOnlyPlayer p = playerManager.Login(pseudo, playerPW);
-            Assert.AreEqual(playerManager.Login(pseudo, playerPW).PublicPseudo, publicPseudo);
+            Assert.AreEqual(playerManager.Login(pseudo, playerPW).PublicPseudo, publicPseudo);*/
         }
 
         [TestMethod]

@@ -5,27 +5,85 @@ using System.Collections.Generic;
 
 namespace FierceGalaxyUnitTest
 {
+
     [TestClass]
     public class MapManagerTest
     {
-        [TestMethod]
-        public void CreateMap()
+        private Node n1, n2, n3, n4, n5, n6, n7, n8, n9;
+        private List<Node> listNode;
+        private Map map1, map2, map3, map4;
+        static private MapManager mapManager;
+
+
+        [ClassInitialize]
+        public static void ClassInit(TestContext context)
         {
-            string pseudo = "Dany";
-            string playerPW = "pass123";
-            string publicPseudo = "shotgun";
-            MapManager mapManager = new MapManager();
+            mapManager = new MapManager();
+        }
 
-            Node node_1 = new Node();
-            List<Node> listNodes = new List<Node>();
-            listNodes.Add(new Node());
-            Map map_1 = new Map("first mapt", "this is my first map");
-            DBMap dbMap = new DBMap(map_1);
-            mapManager.SaveMap(dbMap);
+        [TestInitialize]
+        public void Init()
+        {
+            listNode = new List<Node>(new Node[] { n1, n2, n3 });
+            
+            map1 = new Map();
+            map2 = new Map();
+            map3 = new Map();
+            map4 = new Map();
+            map1.AddNode(n1);
+            map1.AddNode(n2);
+            map1.AddNode(n3);
+        }
 
-            /*playerManager.CreatePlayer(pseudo, playerPW, publicPseudo);
-            IPlayer p = playerManager.Login(pseudo, playerPW);
-            Assert.AreEqual(playerManager.Login(pseudo, playerPW).PublicPseudo, publicPseudo);*/
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException),
+            "Parameter 'Name' cannot be null")]
+        public void SaveMapWithoutNameFail()
+        {
+            DBMap dbMap1 = new DBMap(map1);
+            mapManager.SaveMap(dbMap1);
+        }
+        
+        [TestMethod]
+        public void SaveMapSuccess()
+        {
+            int n = 1;
+            DBMap dbMap1 = new DBMap(map1);
+            bool exist = true;
+
+            while (exist)
+            {
+                dbMap1.Name = "testname1 #" + n;
+                try
+                {
+                    mapManager.SaveMap(dbMap1);
+                    exist = false;
+                }
+                catch (ArgumentException e)
+                {
+                    if (e.Message.Contains("Map name already exist"))
+                    {
+                        n += 1;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }                
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException),
+            "Map name already exist")]
+        public void SaveMapNameAlreadyExistFail()
+        {
+            DBMap dbMap1 = new DBMap(map1);
+            dbMap1.Name = "testDoubleMapName";
+            DBMap dbMap2 = new DBMap(map2);
+            dbMap2.Name = "testDoubleMapName";
+            mapManager.SaveMap(dbMap1);
+            mapManager.SaveMap(dbMap2);
         }
     }
 }
