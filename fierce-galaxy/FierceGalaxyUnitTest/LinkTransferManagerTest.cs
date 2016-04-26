@@ -40,19 +40,6 @@ namespace FierceGalaxyUnitTest
             return TimeSpan.FromSeconds(d / 10);
         }
         
-        public static bool AreDoubleEqual(double d1, double d2, double epsylon=0.001)
-        {
-            if(Math.Abs(d1 - d2) < epsylon)
-            {
-                return true;
-            }
-            else
-            {
-                Console.WriteLine("AreDoubleEqual : " + d1 + "=" + d2 + " Fail");
-                return false;
-            }
-        }
-
         //======================================================
         // Test initialization
         //======================================================
@@ -64,15 +51,15 @@ namespace FierceGalaxyUnitTest
             n1.X = 0;
             n1.Y = 0;
             n1.Radius = 10;
-            n1.MaxCapacity = 50;
-            n1.InitialCapacity = 10;
+            n1.MaxRessource = 50;
+            n1.InitialRessource = 10;
 
             n2 = new Node();
             n2.X = 50;
             n2.Y = 0;
             n2.Radius = 5;
-            n2.MaxCapacity = 25;
-            n2.InitialCapacity = 10;
+            n2.MaxRessource = 25;
+            n2.InitialRessource = 10;
 
             p1 = new Player();
             p2 = new Player();
@@ -105,18 +92,18 @@ namespace FierceGalaxyUnitTest
         {           
             //Use the context
             nm.Zero = DateTime.Now;
-            nm.SetCurrentValue(gn1, n1.InitialCapacity);
-            nm.SetCurrentValue(gn2, n2.InitialCapacity);
+            nm.SetCurrentValue(gn1, n1.InitialRessource);
+            nm.SetCurrentValue(gn2, n2.InitialRessource);
             
             m.SendSquad(5, gn2, gn1);
             System.Threading.Thread.Sleep(3400); //Check just before arrival
             m.Update();
-            Assert.IsTrue(AreDoubleEqual(13.4, nm.GetCurrentValue(gn1), 0.1));
-            Assert.IsTrue(AreDoubleEqual(8.4, nm.GetCurrentValue(gn2), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(13.4, nm.GetCurrentValue(gn1), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(8.4, nm.GetCurrentValue(gn2), 0.1));
             System.Threading.Thread.Sleep(200); //Check just after arrival
             m.Update();
-            Assert.IsTrue(AreDoubleEqual(8.6, nm.GetCurrentValue(gn1), 0.1));
-            Assert.IsTrue(AreDoubleEqual(8.6, nm.GetCurrentValue(gn2), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(8.6, nm.GetCurrentValue(gn1), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(8.6, nm.GetCurrentValue(gn2), 0.1));
         }
     }
 }

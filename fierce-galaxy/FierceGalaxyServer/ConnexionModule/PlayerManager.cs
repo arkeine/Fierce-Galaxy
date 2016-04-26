@@ -12,32 +12,32 @@ namespace FierceGalaxyServer
         // Field
         //======================================================
         
-        private IDBManager dBManager;
+        private IDBPlayerManager dBPlayerManager;
 
         //======================================================
         // Constructor
         //======================================================
 
-        public PlayerManager(IDBManager dBManager)
+        public PlayerManager(IDBPlayerManager dBManager)
         {
-            this.dBManager = dBManager;
+            dBPlayerManager = dBManager;
         }
 
         //======================================================
         // Override
         //======================================================
 
-        public IPlayer CreatePlayer(string pseudo, string playerPW, string publicPseudo)
+        public IReadOnlyPlayer CreatePlayer(string pseudo, string playerPW, string publicPseudo)
         {
             CreatePlayerInDatabase(pseudo, playerPW, publicPseudo);
             return Login(pseudo, playerPW);
         }
 
-        public IPlayer Login(string pseudo, string playerPW)
+        public IReadOnlyPlayer Login(string pseudo, string playerPW)
         {
-            if (dBManager.ContainsPlayer(pseudo))
+            if (dBPlayerManager.ContainsPlayer(pseudo))
             {
-                var dbPlayer = dBManager.GetPlayer(pseudo);
+                var dbPlayer = dBPlayerManager.GetPlayer(pseudo);
 
                 if (dbPlayer.playerPW == playerPW)
                 {
@@ -67,10 +67,10 @@ namespace FierceGalaxyServer
 
         private void CreatePlayerInDatabase(string pseudo, string playerPW, string publicPseudo)
         {
-            if(!dBManager.ContainsPlayer(pseudo))
+            if(!dBPlayerManager.ContainsPlayer(pseudo))
             {
                 DBPlayer newPlayer = new DBPlayer(pseudo, playerPW, publicPseudo);
-                dBManager.SetPlayer(pseudo, newPlayer);
+                dBPlayerManager.SetPlayer(pseudo, newPlayer);
             }
             else
             {

@@ -106,7 +106,9 @@
     </Compile>
     <Compile Include="CommunicationModule\IMainFacadeService.cs" />
     <Compile Include="DBModule\DBJsonManager.cs" />
-    <Compile Include="DBModule\IDBManager.cs" />
+    <Compile Include="DBModule\IDBPlayerManager.cs" />
+    <Compile Include="DBModule\DBMap.cs" />
+    <Compile Include="DBModule\IDBMapManager.cs" />
     <Compile Include="GameModule\Game.cs" />
     <Compile Include="GameModule\GameNode.cs" />
     <Compile Include="Tools\FunctionDictionary.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="ConnexionModule\PlayerManager.cs" />
     <Compile Include="ConnexionModule\TokenManager.cs" />
     <Compile Include="Global\FierceGalaxyFacade.cs" />
+    <Compile Include="MapModule\ListLinkedNodes.cs" />
     <Compile Include="MapModule\IListLinkedNodes.cs" />
     <Compile Include="MapModule\Map.cs" />
     <Compile Include="MapModule\MapManager.cs" />
@@ -137,9 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -2,13 +2,13 @@
 {
     public interface INode : IReadOnlyNode
     {
-        new int InitialCapacity
+        new int InitialRessource
         {
             get;
             set;
         }
-
-        new int MaxCapacity
+        
+        new int MaxRessource
         {
             get;
             set;

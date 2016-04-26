@@ -21,9 +21,31 @@ public class MultiMap<K, V>
         }
     }
 
-    public void Remove(K key, V value)
+    public void RemoveValueInKey(K key, V value)
     {
+        List<V> list;
+        if (this._dictionary.TryGetValue(key, out list))
+        {
+            list.Remove(value);
+        }
+    }
 
+    public void RemoveKey(K key)
+    {
+        _dictionary.Remove(key);
+    }
+
+    public bool Contains(K key, V value)
+    {
+        List<V> list;
+        if (this._dictionary.TryGetValue(key, out list))
+        {
+            return list.Contains(value);
+        }
+        else
+        {
+            return false;
+        }
     }
     
     public IEnumerable<K> Keys

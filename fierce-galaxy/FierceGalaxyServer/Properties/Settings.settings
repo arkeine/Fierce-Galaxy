@@ -3,7 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="JsonDBPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\\temp\\dbManager.txt</Value>
+      <Value Profile="(Default)">C:\\temp\\</Value>
+    </Setting>
+    <Setting Name="JsonDBPlayersFileName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">dbPlayersManager.json</Value>
+    </Setting>
+    <Setting Name="JsonDBMapsPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">maps</Value>
     </Setting>
   </Settings>
 </SettingsFile>

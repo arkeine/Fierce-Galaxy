@@ -2,12 +2,12 @@
 {
     public interface IReadOnlyNode
     {
-        int InitialCapacity
+        int InitialRessource
         {
             get;
         }
-
-        int MaxCapacity
+        
+        int MaxRessource
         {
             get;
         }

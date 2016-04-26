@@ -125,7 +125,7 @@ namespace FierceGalaxyServer
         private Squad CreateSquadFromNode(int ressources, GameNode sourceNode)
         {
             double available = nm.GetCurrentValue(sourceNode);
-            double max = sourceNode.NodeData.MaxCapacity;
+            double max = sourceNode.NodeData.MaxRessource;
             available = available > max ? max : available;
 
             double toSend = available - ressources >= 0 ? ressources : available;
