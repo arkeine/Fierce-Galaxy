@@ -19,8 +19,8 @@ namespace FierceGalaxyUnitTest
         //Global context
         private static INode n1;
         private static INode n2;
-        private static IReadOnlyPlayer p1;
-        private static IReadOnlyPlayer p2;
+        private static IPlayer p1;
+        private static IPlayer p2;
 
         //Context per test case
         private GameNode gn1;
@@ -62,7 +62,9 @@ namespace FierceGalaxyUnitTest
             n2.InitialRessource = 10;
 
             p1 = new Player();
+            p1.PublicPseudo = "p1";
             p2 = new Player();
+            p2.PublicPseudo = "p2";
         }
 
         [TestInitialize]
@@ -88,7 +90,7 @@ namespace FierceGalaxyUnitTest
         //======================================================
 
         [TestMethod]
-        public void GameSenario1()
+        public void SimpleSquadSend()
         {           
             //Use the context
             nm.Zero = DateTime.Now;
@@ -96,14 +98,149 @@ namespace FierceGalaxyUnitTest
             nm.SetCurrentValue(gn2, n2.InitialRessource);
             
             m.SendSquad(5, gn2, gn1);
+
             System.Threading.Thread.Sleep(3400); //Check just before arrival
             m.Update();
             Assert.IsTrue(Tools.AreDoubleEqual(13.4, nm.GetCurrentValue(gn1), 0.1));
             Assert.IsTrue(Tools.AreDoubleEqual(8.4, nm.GetCurrentValue(gn2), 0.1));
+
             System.Threading.Thread.Sleep(200); //Check just after arrival
             m.Update();
             Assert.IsTrue(Tools.AreDoubleEqual(8.6, nm.GetCurrentValue(gn1), 0.1));
             Assert.IsTrue(Tools.AreDoubleEqual(8.6, nm.GetCurrentValue(gn2), 0.1));
+        }
+
+        [TestMethod]
+        public void WillSendMoreThanPossible()
+        {
+            //Use the context
+            nm.Zero = DateTime.Now;
+            nm.SetCurrentValue(gn1, n1.InitialRessource);
+            nm.SetCurrentValue(gn2, n2.InitialRessource);
+
+            m.SendSquad(20, gn2, gn1);
+
+            System.Threading.Thread.Sleep(3400); //Check just before arrival
+            m.Update();
+            Assert.IsTrue(Tools.AreDoubleEqual(13.4, nm.GetCurrentValue(gn1), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(3.4, nm.GetCurrentValue(gn2), 0.1));
+
+            System.Threading.Thread.Sleep(200); //Check just after arrival
+            m.Update();
+            Assert.IsTrue(Tools.AreDoubleEqual(3.6, nm.GetCurrentValue(gn1), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(3.6, nm.GetCurrentValue(gn2), 0.1));
+        }
+
+        [TestMethod]
+        [Timeout(5000)]
+        public void DoubleSendInChain()
+        {
+            //Use the context
+            nm.Zero = DateTime.Now;
+            nm.SetCurrentValue(gn1, n1.InitialRessource);
+            nm.SetCurrentValue(gn2, n2.InitialRessource);
+
+            m.SendSquad(5, gn2, gn1);
+            m.SendSquad(5, gn2, gn1);
+            
+            System.Threading.Thread.Sleep(3400); //Check just before arrival
+            m.Update();
+            Assert.IsTrue(Tools.AreDoubleEqual(13.4, nm.GetCurrentValue(gn1), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(3.4, nm.GetCurrentValue(gn2), 0.1));
+
+            System.Threading.Thread.Sleep(200); //Check just after arrival
+            m.Update();
+            Assert.IsTrue(Tools.AreDoubleEqual(3.6, nm.GetCurrentValue(gn1), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(3.6, nm.GetCurrentValue(gn2), 0.1));
+        }
+
+        [TestMethod]
+        public void SymetricSquadFight()
+        {
+            //Use the context
+            nm.Zero = DateTime.Now;
+            nm.SetCurrentValue(gn1, n1.InitialRessource);
+            nm.SetCurrentValue(gn2, n2.InitialRessource);
+
+            m.SendSquad(2, gn2, gn1);
+            m.SendSquad(2, gn1, gn2);
+
+            System.Threading.Thread.Sleep(3400); //Check just before arrival
+            m.Update();
+            Assert.IsTrue(Tools.AreDoubleEqual(11.4, nm.GetCurrentValue(gn1), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(11.4, nm.GetCurrentValue(gn2), 0.1));
+
+            System.Threading.Thread.Sleep(200); //Check just after arrival
+            m.Update();
+            Assert.IsTrue(Tools.AreDoubleEqual(11.6, nm.GetCurrentValue(gn1), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(11.6, nm.GetCurrentValue(gn2), 0.1));
+        }
+
+        [TestMethod]
+        public void AsymetricSquadFight1()
+        {
+            //Use the context
+            nm.Zero = DateTime.Now;
+            nm.SetCurrentValue(gn1, n1.InitialRessource);
+            nm.SetCurrentValue(gn2, n2.InitialRessource);
+
+            m.SendSquad(3, gn2, gn1);
+            m.SendSquad(2, gn1, gn2);
+
+            System.Threading.Thread.Sleep(3400); //Check just before arrival
+            m.Update();
+            Assert.IsTrue(Tools.AreDoubleEqual(11.4, nm.GetCurrentValue(gn1), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(10.4, nm.GetCurrentValue(gn2), 0.1));
+
+            System.Threading.Thread.Sleep(200); //Check just after arrival
+            m.Update();
+            Assert.IsTrue(Tools.AreDoubleEqual(10.6, nm.GetCurrentValue(gn1), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(10.6, nm.GetCurrentValue(gn2), 0.1));
+        }
+
+        [TestMethod]
+        public void AsymetricSquadFight2()
+        {
+            //Use the context
+            nm.Zero = DateTime.Now;
+            nm.SetCurrentValue(gn1, n1.InitialRessource);
+            nm.SetCurrentValue(gn2, n2.InitialRessource);
+
+            m.SendSquad(2, gn1, gn2); //This ligne differ from AsymetricSquadFight1
+            m.SendSquad(3, gn2, gn1);
+
+            System.Threading.Thread.Sleep(3400); //Check just before arrival
+            m.Update();
+            Assert.IsTrue(Tools.AreDoubleEqual(11.4, nm.GetCurrentValue(gn1), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(10.4, nm.GetCurrentValue(gn2), 0.1));
+
+            System.Threading.Thread.Sleep(200); //Check just after arrival
+            m.Update();
+            Assert.IsTrue(Tools.AreDoubleEqual(10.6, nm.GetCurrentValue(gn1), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(10.6, nm.GetCurrentValue(gn2), 0.1));
+        }
+
+        [TestMethod]
+        public void ChangeOwnership()
+        {
+            //Use the context
+            nm.Zero = DateTime.Now;
+            nm.SetCurrentValue(gn1, n1.InitialRessource);
+            nm.SetCurrentValue(gn2, n2.InitialRessource-8);
+            
+            m.SendSquad(10, gn1, gn2);
+
+            System.Threading.Thread.Sleep(3400); //Check just before arrival
+            m.Update();
+            Assert.IsTrue(Tools.AreDoubleEqual(3.4, nm.GetCurrentValue(gn1), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(5.4, nm.GetCurrentValue(gn2), 0.1));
+            Assert.AreEqual(p2, gn2.CurrentOwner);
+
+            System.Threading.Thread.Sleep(200); //Check just after arrival
+            m.Update();
+            Assert.IsTrue(Tools.AreDoubleEqual(3.6, nm.GetCurrentValue(gn1), 0.1));
+            Assert.IsTrue(Tools.AreDoubleEqual(4.4, nm.GetCurrentValue(gn2), 0.1));
+            Assert.AreEqual(p1, gn2.CurrentOwner);
         }
     }
 }

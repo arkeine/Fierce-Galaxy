@@ -19,16 +19,6 @@ namespace FierceGalaxyServer
             double d = Math.Sqrt(dx * dx + dy * dy);
             d = d - n1.Radius - n2.Radius;
 
-            /*
-            Is there a possibility to do :
-
-            double d = dx*dx+dy*dy;
-            d = d - n1.Radius*n1.Radius - n2.Radius*n2.Radius;
-
-            And change the method name to SquarDistanceBetweenNode ? 
-            Aim : improve speed
-            */
-
             return TimeSpan.FromSeconds(d / 10);
         }
 
@@ -57,7 +47,7 @@ namespace FierceGalaxyServer
         {
             this.nm = nm;
             this.fd = fd;
-            listSquad = new SortedList<DateTime, Squad>();
+            listSquad = new SortedList<DateTime, Squad>(new DuplicateKeyComparer<DateTime>());
         }
 
         //======================================================
@@ -78,7 +68,7 @@ namespace FierceGalaxyServer
                 DateTime now = DateTime.Now;
                 DateTime arrival = now + fd(s.SourceNode.NodeData, s.TargetNode.NodeData);
                 DealRessources(now);
-                listSquad.Add(arrival, s);
+                AddSquadToList(arrival, s);
             }
         }
 
@@ -153,27 +143,93 @@ namespace FierceGalaxyServer
                 SquadEnterNode(s);
 
                 //Load next element
-                listSquad.Remove(pair.Value.Key);
+                listSquad.RemoveAt(0);
                 pair = GetFirstSquad();
             }
         }
 
         private Nullable<KeyValuePair<DateTime, Squad>> GetFirstSquad()
         {
-            if (listSquad.Count <= 0) return null;
+            if (listSquad.Count == 0)
+            {
+                return null;
+            }
             else return listSquad.First();
+        }
+
+        private void AddSquadToList(DateTime arrival, Squad newSquad)
+        {
+            int i = listSquad.Count-1;
+
+            while (i >= 0)
+            {
+                var k = listSquad.ElementAt(i);
+
+                Squad otherSquad = k.Value;
+
+                if (newSquad.SourceNode == otherSquad.TargetNode &&
+                    newSquad.CurrentOwner != otherSquad.CurrentOwner)
+                {
+                    //Resolve the fight between squad
+                    if (newSquad.Ressources < otherSquad.Ressources)
+                    {
+                        otherSquad.Ressources -= newSquad.Ressources;
+                        newSquad.Ressources = 0;
+                    }
+                    else
+                    {
+                        newSquad.Ressources -= otherSquad.Ressources;
+                        otherSquad.Ressources = 0;
+                    }
+
+                    //Update the list
+                    if (otherSquad.Ressources <= 0)
+                    {
+                        listSquad.Remove(k.Key);
+                    }
+                    if (newSquad.Ressources <= 0)
+                    {
+                        return; //Return to save time
+                    }
+                }
+
+                i -= 1;
+            }
+            
+            listSquad.Add(arrival, newSquad);
         }
 
         //======================================================
         // Internal
         //======================================================
 
-        private struct Squad
+        private class Squad
         {
             public double Ressources;
             public IReadOnlyPlayer CurrentOwner;
             public GameNode SourceNode;
             public GameNode TargetNode;
+        }
+        /// <summary>
+        /// Comparer for comparing two keys, handling equality
+        /// as beeing greater
+        /// Use this Comparer e.g. with SortedLists or 
+        /// SortedDictionaries, that don't allow duplicate keys
+        /// 
+        /// Source :http://stackoverflow.com/questions/5716423/c-sharp-sortable-collection-which-allows-duplicate-keys
+        /// </summary>
+        public class DuplicateKeyComparer<TKey> : 
+            IComparer<TKey> where TKey : IComparable
+        {
+            public int Compare(TKey x, TKey y)
+            {
+                int result = x.CompareTo(y);
+
+                if (result == 0)
+                    return 1;   // Handle equality as beeing greater
+                else
+                    return result;
+            }
         }
     }
 }
