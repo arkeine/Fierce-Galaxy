@@ -70,9 +70,9 @@ namespace FierceGalaxyServer
         {
             //Calculate the value to substract to offset
             double newOffset = GetValueFromZero() - ressources;
-
+            
             //Update the offset
-            dicOffset[k] = Math.Abs(newOffset);
+            dicOffset[k] = newOffset;
         }
 
         public double GetCurrentValue(T k)
@@ -89,7 +89,7 @@ namespace FierceGalaxyServer
 
         private double GetValueFromZero()
         {
-            return (int)Function((DateTime.Now - zero).TotalSeconds);
+            return Function((DateTime.Now - zero).TotalSeconds);
         }
     }
 }

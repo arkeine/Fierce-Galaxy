@@ -12,7 +12,10 @@ namespace FierceGalaxyUnitTest
         public void UseWithChangeTimeOffset()
         {
             Node n = new Node();
-            FunctionDictionary<IReadOnlyNode> nm = new FunctionDictionary<IReadOnlyNode>();
+            FunctionDictionary<IReadOnlyNode> nm =
+                new FunctionDictionary<IReadOnlyNode>(
+                    delegate (double t) { return t; }
+                );
 
             //At time 0
             Assert.AreEqual(0, nm.GetCurrentValue(n));
@@ -38,7 +41,10 @@ namespace FierceGalaxyUnitTest
         public void UseWithSleep()
         {
             Node n = new Node();
-            FunctionDictionary<IReadOnlyNode> nm = new FunctionDictionary<IReadOnlyNode>();
+            FunctionDictionary<IReadOnlyNode> nm =
+                new FunctionDictionary<IReadOnlyNode>(
+                    delegate (double t) { return t; }
+                );
 
             //At time 0
             Assert.AreEqual(0, nm.GetCurrentValue(n));
@@ -55,6 +61,25 @@ namespace FierceGalaxyUnitTest
             nm.SetCurrentValue(n, 0);
             System.Threading.Thread.Sleep(4000);
             Assert.AreEqual(4, nm.GetCurrentValue(n));
+        }
+
+        [TestMethod]
+        public void UseWithInitialOffset()
+        {
+            Node n = new Node();
+            FunctionDictionary<IReadOnlyNode> nm =
+                new FunctionDictionary<IReadOnlyNode>(
+                    delegate (double t) { return t; }
+                );
+
+            //At time 0
+            Assert.AreEqual(0, nm.GetCurrentValue(n));
+            nm.SetCurrentValue(n, 10);
+            Assert.AreEqual(10, nm.GetCurrentValue(n));
+
+            //At time 3s
+            System.Threading.Thread.Sleep(3000);
+            Assert.AreEqual(13, nm.GetCurrentValue(n));
         }
     }
 }
