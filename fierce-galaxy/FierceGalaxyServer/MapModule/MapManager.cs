@@ -37,8 +37,8 @@ namespace FierceGalaxyServer
 
         public IReadOnlyList<string> ListMap()
         {
-            throw new NotImplementedException();
-        }
+                throw new NotImplementedException();
+            }
 
         public void LoadMaps()
         {
