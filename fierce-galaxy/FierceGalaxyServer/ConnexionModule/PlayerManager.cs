@@ -20,7 +20,7 @@ namespace FierceGalaxyServer
 
         public PlayerManager(IDBPlayerManager dBManager)
         {
-            this.dBPlayerManager = dBManager;
+            dBPlayerManager = dBManager;
         }
 
         //======================================================

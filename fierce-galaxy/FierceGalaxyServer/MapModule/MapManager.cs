@@ -1,62 +1,73 @@
 ﻿using FierceGalaxyInterface;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace FierceGalaxyServer
 {
-    public class MapManager : IMapManager
+    public class MapManager
     {
         //======================================================
         // Field
         //======================================================
 
-        private IDBMapManager dBMapManager;
+        private IDictionary<string, IReadOnlyMap> dicMaps;
+        private string dbFilePath;
+        private string mapsDirectory;
+        private DBMap dbMapJson;
 
         //======================================================
         // Constructor
         //======================================================
 
-        public MapManager(IDBPlayerManager dBMapManager)
+        public MapManager()
         {
-            dBMapManager = dBMapManager;
+            dicMaps = new Dictionary<string, IReadOnlyMap>();
+
+            dbFilePath = Properties.Settings.Default.JsonDBPath;
+
+            mapsDirectory = dbFilePath + Properties.Settings.Default.JsonDBMapsPath;
+
+            LoadMaps();
         }
 
         //======================================================
         // Override
         //======================================================
 
-        public IList<string> MapsName
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public IReadOnlyMap LoadMap(string mapName)
-        {
-            if (dBMapManager.ContainsMap(mapName))
-            {
-                var dbMap = dBMapManager.GetMap(mapName);
-                var map = new Map();
-                map.Name = dbMap.Name;
-                map.Description = dbMap.Description;
-                return map;
-            }
-            else
-            {
-                throw new System.ArgumentException("Pseudo '" + pseudo + "' does not exist", "pseudo");
-            }
-        }
-
-        public void SaveMap(IReadOnlyMap map)
+        public IReadOnlyList<string> ListMap()
         {
             throw new NotImplementedException();
+        }
+
+        public void LoadMaps()
+        {
+            Directory.CreateDirectory(mapsDirectory);
+            string[] fileEntries = Directory.GetFiles(mapsDirectory);
+            foreach (string fileName in fileEntries)
+            {
+                dbMapJson = JsonSerialization.ReadFromJsonFile<DBMap>(fileName);
+                var map = new Map(dbMapJson.Name, dbMapJson.Description);
+                dicMaps.Add(dbMapJson.Name, map);
+            }
+        }
+
+        public void SaveMap(DBMap map)
+        {
+            Console.Write(mapsDirectory + map.Name);
+            JsonSerialization.WriteToJsonFile<DBMap>
+                (mapsDirectory + "\\" + map.Name + ".json", map);
         }
 
         //======================================================
         // Private
         //======================================================
         
+        private IReadOnlyMap LoadSingleMap(string mapName)
+        {
+            IReadOnlyMap m = JsonSerialization.ReadFromJsonFile<Map>(
+                mapsDirectory + mapName);
+            return m;
+        }
     }
 }

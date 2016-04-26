@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace FierceGalaxyServer
@@ -10,18 +9,26 @@ namespace FierceGalaxyServer
         // Field
         //======================================================
 
-        private DBJson dbJson;
-        private string dbFilePath;
+        private DBJson dbPlayersJson;
+        private DBJson dbMapsJson;
+        private string dbPlayersFile;
+        private string dbMapsPath;
 
         //======================================================
         // Constructor
         //======================================================
 
-        public DBJsonManager(string dbFilePath)
+        public DBJsonManager()
         {
-            this.dbFilePath = dbFilePath;
+            string dbFilePath = Properties.Settings.Default.JsonDBPath;
+            string dbPlayersFileName = Properties.Settings.Default.JsonDBPlayersFileName;
+
+            dbPlayersFile = dbFilePath + dbPlayersFileName;
+            dbMapsPath = dbFilePath + Properties.Settings.Default.JsonDBMapsPath;
+
             ValidateDBExist();
-            LoadDB();
+            LoadPlayersDB();
+            //LoadMapsDB();
         }
 
         //======================================================
@@ -30,45 +37,45 @@ namespace FierceGalaxyServer
 
         public bool ContainsPlayer(string key)
         {
-            return dbJson.DicDBPlayers.ContainsKey(key);
+            return dbPlayersJson.DicDBPlayers.ContainsKey(key);
         }
 
         public void SetPlayer(string key, DBPlayer player)
         {
             if(player.playerID == null)
             {
-                player.playerID = dbJson.CurrentID++;
+                player.playerID = dbPlayersJson.CurrentID++;
             }
-            dbJson.DicDBPlayers[key] = player;
+            dbPlayersJson.DicDBPlayers[key] = player;
             SaveDB();
         }
 
         public DBPlayer GetPlayer(string key)
         {
             DBPlayer p;
-            dbJson.DicDBPlayers.TryGetValue(key, out p);
+            dbPlayersJson.DicDBPlayers.TryGetValue(key, out p);
             return p;
         }
         
         public DBMap GetMap(string key)
         {
             DBMap m;
-            dbJson.DicDBMaps.TryGetValue(key, out m);
+            dbPlayersJson.DicDBMaps.TryGetValue(key, out m);
             return m;
         }
 
         public bool ContainsMap(string key)
         {
-            return dbJson.DicDBMaps.ContainsKey(key);
+            return dbPlayersJson.DicDBMaps.ContainsKey(key);
         }
 
         public void SetMap(string key, DBMap map)
         {
             if (map.mapID == null)
             {
-                map.mapID = dbJson.CurrentID++;
+                map.mapID = dbPlayersJson.CurrentID++;
             }
-            dbJson.DicDBMaps[key] = map;
+            dbPlayersJson.DicDBMaps[key] = map;
             SaveDB();
         }
 
@@ -78,24 +85,26 @@ namespace FierceGalaxyServer
 
         private void SaveDB()
         {
+            string jsonDBPath = Properties.Settings.Default.JsonDBPath;
+            string jsonDBPlayersFileName = Properties.Settings.Default.JsonDBPlayersFileName;
             JsonSerialization.WriteToJsonFile<DBJson>
-                (Properties.Settings.Default.JsonDBPath, dbJson);
+                (jsonDBPath + jsonDBPlayersFileName, dbPlayersJson);
         }
 
-        private void LoadDB()
+        private void LoadPlayersDB()
         {
-            dbJson = JsonSerialization.ReadFromJsonFile<DBJson>(dbFilePath);
+            dbPlayersJson = JsonSerialization.ReadFromJsonFile<DBJson>(dbPlayersFile);
         }
 
         private void ValidateDBExist()
         {
-            FileInfo fileInfo = new FileInfo(dbFilePath);
+            FileInfo fileInfo = new FileInfo(dbPlayersFile);
 
             if (!fileInfo.Exists)
                 Directory.CreateDirectory(fileInfo.Directory.FullName);
 
             // Trick to create file if not exist
-            using (File.Create(dbFilePath)) { }
+            using (File.Create(dbPlayersFile)) { }
         }
 
         //======================================================

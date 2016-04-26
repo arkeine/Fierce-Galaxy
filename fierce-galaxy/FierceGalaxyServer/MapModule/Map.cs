@@ -1,4 +1,5 @@
 ﻿using FierceGalaxyInterface;
+using FierceGalaxyServer.MapModule;
 using System;
 using System.Collections.Generic;
 
@@ -19,6 +20,15 @@ namespace FierceGalaxyServer
             listLinkedNodes = new ListLinkedNodes();
             listNode = new List<IReadOnlyNode>();
             listSpawnNode = new List<IReadOnlyNode>();
+        }
+
+        public Map(string name, string description)
+        {
+            listLinkedNodes = new ListLinkedNodes();
+            listNode = new List<IReadOnlyNode>();
+            listSpawnNode = new List<IReadOnlyNode>();
+            Name = name;
+            Description = description;
         }
         //======================================================
         // Override
