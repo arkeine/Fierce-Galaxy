@@ -109,7 +109,8 @@
     <Compile Include="DBModule\IDBManager.cs" />
     <Compile Include="GameModule\Game.cs" />
     <Compile Include="GameModule\GameNode.cs" />
-    <Compile Include="GameModule\NodeManager.cs" />
+    <Compile Include="Tools\FunctionManager.cs" />
+    <Compile Include="GameModule\RessourcesTransfertManager.cs" />
     <Compile Include="Global\Player.cs" />
     <Compile Include="ConnexionModule\PlayerManager.cs" />
     <Compile Include="ConnexionModule\TokenManager.cs" />

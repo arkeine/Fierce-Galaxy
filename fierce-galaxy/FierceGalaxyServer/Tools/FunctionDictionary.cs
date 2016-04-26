@@ -1,42 +1,40 @@
-﻿using FierceGalaxyInterface;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace FierceGalaxyServer
 {
     /// <summary>
-    /// List which manage the ressources of the node in function of time
+    /// Manage a key-value pair where the value is function of 
+    /// time
     /// </summary>
-    public class NodeManager
+    public class FunctionDictionary<T>
     {
         //======================================================
         // Delegate
         //======================================================
 
-        public delegate double NodeFonction(double t);
+        public delegate double Fonction(double t);
 
         //======================================================
         // Field
         //======================================================
 
-        private IDictionary<IReadOnlyNode, int> dicOffset;
+        private IDictionary<T, double> dicOffset;
         private DateTime zero;
-        private NodeFonction f;
+        private Fonction f;
 
         //======================================================
         // Constructor
         //======================================================
 
-        public NodeManager(NodeFonction f)
+        public FunctionDictionary(Fonction f)
         {
-            dicOffset = new Dictionary<IReadOnlyNode, int>();
+            dicOffset = new Dictionary<T, double>();
             Zero = DateTime.Now;
             Function = f;
         }
 
-        public NodeManager() : this(delegate (double t) { return t; }) { }
+        public FunctionDictionary() : this(delegate (double t) { return t; }) { }
 
         //======================================================
         // Access
@@ -55,7 +53,7 @@ namespace FierceGalaxyServer
             }
         }
 
-        public NodeFonction Function
+        public Fonction Function
         {
             get
             {
@@ -68,33 +66,28 @@ namespace FierceGalaxyServer
             }
         }
 
-        public void SetCurrentNodeRessources(IReadOnlyNode node, int ressources)
+        public void SetCurrentValue(T k, double ressources)
         {
             //Calculate the value to substract to offset
-            int newOffset = GetRessourcesFromZero() - ressources;
+            double newOffset = GetValueFromZero() - ressources;
 
             //Update the offset
-            dicOffset[node] = Math.Abs(newOffset);
+            dicOffset[k] = Math.Abs(newOffset);
         }
 
-        public int GetCurrentNodeRessources(IReadOnlyNode node)
+        public double GetCurrentValue(T k)
         {
-            int absolutValue = (int)Function((DateTime.Now - zero).TotalSeconds);
-            int currentOffset;
-            dicOffset.TryGetValue(node, out currentOffset);
-            /*
-            Console.WriteLine("GetCurrentRessources");
-            Console.WriteLine("Abs "+absolutValue);
-            Console.WriteLine("Cur "+currentOffset);
-            Console.WriteLine("Dif "+(absolutValue - currentOffset));/**/
-            return GetRessourcesFromZero() - currentOffset;
+            double absolutValue = Function((DateTime.Now - zero).TotalSeconds);
+            double currentOffset;
+            dicOffset.TryGetValue(k, out currentOffset);
+            return GetValueFromZero() - currentOffset;
         }
 
         //======================================================
         // Private
         //======================================================
 
-        private int GetRessourcesFromZero()
+        private double GetValueFromZero()
         {
             return (int)Function((DateTime.Now - zero).TotalSeconds);
         }
