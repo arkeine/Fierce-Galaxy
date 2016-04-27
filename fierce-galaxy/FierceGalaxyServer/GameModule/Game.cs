@@ -13,6 +13,8 @@ namespace FierceGalaxyServer
         private IReadOnlyMap map;
         private INetworkTime ntp;
         private IDictionary<IReadOnlyNode, GameNode> dicGameNodeToMapNode;
+        private FunctionDictionary<GameNode> nodeManager;
+        private SquadManager squad
 
         //======================================================
         // Constructor

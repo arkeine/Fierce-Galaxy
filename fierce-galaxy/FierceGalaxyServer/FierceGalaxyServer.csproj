@@ -112,7 +112,7 @@
     <Compile Include="GameModule\Game.cs" />
     <Compile Include="GameModule\GameNode.cs" />
     <Compile Include="Tools\FunctionDictionary.cs" />
-    <Compile Include="GameModule\LinkTransferManager.cs" />
+    <Compile Include="GameModule\SquadManager.cs" />
     <Compile Include="Global\Player.cs" />
     <Compile Include="ConnexionModule\PlayerManager.cs" />
     <Compile Include="ConnexionModule\TokenManager.cs" />

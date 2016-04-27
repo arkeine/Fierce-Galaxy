@@ -10,7 +10,7 @@ using FierceGalaxyServer;
 namespace FierceGalaxyUnitTest
 {
     [TestClass]
-    public class LinkTransferManagerTest
+    public class SquadManagerTest
     {
         //======================================================
         // Global tool
@@ -26,7 +26,7 @@ namespace FierceGalaxyUnitTest
         private GameNode gn1;
         private GameNode gn2;
         private FunctionDictionary<GameNode> nm;
-        private LinkTransferManager m;
+        private SquadManager m;
         
         //Distance function for the test case
         public static TimeSpan TestFunctionDistance(IReadOnlyNode n1, IReadOnlyNode n2)
@@ -82,7 +82,7 @@ namespace FierceGalaxyUnitTest
                     delegate (double t) { return t; }
                 );
 
-            m = new LinkTransferManager(nm, TestFunctionDistance);
+            m = new SquadManager(nm, TestFunctionDistance);
         }
 
         //======================================================

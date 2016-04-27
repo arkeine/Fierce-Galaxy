@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace FierceGalaxyServer
 {
-    public class LinkTransferManager
+    public class SquadManager
     {
         //======================================================
         // Static
@@ -40,10 +40,10 @@ namespace FierceGalaxyServer
         // Constructor
         //======================================================
 
-        public LinkTransferManager(FunctionDictionary<GameNode> nm) :
+        public SquadManager(FunctionDictionary<GameNode> nm) :
             this(nm, DefaultFunctionDistance) { }
 
-        public LinkTransferManager(FunctionDictionary<GameNode> nm, FonctionDistance fd)
+        public SquadManager(FunctionDictionary<GameNode> nm, FonctionDistance fd)
         {
             this.nm = nm;
             this.fd = fd;
@@ -210,6 +210,7 @@ namespace FierceGalaxyServer
             public GameNode SourceNode;
             public GameNode TargetNode;
         }
+
         /// <summary>
         /// Comparer for comparing two keys, handling equality
         /// as beeing greater
