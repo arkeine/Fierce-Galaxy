@@ -2,7 +2,7 @@
 
 namespace FierceGalaxyServer
 {
-    public class GameFacade : IGameFacade
+    public class GameFacade : IFierceGalaxyFacade
     {
         //======================================================
         // Field

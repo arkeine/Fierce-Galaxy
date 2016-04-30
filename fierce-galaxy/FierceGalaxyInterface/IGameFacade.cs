@@ -1,6 +1,6 @@
 ﻿namespace FierceGalaxyInterface
 {
-    public interface IGameFacade
+    public interface IFierceGalaxyFacade
     {
         IPlayerManager PlayerManager { get; }
     }

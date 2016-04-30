@@ -7,14 +7,8 @@
             get;
             set;
         }
-
+        
         new int MaxRessource
-        {
-            get;
-            set;
-        }
-
-        new IPlayer CurrentOwner
         {
             get;
             set;

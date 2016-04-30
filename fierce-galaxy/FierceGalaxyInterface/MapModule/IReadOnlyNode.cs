@@ -6,13 +6,8 @@
         {
             get;
         }
-
+        
         int MaxRessource
-        {
-            get;
-        }
-
-        IPlayer CurrentOwner
         {
             get;
         }
