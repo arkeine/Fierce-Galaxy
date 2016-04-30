@@ -123,6 +123,7 @@
     <Compile Include="MapModule\Map.cs" />
     <Compile Include="MapModule\MapManager.cs" />
     <Compile Include="MapModule\Node.cs" />
+    <Compile Include="MatchingModule\ByLobby\Lobby.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
