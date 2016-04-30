@@ -27,6 +27,8 @@ namespace FierceGalaxyServer
         //======================================================
 
         public delegate TimeSpan FonctionDistance(IReadOnlyNode n1, IReadOnlyNode n2);
+        public delegate void NodeUpdateHandler(GameNode n);
+        public delegate void SquadLeavesHandler(GameNode source, GameNode target, IReadOnlyPlayer owner, double ressources);
 
         //======================================================
         // Field
@@ -51,13 +53,30 @@ namespace FierceGalaxyServer
         }
 
         //======================================================
+        // Event
+        //======================================================
+
+        public event NodeUpdateHandler NodeUpdated;
+        public event SquadLeavesHandler SquadLeaves;
+
+        private void OnSquadLeaves(Squad s)
+        {
+            if (SquadLeaves != null) SquadLeaves(s.SourceNode, s.TargetNode, s.CurrentOwner, s.Ressources);
+        }
+
+        private void OnNodeUpdated(GameNode n)
+        {
+            if (NodeUpdated != null) NodeUpdated(n);
+        }
+
+        //======================================================
         // Access
         //======================================================
 
         /// <summary>
         /// Send a squad to another node.
         /// </summary>
-        public void SendSquad(int ressources,
+        public void SendSquad(double ressources,
             GameNode sourceNode, GameNode targetNode)
         {
             Squad s = CreateSquadFromNode(ressources, sourceNode);
@@ -69,6 +88,7 @@ namespace FierceGalaxyServer
                 DateTime arrival = now + fd(s.SourceNode.NodeData, s.TargetNode.NodeData);
                 DealRessources(now);
                 AddSquadToList(arrival, s);
+                OnSquadLeaves(s);
             }
         }
 
@@ -96,6 +116,7 @@ namespace FierceGalaxyServer
             if (s.CurrentOwner == n.CurrentOwner)
             {
                 nm.SetCurrentValue(n, v + s.Ressources);
+                OnNodeUpdated(n);
             }
             else
             {
@@ -103,16 +124,18 @@ namespace FierceGalaxyServer
                 if (diff < 0)
                 {
                     nm.SetCurrentValue(n, -1 * diff);
+                    OnNodeUpdated(n);
                     n.CurrentOwner = s.CurrentOwner;
                 }
                 else
                 {
                     nm.SetCurrentValue(n, diff);
+                    OnNodeUpdated(n);
                 }
             }
         }
 
-        private Squad CreateSquadFromNode(int ressources, GameNode sourceNode)
+        private Squad CreateSquadFromNode(double ressources, GameNode sourceNode)
         {
             double available = nm.GetCurrentValue(sourceNode);
             double max = sourceNode.NodeData.MaxRessource;
@@ -121,6 +144,7 @@ namespace FierceGalaxyServer
             double toSend = available - ressources >= 0 ? ressources : available;
 
             nm.SetCurrentValue(sourceNode, available - toSend);
+            OnNodeUpdated(sourceNode);
 
             Squad s = new Squad();
             s.CurrentOwner = sourceNode.CurrentOwner;
@@ -219,7 +243,7 @@ namespace FierceGalaxyServer
         /// 
         /// Source :http://stackoverflow.com/questions/5716423/c-sharp-sortable-collection-which-allows-duplicate-keys
         /// </summary>
-        public class DuplicateKeyComparer<TKey> : 
+        private class DuplicateKeyComparer<TKey> : 
             IComparer<TKey> where TKey : IComparable
         {
             public int Compare(TKey x, TKey y)

@@ -78,9 +78,14 @@ namespace FierceGalaxyServer
         public double GetCurrentValue(T k)
         {
             double absolutValue = Function((DateTime.Now - zero).TotalSeconds);
+            return GetValueFromZero() - GetCurrentOffset(k);
+        }
+
+        public double GetCurrentOffset(T k)
+        {
             double currentOffset;
             dicOffset.TryGetValue(k, out currentOffset);
-            return GetValueFromZero() - currentOffset;
+            return currentOffset;
         }
 
         //======================================================
