@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{70AF6D59-A5DB-43FF-863D-3ED8DF4F82CF}</ProjectGuid>
+    <ProjectGuid>{E7D46170-26CD-4F99-8FD4-42FED0536D36}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FierceGalaxyServer</RootNamespace>
-    <AssemblyName>FierceGalaxyServer</AssemblyName>
+    <RootNamespace>FierceGalaxyService</RootNamespace>
+    <AssemblyName>FierceGalaxyService</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -41,61 +41,53 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CommunicationModule\IMetaGameService.svc" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="Service1.svc" />
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBModule\DBJsonManager.cs" />
-    <Compile Include="DBModule\IDBPlayerManager.cs" />
-    <Compile Include="DBModule\DBMap.cs" />
-    <Compile Include="DBModule\IDBMapManager.cs" />
-    <Compile Include="GameModule\Game.cs" />
-    <Compile Include="GameModule\GameNode.cs" />
-    <Compile Include="GameModule\TimestampManager.cs" />
-    <Compile Include="Tools\FunctionDictionary.cs" />
-    <Compile Include="GameModule\SquadManager.cs" />
-    <Compile Include="Global\Player.cs" />
-    <Compile Include="ConnexionModule\PlayerManager.cs" />
-    <Compile Include="ConnexionModule\TokenManager.cs" />
-    <Compile Include="Global\FierceGalaxyFacade.cs" />
-    <Compile Include="MapModule\ListLinkedNodes.cs" />
-    <Compile Include="MapModule\IListLinkedNodes.cs" />
-    <Compile Include="MapModule\Map.cs" />
-    <Compile Include="MapModule\MapManager.cs" />
-    <Compile Include="MapModule\Node.cs" />
-    <Compile Include="MatchingModule\ByLobby\Lobby.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
+    <Compile Include="CommunicationModule\IMetaGameService.cs" />
+    <Compile Include="CommunicationModule\IMetaGameService.svc.cs">
+      <DependentUpon>IMetaGameService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Tools\DoubleDictionarySameType.cs" />
-    <Compile Include="Tools\DoubleDictionary.cs" />
-    <Compile Include="DBModule\DBPlayer.cs" />
-    <Compile Include="DBModule\JsonSerialization.cs" />
+    <Compile Include="CommunicationModule\UserAuthentication.cs" />
+    <Compile Include="Service1.svc.cs">
+      <DependentUpon>Service1.svc</DependentUpon>
+    </Compile>
+    <Compile Include="IService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TimeModule\NetworkTime.cs" />
-    <Compile Include="Tools\MultiMap.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FierceGalaxyInterface\FierceGalaxyInterface.csproj">
       <Project>{10fc4531-bd9c-4cba-b478-00c2ec04eb7a}</Project>
       <Name>FierceGalaxyInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FierceGalaxyServer\FierceGalaxyServer.csproj">
+      <Project>{70af6d59-a5db-43ff-863d-3ed8df4f82cf}</Project>
+      <Name>FierceGalaxyServer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
@@ -111,9 +103,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50323</DevelopmentServerPort>
+          <DevelopmentServerPort>57317</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50323/</IISUrl>
+          <IISUrl>http://localhost:57317/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -123,7 +115,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

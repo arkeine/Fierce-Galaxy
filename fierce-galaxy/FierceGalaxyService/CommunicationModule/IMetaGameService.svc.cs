@@ -2,7 +2,7 @@
 
 namespace FierceGalaxyServer
 {
-    public class MainFacadeService : IMainFacadeService
+    public class MetaGameService : IMetaGameService
     {
         public void NewPlayer(string pseudo, string playerPW, string publicPseudo)
         {

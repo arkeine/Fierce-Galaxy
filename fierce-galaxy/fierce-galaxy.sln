@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FierceGalaxyServer", "Fierc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FierceGalaxyUnitTest", "FierceGalaxyUnitTest\FierceGalaxyUnitTest.csproj", "{1B824FE6-21E2-490C-AF13-564D4511D6E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FierceGalaxyService", "FierceGalaxyService\FierceGalaxyService.csproj", "{E7D46170-26CD-4F99-8FD4-42FED0536D36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1B824FE6-21E2-490C-AF13-564D4511D6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B824FE6-21E2-490C-AF13-564D4511D6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B824FE6-21E2-490C-AF13-564D4511D6E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7D46170-26CD-4F99-8FD4-42FED0536D36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7D46170-26CD-4F99-8FD4-42FED0536D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7D46170-26CD-4F99-8FD4-42FED0536D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7D46170-26CD-4F99-8FD4-42FED0536D36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
