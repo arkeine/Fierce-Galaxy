@@ -70,13 +70,11 @@ namespace FierceGalaxyUnitTest
         [TestInitialize]
         public void GenerateLocalContext()
         {
-            gn1 = new GameNode();
+            gn1 = new GameNode(n1);
             gn1.CurrentOwner = p1;
-            gn1.NodeData = n1;
 
-            gn2 = new GameNode();
+            gn2 = new GameNode(n2);
             gn2.CurrentOwner = p2;
-            gn2.NodeData = n2;
 
             nm = new FunctionDictionary<GameNode>(
                     delegate (double t) { return t; }

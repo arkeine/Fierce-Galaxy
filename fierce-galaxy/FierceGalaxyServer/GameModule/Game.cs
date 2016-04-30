@@ -14,18 +14,25 @@ namespace FierceGalaxyServer
         private INetworkTime ntp;
         private IDictionary<IReadOnlyNode, GameNode> dicGameNodeToMapNode;
         private FunctionDictionary<GameNode> nodeManager;
-        private SquadManager squad
+        private SquadManager squadManager;
+        private IDictionary<IReadOnlyNode, IReadOnlyPlayer> spawnAttribution;
 
         //======================================================
         // Constructor
         //======================================================
 
-        public Game(IReadOnlyMap map, INetworkTime ntp)
+        public Game(IReadOnlyMap map, INetworkTime ntp, 
+            IDictionary<IReadOnlyNode, IReadOnlyPlayer> spawnAttribution)
         {
             this.map = map;
             this.ntp = ntp;
+            this.spawnAttribution = spawnAttribution;
 
             dicGameNodeToMapNode = new Dictionary<IReadOnlyNode, GameNode>();
+            nodeManager = new FunctionDictionary<GameNode>();
+            squadManager = new SquadManager(nodeManager);
+
+            LoadMap(map);
         }
 
         //======================================================
@@ -43,7 +50,7 @@ namespace FierceGalaxyServer
 
         public void Move(IReadOnlyPlayer player, IReadOnlyNode sourceNode, IReadOnlyNode targetNode, int ressources)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void UsePowerDestroy(IReadOnlyPlayer player, IReadOnlyNode targetNode)
@@ -69,6 +76,21 @@ namespace FierceGalaxyServer
         //======================================================
         // Private
         //======================================================
+
+        private void LoadMap(IReadOnlyMap map)
+        {
+            foreach(IReadOnlyNode n in map.Nodes)
+            {
+                GameNode gn = new GameNode(n);
+
+                if(spawnAttribution.ContainsKey(n))
+                {
+
+                }
+
+                dicGameNodeToMapNode.Add(n, gn);
+            }            
+        }
 
     }
 }
