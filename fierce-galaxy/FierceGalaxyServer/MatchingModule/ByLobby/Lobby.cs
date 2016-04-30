@@ -6,7 +6,7 @@ using System.Web;
 
 namespace FierceGalaxyServer.MatchingModule.ByLobby
 {
-    public class Lobby : ILobby
+    public class Lobby //: ILobby
     {
         public IReadOnlyMap CurrentMap
         {
