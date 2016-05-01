@@ -36,6 +36,10 @@ namespace FierceGalaxyUnitTest
             testMap.AddNode(n3);
             testMap.AddNode(n4);
             testMap.AddNode(n5);
+            testMap.SetSpawnNode(n1, true);
+            testMap.SetSpawnNode(n2, true);
+            testMap.SetSpawnNode(n3, true);
+
         }
 
         /// <summary>
@@ -48,6 +52,8 @@ namespace FierceGalaxyUnitTest
         {
             testLobby.SetPlayerReady(p1, true);
 
+            testLobby.CurrentMap = testMap;
+
             testLobby.StartGame();
         }
 
@@ -59,51 +65,15 @@ namespace FierceGalaxyUnitTest
             "Player p1 has no spawn node")]
         public void CantStartGame_2()
         {
-            testLobby.SetPlayerReady(p1, true);
-            testLobby.SetPlayerReady(p2, true);
-            testLobby.SetPlayerReady(p2, true);
-            testLobby.SetPlayerSpawn(p2, n2);
-            testLobby.SetPlayerSpawn(p3, n3);
-            testLobby.StartGame();
-        }
-
-        /// <summary>
-        /// A player has no spawnNode
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ApplicationException),
-            "No map selected")]
-        public void CantStartGame_3()
-        {
-            testLobby.SetPlayerReady(p1, true);
-            testLobby.SetPlayerReady(p2, true);
-            testLobby.SetPlayerReady(p2, true);
-            testLobby.SetPlayerSpawn(p1, n1);
-            testLobby.SetPlayerSpawn(p2, n2);
-            testLobby.SetPlayerSpawn(p3, n3);
-            testLobby.StartGame();
-        }
-
-        /// <summary>
-        /// Two players have same spawnNode
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ApplicationException),
-            "Two or more players have the same spawn node")]
-        public void CantStartGame_4()
-        {
-            testLobby.SetPlayerReady(p1, true);
-            testLobby.SetPlayerReady(p2, true);
-            testLobby.SetPlayerReady(p2, true);
-
-            testLobby.SetPlayerSpawn(p1, n1);
-            testLobby.SetPlayerSpawn(p2, n2);
-            testLobby.SetPlayerSpawn(p3, n2);
-
             testLobby.CurrentMap = testMap;
-
+            testLobby.SetPlayerReady(p1, true);
+            testLobby.SetPlayerReady(p2, true);
+            testLobby.SetPlayerReady(p3, true);
+            testLobby.SetPlayerSpawn(p2, n2);
+            testLobby.SetPlayerSpawn(p3, n3);
             testLobby.StartGame();
         }
+        
 
         /// <summary>
         /// A player has no spawnNode
