@@ -14,28 +14,24 @@ namespace FierceGalaxyServer
         //private IList<GamePlayer> listPlayers;
         private IDictionary<IReadOnlyPlayer, GamePlayer> dictPlayers;
         private IReadOnlyMap currentMap;
-        private IReadOnlyPlayer owner;
+        private GamePlayer owner;
         private IDictionary<IReadOnlyNode, IReadOnlyPlayer> spawnAttribution;
         private IDictionary<IReadOnlyNode, GameNode> dicGameNodeToMapNode;
+        private string name;
 
         //======================================================
         // Constructor
         //======================================================
+        
 
-        public Lobby()
+        public Lobby(string lobbyName, IReadOnlyPlayer gameOwner)
         {
             dictPlayers = new Dictionary<IReadOnlyPlayer, GamePlayer>();
-            currentMap = new Map();
-            owner = new Player();
-        }
+            owner = new GamePlayer(gameOwner);
+            name = lobbyName;
 
-        public Lobby(string name, IReadOnlyPlayer gameOwner)
-        {
-            GamePlayer owner = new GamePlayer();
-            dictPlayers = new Dictionary<IReadOnlyPlayer, GamePlayer>();
             dictPlayers.Add(gameOwner, owner);
-            currentMap = null;
-            
+
             PlayerCount = 1;
             MaxCapacity = 2;
             IsClosed = false;
@@ -97,7 +93,7 @@ namespace FierceGalaxyServer
 
         public void Join(IReadOnlyPlayer player)
         {
-            dictPlayers.Add(player, new GamePlayer());
+            dictPlayers.Add(player, new GamePlayer(player));
         }
 
         public void KickUser(IReadOnlyPlayer player)
@@ -146,6 +142,11 @@ namespace FierceGalaxyServer
         {
             public IReadOnlyNode SpawnNode { get; set; }
             public bool playerReady { get; set; }
+
+            public GamePlayer(IReadOnlyPlayer player): base(player)
+            {
+
+            }
         }
     }
 }

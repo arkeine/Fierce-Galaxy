@@ -9,7 +9,7 @@ namespace FierceGalaxyUnitTest
     {
         private static Player p1, p2, p3, p4;
         private static Lobby testLobby;
-        private static Node n1, n2, n3, n4;
+        private static Node n1, n2, n3, n4, n5;
         private static Map testMap;
 
         [ClassInitialize]
@@ -20,8 +20,7 @@ namespace FierceGalaxyUnitTest
             p2 = new Player();
             p3 = new Player();
             p4 = new Player();
-            testLobby = new Lobby();
-            testLobby.Join(p1);
+            testLobby = new Lobby("test lobby", p1);
             testLobby.Join(p2);
             testLobby.Join(p3);
 
@@ -30,11 +29,13 @@ namespace FierceGalaxyUnitTest
             n2 = new Node();
             n3 = new Node();
             n4 = new Node();
+            n5 = new Node();
             testMap = new Map();
             testMap.AddNode(n1);
             testMap.AddNode(n2);
             testMap.AddNode(n3);
             testMap.AddNode(n4);
+            testMap.AddNode(n5);
         }
 
         /// <summary>
@@ -42,11 +43,10 @@ namespace FierceGalaxyUnitTest
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ApplicationException),
-            "Player p3 is not ready")]
+            "Player p2 is not ready")]
         public void CantStartGame_1()
         {
             testLobby.SetPlayerReady(p1, true);
-            testLobby.SetPlayerReady(p2, true);
 
             testLobby.StartGame();
         }
@@ -62,6 +62,8 @@ namespace FierceGalaxyUnitTest
             testLobby.SetPlayerReady(p1, true);
             testLobby.SetPlayerReady(p2, true);
             testLobby.SetPlayerReady(p2, true);
+            testLobby.SetPlayerSpawn(p2, n2);
+            testLobby.SetPlayerSpawn(p3, n3);
             testLobby.StartGame();
         }
 
