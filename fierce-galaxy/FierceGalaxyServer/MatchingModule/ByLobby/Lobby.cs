@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace FierceGalaxyServer
 {
@@ -16,11 +17,11 @@ namespace FierceGalaxyServer
         private IReadOnlyMap currentMap;
         private GamePlayer owner;
         private string name;
-
+        
         //======================================================
         // Constructor
         //======================================================
-        
+
         public Lobby(string lobbyName, IReadOnlyPlayer gameOwner)
         {
             dictPlayers = new Dictionary<IReadOnlyPlayer, GamePlayer>();
@@ -131,8 +132,17 @@ namespace FierceGalaxyServer
 
             if (currentMap == null)
                 throw new ApplicationException("No map selected");
+
             StartGame();
         }
+
+        public IDictionary<IReadOnlyNode, IReadOnlyPlayer> spawnAttribution()
+        {
+            return dictPlayers.ToDictionary( 
+                p=> p.Value.SpawnNode,
+                p => p.Key);
+        }
+
 
         //======================================================
         // Internal
