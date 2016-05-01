@@ -16,15 +16,21 @@ public class game : MonoBehaviour {
         Instantiate(plan);
 
         Vector3 sphere1Coord = Vector3.zero;
-        Vector3 sphere2Coord = new Vector3(8,0,4);
+        Vector3 sphere2Coord = new Vector3(8, 0, 4);
         Vector3 sphere3Coord = new Vector3(2, 0, -4);
+        Vector3 sphere4Coord = new Vector3(-6, 0, -4);
+        Vector3 sphere5Coord = new Vector3(-2, 0, -4);
         Instantiate(sphere, sphere1Coord, Quaternion.identity);
         Instantiate(sphere, sphere2Coord, Quaternion.identity);
         Instantiate(sphere, sphere3Coord, Quaternion.identity);
+        Instantiate(sphere, sphere4Coord, Quaternion.identity);
+        Instantiate(sphere, sphere5Coord, Quaternion.identity);
 
         connectSpheres(sphere1Coord, sphere2Coord);
         connectSpheres(sphere1Coord, sphere3Coord);
         connectSpheres(sphere2Coord, sphere3Coord);
+        connectSpheres(sphere1Coord, sphere4Coord);
+        connectSpheres(sphere4Coord, sphere5Coord);
 
     }
 

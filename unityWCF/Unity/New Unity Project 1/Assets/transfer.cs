@@ -81,5 +81,6 @@ public class transfer : MonoBehaviour {
     {
         cAnimation = new connectorAnimation(start, stop);
         workingSphere = Instantiate(sphere, start, Quaternion.identity) as GameObject;
+        workingSphere.transform.localScale *= 0.3f;
     }
 }
