@@ -15,8 +15,6 @@ namespace FierceGalaxyServer
         private IDictionary<IReadOnlyPlayer, GamePlayer> dictPlayers;
         private IReadOnlyMap currentMap;
         private GamePlayer owner;
-        private IDictionary<IReadOnlyNode, IReadOnlyPlayer> spawnAttribution;
-        private IDictionary<IReadOnlyNode, GameNode> dicGameNodeToMapNode;
         private string name;
 
         //======================================================
@@ -91,16 +89,19 @@ namespace FierceGalaxyServer
         public void Join(IReadOnlyPlayer player)
         {
             dictPlayers.Add(player, new GamePlayer(player));
+            PlayerJoin(player);
         }
 
         public void KickUser(IReadOnlyPlayer player)
         {
             dictPlayers.Remove(player);
+            PlayerQuit(player);
         }
 
         public void Leave(IReadOnlyPlayer player)
         {
             dictPlayers.Remove(player);
+            PlayerQuit(player);
         }
 
         public void SetPlayerColor(IPlayer player, Color c)
@@ -126,9 +127,11 @@ namespace FierceGalaxyServer
                     throw new ApplicationException("Player" + player.Key.PublicPseudo + " is not ready");
                 if (player.Value.SpawnNode == null)
                     throw new ApplicationException("Player" + player.Key.PublicPseudo + " has no spawn node");
-                if(currentMap == null)
-                    throw new ApplicationException("No map selected");
             }
+
+            if (currentMap == null)
+                throw new ApplicationException("No map selected");
+            StartGame();
         }
 
         //======================================================
@@ -140,10 +143,7 @@ namespace FierceGalaxyServer
             public IReadOnlyNode SpawnNode { get; set; }
             public bool playerReady { get; set; }
 
-            public GamePlayer(IReadOnlyPlayer player): base(player)
-            {
-
-            }
+            public GamePlayer(IReadOnlyPlayer player) : base(player) { }
         }
     }
 }
