@@ -1,5 +1,6 @@
 ﻿using FierceGalaxyInterface;
 using FierceGalaxyServer;
+using FierceGalaxyServer.GameModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -8,14 +9,14 @@ namespace FierceGalaxyUnitTest
     [TestClass]
     public class FunctionDictionaryTest
     {
-        private Node n;
-        private FunctionDictionary<IReadOnlyNode> nm;
+        private GameNode n;
+        private GameNodeManager nm;
 
         [TestInitialize]
         public void CreateLocalContext()
         {
-            n = new Node();
-            nm = new FunctionDictionary<IReadOnlyNode>(
+            n = new GameNode(new Node());
+            nm = new GameNodeManager(
                     delegate (double t) { return t; }
                 );
         }

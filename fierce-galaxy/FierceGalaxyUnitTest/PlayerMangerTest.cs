@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FierceGalaxyServer;
-using FierceGalaxyInterface;
 
 namespace FierceGalaxyUnitTest
 {

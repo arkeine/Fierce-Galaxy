@@ -1,4 +1,5 @@
 ﻿using FierceGalaxyInterface;
+using FierceGalaxyServer.GameModule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace FierceGalaxyServer
         private IReadOnlyMap map;
         private IDictionary<IReadOnlyNode, IReadOnlyPlayer> spawnAttribution;
         private IDictionary<IReadOnlyNode, GameNode> dicGameNodeToMapNode;
-        private FunctionDictionary<GameNode> nodeManager;
+        private GameNodeManager nodeManager;
         private SquadManager squadManager;
 
         //======================================================
@@ -31,7 +32,7 @@ namespace FierceGalaxyServer
             this.spawnAttribution = spawnAttribution;
             
             dicGameNodeToMapNode = new Dictionary<IReadOnlyNode, GameNode>();
-            nodeManager = new FunctionDictionary<GameNode>();
+            nodeManager = new GameNodeManager();
             squadManager = new SquadManager(nodeManager);
 
             LoadMap(map);
@@ -140,7 +141,38 @@ namespace FierceGalaxyServer
                 }
                 
                 dicGameNodeToMapNode.Add(n, gn);
-            }            
+            }
+        }
+
+        private bool IsThereMoreThanOnePLayer()
+        {
+            GameNode first = null;
+
+            foreach (IReadOnlyNode n in map.Nodes)
+            {
+                GameNode gn = dicGameNodeToMapNode[n];
+
+                //Get the first node with a owner
+                if (first == null && gn.CurrentOwner != null)
+                {
+                    first = gn;
+                }
+                //And compar if other node have different owner
+                else if (first.CurrentOwner != gn.CurrentOwner)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void CheckGameEnd()
+        {
+            if(!IsThereMoreThanOnePLayer())
+            {
+                OnGameFinish();
+            }
         }
 
     }

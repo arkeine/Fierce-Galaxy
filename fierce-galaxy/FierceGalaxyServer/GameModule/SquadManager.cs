@@ -3,9 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FierceGalaxyServer
+namespace FierceGalaxyServer.GameModule
 {
-    public class SquadManager
+
+    class SquadManager
     {
         //======================================================
         // Static
@@ -34,7 +35,7 @@ namespace FierceGalaxyServer
         // Field
         //======================================================
 
-        private FunctionDictionary<GameNode> nm;
+        private GameNodeManager nm;
         private SortedList<DateTime, Squad> listSquad;
         private FonctionDistance fd;
 
@@ -42,10 +43,10 @@ namespace FierceGalaxyServer
         // Constructor
         //======================================================
 
-        public SquadManager(FunctionDictionary<GameNode> nm) :
+        public SquadManager(GameNodeManager nm) :
             this(nm, DefaultFunctionDistance) { }
 
-        public SquadManager(FunctionDictionary<GameNode> nm, FonctionDistance fd)
+        public SquadManager(GameNodeManager nm, FonctionDistance fd)
         {
             this.nm = nm;
             this.fd = fd;

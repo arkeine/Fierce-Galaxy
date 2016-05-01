@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FierceGalaxyInterface;
 using FierceGalaxyServer;
+using FierceGalaxyServer.GameModule;
 
 namespace FierceGalaxyUnitTest
 {
@@ -25,7 +22,7 @@ namespace FierceGalaxyUnitTest
         //Context per test case
         private GameNode gn1;
         private GameNode gn2;
-        private FunctionDictionary<GameNode> nm;
+        private GameNodeManager nm;
         private SquadManager m;
         
         //Distance function for the test case
@@ -76,7 +73,7 @@ namespace FierceGalaxyUnitTest
             gn2 = new GameNode(n2);
             gn2.CurrentOwner = p2;
 
-            nm = new FunctionDictionary<GameNode>(
+            nm = new GameNodeManager(
                     delegate (double t) { return t; }
                 );
 

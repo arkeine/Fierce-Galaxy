@@ -16,6 +16,11 @@ namespace FierceGalaxyService
         {
             throw new NotImplementedException();
         }
+        
+        public string GetGameFacadePort(string token)
+        {
+            throw new NotImplementedException();
+        }
 
         public string NewPlayer(string userName, string password, string pseudo)
         {
