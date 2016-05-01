@@ -2,7 +2,7 @@
 
 namespace FierceGalaxyServer
 {
-    public class GameNode
+    class GameNode
     {
         public GameNode(IReadOnlyNode nodeDatan)
         {
