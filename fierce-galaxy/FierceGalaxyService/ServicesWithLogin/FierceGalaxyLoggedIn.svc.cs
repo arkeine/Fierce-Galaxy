@@ -11,17 +11,21 @@ namespace FierceGalaxyService.ServicesWithLogin
     {
         public void Connect()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            Console.WriteLine("Connect");
         }
 
         public void Disconnect()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            Console.WriteLine("Disconnect");
         }
 
-        public long GenerateConnexionToken()
+        public string GenerateConnexionToken()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            Console.WriteLine("GenerateConnexionToken");
+            return "TROOLLLLLL";
         }
     }
 }
