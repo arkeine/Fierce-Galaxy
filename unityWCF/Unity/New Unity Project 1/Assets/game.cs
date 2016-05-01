@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
 using System;
 
-public class testSphere : MonoBehaviour {
+public class game : MonoBehaviour {
     
     public GameObject sphere;
     public GameObject plan;
     public GameObject connection;
+
+    public static List<GameObject> connections;
 
     // Use this for initialization
     void Start () {
@@ -21,26 +24,13 @@ public class testSphere : MonoBehaviour {
 
         connectSpheres(sphere1Coord, sphere2Coord);
         connectSpheres(sphere1Coord, sphere3Coord);
+        connectSpheres(sphere2Coord, sphere3Coord);
 
-        initSphereBehavior();
     }
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetMouseButtonDown(0))
-        { // if left button pressed...
-            Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                //Instantiate(sphere, new Vector3(2,2,2), Quaternion.identity);
-                //Destroy((GameObject)hit);
-
-                print(hit.transform.position);
-                // the object identified by hit.transform was clicked
-                // do whatever you want
-            }
-        }
+        
     }
 
     void connectSpheres(Vector3 sphere1Coord, Vector3 sphere2Coord)
@@ -53,9 +43,5 @@ public class testSphere : MonoBehaviour {
 
         
     }
-
-    private void initSphereBehavior()
-    {
-        
-    }
+    
 }

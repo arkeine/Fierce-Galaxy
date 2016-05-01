@@ -3,11 +3,11 @@ using System.Collections;
 
 public class animationSphere : MonoBehaviour {
     public float shiverFactor = 0.2f;
-    private int x;
+    //private int x;
 
     // Use this for initialization
     void Start () {
-        x = 1;
+      //  x = 1;
     }
 	
 	// Update is called once per frame
