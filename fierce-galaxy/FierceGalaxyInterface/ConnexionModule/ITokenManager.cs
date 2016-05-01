@@ -1,5 +1,8 @@
 ﻿namespace FierceGalaxyInterface
 {
+    /// <summary>
+    /// Manage the connection token of players
+    /// </summary>
     public interface ITokenManager
     {
         /// <summary>
@@ -7,23 +10,23 @@
         /// </summary>
         /// <param name="player">The owner of the token</param>
         /// <returns>The token as a long</returns>
-        long GenerateToken(IPlayer player);
+        long GenerateToken(IReadOnlyPlayer player);
 
         /// <summary>
         /// Remove the player's token, if exist
         /// </summary>
         /// <param name="player">The owner of the token</param>
-        void RemoveToken(IPlayer player);
+        void RemoveToken(IReadOnlyPlayer player);
 
         /// <summary>
-        /// Use the token for a single connexion. 
+        /// Check if the token is still valid
         /// 
         /// If the given token is valide (link to a player and in time range),
-        /// the method return true and the token is removed.
+        /// the method return true.
         /// Otherwise, if the given token is wrong, the method return false.
         /// </summary>
         /// <param name="token">The token as a long</param>
         /// <returns>True if the token is valid, false otherwise</returns>
-        bool ConsumeToken(long token);
+        bool IsValid(long token);
     }
 }
