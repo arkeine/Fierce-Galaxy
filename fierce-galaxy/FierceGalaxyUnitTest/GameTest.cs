@@ -1,4 +1,5 @@
-﻿using FierceGalaxyServer;
+﻿using FierceGalaxyInterface;
+using FierceGalaxyServer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FierceGalaxyUnitTest
@@ -16,19 +17,19 @@ namespace FierceGalaxyUnitTest
         private static Map testMap;
         private static Game testGame;
 
+        //Global memory for the listeners
+        private bool isGameFinishedCalled;
+        private bool isNodeUpdateCalled;
+        private bool isSquadLeavesCalled;
+        private bool isManaupdateCalled;
+
+        //======================================================
+        // Test initialization
+        //======================================================
 
         [ClassInitialize]
         public static void GenerateGlobalContext(TestContext context)
         {
-            // initialise players and a lobby
-            p1 = new Player();
-            p2 = new Player();
-            p3 = new Player();
-            p4 = new Player();
-            testLobby = new Lobby("test lobby", p1);
-            testLobby.Join(p2);
-            testLobby.Join(p3);
-
             // initialise a map
             n1 = new Node();
             n2 = new Node();
@@ -72,7 +73,17 @@ namespace FierceGalaxyUnitTest
             testMap.AddLink(n3, n4);
             testMap.AddLink(n4, n5);
             testMap.AddLink(n4, n6);
-            
+
+
+            // initialise players and a lobby
+            p1 = new Player();
+            p2 = new Player();
+            p3 = new Player();
+            p4 = new Player();
+
+            testLobby = new Lobby("test lobby", p1);
+            testLobby.Join(p2);
+            testLobby.Join(p3);
 
             testLobby.CurrentMap = testMap;
 
@@ -85,22 +96,61 @@ namespace FierceGalaxyUnitTest
             testLobby.SetPlayerSpawn(p3, n5);
 
             testLobby.StartGame();
+        }
+
+        [TestInitialize]
+        public void GenerateLocalContext()
+        {
+            isNodeUpdateCalled = false;
+            isSquadLeavesCalled = false;
+            isManaupdateCalled = false;
+            isGameFinishedCalled = false;
 
             testGame = new Game(testLobby.CurrentMap, testLobby.SpawnAttribution());
-
         }
+
+        //======================================================
+        // Test case
+        //======================================================
 
         [TestMethod]
         public void FailNodesNotLinked()
         {
             testGame.Move(p1, n1, n2, 10);
+            
+            Assert.IsFalse(isSquadLeavesCalled);
         }
 
         [TestMethod]
         public void FailRessourcesTooLow()
         {
             testGame.Move(p1, n1, n3, 100);
+
+            Assert.IsFalse(isSquadLeavesCalled);
+        }
+        
+        //======================================================
+        // Listeners
+        //======================================================
+
+        private void OnNodeUpdate(IReadOnlyNode node, IReadOnlyPlayer owner, double ressourcesOffset)
+        {
+            isNodeUpdateCalled = true;
         }
 
+        private void OnSquadLeaves(IReadOnlyNode sourceNode, IReadOnlyNode targetNode, IReadOnlyPlayer owner, double ressources)
+        {
+            isSquadLeavesCalled = true;
+        }
+
+        private void OnManaUpdate(IReadOnlyPlayer player, double currentAmount)
+        {
+            isManaupdateCalled = true;
+        }
+
+        private void OnGameFinish()
+        {
+            isGameFinishedCalled = true;
+        }
     }
 }
