@@ -13,6 +13,8 @@ namespace FierceGalaxyService.ServicesWithoutLogin
         [OperationContract(IsInitiating = true)]
         [WebInvoke(Method = "POST",
             RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "create/player/")]
         void NewPlayer(string userName, string password, string pseudo);
     }
