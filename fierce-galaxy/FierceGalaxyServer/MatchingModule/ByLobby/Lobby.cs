@@ -11,9 +11,12 @@ namespace FierceGalaxyServer
         // Field
         //======================================================
 
-        private IList<IReadOnlyPlayer> listPlayers;
+        //private IList<GamePlayer> listPlayers;
+        private IDictionary<IReadOnlyPlayer, GamePlayer> dictPlayers;
         private IReadOnlyMap currentMap;
         private IReadOnlyPlayer owner;
+        private IDictionary<IReadOnlyNode, IReadOnlyPlayer> spawnAttribution;
+        private IDictionary<IReadOnlyNode, GameNode> dicGameNodeToMapNode;
 
         //======================================================
         // Constructor
@@ -21,16 +24,16 @@ namespace FierceGalaxyServer
 
         public Lobby()
         {
-            listPlayers = new List<IReadOnlyPlayer>();
+            dictPlayers = new Dictionary<IReadOnlyPlayer, GamePlayer>();
             currentMap = new Map();
             owner = new Player();
         }
 
         public Lobby(string name, IReadOnlyPlayer gameOwner)
         {
-            owner = gameOwner;
-            listPlayers = new List<IReadOnlyPlayer>();
-            listPlayers.Add(owner);
+            GamePlayer owner = new GamePlayer();
+            dictPlayers = new Dictionary<IReadOnlyPlayer, GamePlayer>();
+            dictPlayers.Add(gameOwner, owner);
             currentMap = null;
             
             PlayerCount = 1;
@@ -71,8 +74,8 @@ namespace FierceGalaxyServer
         // Override
         //======================================================
 
-        // IReadOnlyLobby
-        public IReadOnlyMap CurrentMap { get { return currentMap; } }
+        // Class: IReadOnlyLobby
+        public IReadOnlyMap CurrentMap { get { return currentMap; } set { currentMap = value; } }
         public IReadOnlyPlayer Owner { get { return owner; } }
         public int PlayerCount { get; set; }
         public int MaxCapacity { get; set; }
@@ -82,53 +85,67 @@ namespace FierceGalaxyServer
         {
             get
             {
-                return (IReadOnlyList<IReadOnlyPlayer>)listPlayers; 
+                return (IReadOnlyList<IReadOnlyPlayer>)dictPlayers; 
             }
         }
 
-        // ILobby
+        // Class: ILobby
         public bool IsPlayerReady(IReadOnlyPlayer player)
         {
-            throw new NotImplementedException();
+            return dictPlayers[player].playerReady;
         }
 
         public void Join(IReadOnlyPlayer player)
         {
-            if(!listPlayers.Contains(player))
-            {
-                listPlayers.Add(player);
-            }
-                
+            dictPlayers.Add(player, new GamePlayer());
         }
 
         public void KickUser(IReadOnlyPlayer player)
         {
-            throw new NotImplementedException();
+            dictPlayers.Remove(player);
         }
 
         public void Leave(IReadOnlyPlayer player)
         {
-            throw new NotImplementedException();
+            dictPlayers.Remove(player);
         }
 
         public void SetPlayerColor(IPlayer player, Color c)
         {
-            throw new NotImplementedException();
+            dictPlayers[player].Color = c;
         }
 
         public void SetPlayerReady(IReadOnlyPlayer player, bool ready)
         {
-            throw new NotImplementedException();
+            dictPlayers[player].playerReady = ready;
         }
 
-        public void SetSpawn(IReadOnlyPlayer player, IReadOnlyNode node)
+        public void SetPlayerSpawn(IReadOnlyPlayer player, IReadOnlyNode node)
         {
-            throw new NotImplementedException();
+            dictPlayers[player].SpawnNode = node;
         }
 
         public void StartGame()
         {
-            throw new NotImplementedException();
+            foreach(KeyValuePair<IReadOnlyPlayer, GamePlayer> player in dictPlayers)
+            {
+                if(!player.Value.playerReady)
+                    throw new ApplicationException("Player" + player.Key.PublicPseudo + " is not ready");
+                if (player.Value.SpawnNode == null)
+                    throw new ApplicationException("Player" + player.Key.PublicPseudo + " has no spawn node");
+                if(currentMap == null)
+                    throw new ApplicationException("No map selected");
+            }
+        }
+
+        //======================================================
+        // Internal
+        //======================================================
+
+        private class GamePlayer : Player
+        {
+            public IReadOnlyNode SpawnNode { get; set; }
+            public bool playerReady { get; set; }
         }
     }
 }

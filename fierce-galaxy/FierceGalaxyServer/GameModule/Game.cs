@@ -118,7 +118,7 @@ namespace FierceGalaxyServer
         {
             if(spawnAttribution.Count > map.SpawnNodes.Count)
             {
-                throw new ArgumentException("Too much player for this map");
+                throw new ArgumentException("Too many players for this map");
             }
 
             foreach(IReadOnlyNode n in map.Nodes)
@@ -133,7 +133,7 @@ namespace FierceGalaxyServer
                     }
                     else
                     {
-                        throw new ArgumentException("Spawn attibution is not correct");
+                        throw new ArgumentException("Spawn attribution is not correct");
                     }
                 }
                 
