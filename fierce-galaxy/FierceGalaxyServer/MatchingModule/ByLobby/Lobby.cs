@@ -1,6 +1,7 @@
 ﻿using FierceGalaxyInterface;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace FierceGalaxyServer
 {
@@ -13,6 +14,10 @@ namespace FierceGalaxyServer
         private IList<IReadOnlyPlayer> listPlayers;
         private IReadOnlyMap currentMap;
         private IReadOnlyPlayer owner;
+
+        //======================================================
+        // Constructor
+        //======================================================
 
         public Lobby()
         {
@@ -31,12 +36,41 @@ namespace FierceGalaxyServer
             PlayerCount = 1;
             MaxCapacity = 2;
             IsClosed = false;
-    }
+        }
+
+        //======================================================
+        // Events
+        //======================================================
+        
+        public event GameStartHandler GameStart;
+        public event MapChangeHandler MapChange;
+        public event PlayerJoinHandler PlayerJoin;
+        public event PlayerQuitHandler PlayerQuit;
+
+        private void OnGameStart()
+        {
+            if (GameStart != null) GameStart();
+        }
+
+        private void OnMapChange(IReadOnlyMap map)
+        {
+            if (MapChange != null) MapChange(map);
+        }
+
+        private void OnPlayerJoin(IReadOnlyPlayer player)
+        {
+            if (PlayerJoin != null) PlayerJoin(player);
+        }
+
+        private void OnPlayerQuit(IReadOnlyPlayer player)
+        {
+            if (PlayerQuit != null) PlayerQuit(player);
+        }
 
         //======================================================
         // Override
         //======================================================
-        
+
         // IReadOnlyLobby
         public IReadOnlyMap CurrentMap { get { return currentMap; } }
         public IReadOnlyPlayer Owner { get { return owner; } }
@@ -51,11 +85,6 @@ namespace FierceGalaxyServer
                 return (IReadOnlyList<IReadOnlyPlayer>)listPlayers; 
             }
         }
-        
-        public event EventHandler OnGameStart;
-        public event EventHandler OnMapChange;
-        public event EventHandler OnPlayerJoin;
-        public event EventHandler OnPlayerQuit;
 
         // ILobby
         public bool IsPlayerReady(IReadOnlyPlayer player)
@@ -65,7 +94,11 @@ namespace FierceGalaxyServer
 
         public void Join(IReadOnlyPlayer player)
         {
-            listPlayers.Add(player);
+            if(!listPlayers.Contains(player))
+            {
+                listPlayers.Add(player);
+            }
+                
         }
 
         public void KickUser(IReadOnlyPlayer player)

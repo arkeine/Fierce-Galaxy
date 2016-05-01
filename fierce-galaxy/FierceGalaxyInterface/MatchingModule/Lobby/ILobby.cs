@@ -1,4 +1,6 @@
-﻿namespace FierceGalaxyInterface
+﻿using System;
+
+namespace FierceGalaxyInterface
 {
     public interface ILobby : IReadOnlyLobby
     {        
