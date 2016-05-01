@@ -64,11 +64,13 @@ namespace FierceGalaxyUnitTest
             testMap.SetSpawnNode(n2, true);
             testMap.SetSpawnNode(n5, true);
 
-            // n1          n5
-            //    \       /
-            //     n3 - n4
-            //    /       \
-            // n2          n6
+            // Map links:
+            //
+            //   n1          n5
+            //      \       /
+            //       n3 - n4
+            //      /       \
+            //   n2          n6
 
             testMap.AddLink(n1, n3);
             testMap.AddLink(n2, n3);
