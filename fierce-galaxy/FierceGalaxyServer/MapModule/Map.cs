@@ -2,6 +2,7 @@
 using FierceGalaxyServer.MapModule;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FierceGalaxyServer
 {
@@ -67,7 +68,7 @@ namespace FierceGalaxyServer
 
         public IReadOnlyList<IReadOnlyNode> GetLinkFrom(IReadOnlyNode source)
         {
-            throw new NotImplementedException();
+            return listLinkedNodes.LinkedNodes(source);
         }
 
         public void RemoveLink(IReadOnlyNode node1, IReadOnlyNode node2)
