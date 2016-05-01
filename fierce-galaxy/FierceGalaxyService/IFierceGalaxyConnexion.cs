@@ -15,7 +15,7 @@ namespace FierceGalaxyService
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "create/player/")]
-        string NewPlayer(string userName, string password, string pseudo);
+        string CreatePlayer(string userName, string password, string pseudo);
 
         /// <summary>
         /// Create the player's session if the credentials are correct
@@ -37,7 +37,7 @@ namespace FierceGalaxyService
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "disconnect/")]
-        string Disconnect(string token);
+        void Disconnect(string token);
 
         /// <summary>
         /// Disconnect the player and close the session

@@ -1,9 +1,11 @@
 ﻿namespace FierceGalaxyInterface
 {
+    public delegate void SendJson(IReadOnlyPlayer node, string json);
+
     public interface IGameActionParser
     {
-        void JsonToAction(string json);
-        
+        event SendJson SendingJson;
+
         // Action from the game module
 
         void NodeUpdating(IReadOnlyNode node, IReadOnlyPlayer owner, double ressourcesOffset);
