@@ -49,6 +49,7 @@
     <Compile Include="MatchingModule\Lobby\ILobby.cs" />
     <Compile Include="MatchingModule\Lobby\ILobbyManager.cs" />
     <Compile Include="ParserModule\IGameActionParser.cs" />
+    <Compile Include="CommunicationModule\IPlayerToIP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="TimeModule\INetworkTime.cs" />
