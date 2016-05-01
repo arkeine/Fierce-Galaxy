@@ -36,7 +36,6 @@
     <Compile Include="CommunicationModule\ITextCommunicationClient.cs" />
     <Compile Include="CommunicationModule\ITextCommunicationServer.cs" />
     <Compile Include="ConnexionModule\IPlayerManager.cs" />
-    <Compile Include="IGameFacade.cs" />
     <Compile Include="IReadOnlyPlayer.cs" />
     <Compile Include="ConnexionModule\ITokenManager.cs" />
     <Compile Include="GameModule\IGame.cs" />
@@ -48,11 +47,13 @@
     <Compile Include="MatchingModule\Lobby\IReadOnlyLobby.cs" />
     <Compile Include="MatchingModule\Lobby\ILobby.cs" />
     <Compile Include="MatchingModule\Lobby\ILobbyManager.cs" />
-    <Compile Include="ParserModule\IGameActionParser.cs" />
+    <Compile Include="ParserModule\IActionToJsonParser.cs" />
+    <Compile Include="ParserModule\IJsonToActionParser.cs" />
     <Compile Include="CommunicationModule\IPlayerToIP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="TimeModule\INetworkTime.cs" />
+    <Compile Include="TimeModule\ITimestampManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

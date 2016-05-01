@@ -1,4 +1,5 @@
 ﻿using FierceGalaxyInterface;
+using System.Collections.Generic;
 
 namespace FierceGalaxyServer
 {
@@ -11,5 +12,7 @@ namespace FierceGalaxyServer
         void RemoveAllLinksForNode(IReadOnlyNode n);
 
         bool AreNodesLinked(IReadOnlyNode n1, IReadOnlyNode n2);
+        
+        IReadOnlyList<IReadOnlyNode> LinkedNodes(IReadOnlyNode src);
     }
 }

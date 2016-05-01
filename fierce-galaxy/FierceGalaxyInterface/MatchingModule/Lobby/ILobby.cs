@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FierceGalaxyInterface
+﻿namespace FierceGalaxyInterface
 {
     public interface ILobby : IReadOnlyLobby
     {        
@@ -9,7 +7,6 @@ namespace FierceGalaxyInterface
         void SetPlayerSpawn(IReadOnlyPlayer player, IReadOnlyNode node);
         void SetPlayerColor(IPlayer player, Color c);
         void StartGame();
-        void SetPlayerReady(IReadOnlyPlayer player, bool ready);
-        
+        void SetPlayerReady(IReadOnlyPlayer player, bool ready);        
     }
 }

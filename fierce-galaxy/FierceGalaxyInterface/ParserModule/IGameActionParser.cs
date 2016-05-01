@@ -1,7 +1,7 @@
 ﻿namespace FierceGalaxyInterface
 {
     public interface IGameActionParser
-    { 
+    {
         void Move(string token, string sourceNodeID, string targetNodeID, string ressources);
         
         void UsePowerDestroy(string token, string targetNodeID);

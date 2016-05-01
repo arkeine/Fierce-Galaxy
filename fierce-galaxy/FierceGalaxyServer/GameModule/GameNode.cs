@@ -1,8 +1,10 @@
 ﻿using FierceGalaxyInterface;
+using System.Runtime.CompilerServices;
 
-namespace FierceGalaxyServer
+[assembly: InternalsVisibleTo("FierceGalaxyUnitTest")]
+namespace FierceGalaxyServer.GameModule
 {
-    public class GameNode
+    class GameNode
     {
         public GameNode(IReadOnlyNode nodeDatan)
         {

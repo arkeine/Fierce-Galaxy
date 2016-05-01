@@ -1,6 +1,5 @@
 ﻿using FierceGalaxyInterface;
 using FierceGalaxyServer.MapModule;
-using System;
 using System.Collections.Generic;
 
 namespace FierceGalaxyServer
@@ -15,21 +14,22 @@ namespace FierceGalaxyServer
         private IList<IReadOnlyNode> listNode;
         private IList<IReadOnlyNode> listSpawnNode;
 
-        public Map()
-        {
-            listLinkedNodes = new ListLinkedNodes();
-            listNode = new List<IReadOnlyNode>();
-            listSpawnNode = new List<IReadOnlyNode>();
-        }
+        //======================================================
+        // Constructor
+        //======================================================
+
+        public Map() : this("", "") { }
 
         public Map(string name, string description)
         {
             listLinkedNodes = new ListLinkedNodes();
             listNode = new List<IReadOnlyNode>();
             listSpawnNode = new List<IReadOnlyNode>();
+
             Name = name;
             Description = description;
         }
+
         //======================================================
         // Override
         //======================================================
@@ -67,7 +67,7 @@ namespace FierceGalaxyServer
 
         public IReadOnlyList<IReadOnlyNode> GetLinkFrom(IReadOnlyNode source)
         {
-            throw new NotImplementedException();
+            return listLinkedNodes.LinkedNodes(source);
         }
 
         public void RemoveLink(IReadOnlyNode node1, IReadOnlyNode node2)
@@ -80,7 +80,8 @@ namespace FierceGalaxyServer
 
         public void SetSpawnNode(IReadOnlyNode node, bool isSpawn)
         {
-            if (!listSpawnNode.Contains((Node)node)){
+            if (!listSpawnNode.Contains((Node)node))
+            {
                 listSpawnNode.Add((Node)node);
             }
         }
@@ -89,11 +90,5 @@ namespace FierceGalaxyServer
         {
             return listLinkedNodes.AreNodesLinked(n1, n2);
         }
-
-
-        //======================================================
-        // Private
-        //======================================================
-        
     }
 }

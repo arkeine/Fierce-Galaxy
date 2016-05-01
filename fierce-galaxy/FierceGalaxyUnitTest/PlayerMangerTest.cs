@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FierceGalaxyServer;
-using FierceGalaxyInterface;
 
 namespace FierceGalaxyUnitTest
 {
@@ -14,11 +13,6 @@ namespace FierceGalaxyUnitTest
             string pseudo = "Dany";
             string playerPW = "pass123";
             string publicPseudo = "shotgun";
-            /*PlayerManager playerManager = new PlayerManager(CreateNewDB());
-            
-            playerManager.CreatePlayer(pseudo, playerPW, publicPseudo);
-            IReadOnlyPlayer p = playerManager.Login(pseudo, playerPW);
-            Assert.AreEqual(playerManager.Login(pseudo, playerPW).PublicPseudo, publicPseudo);*/
         }
 
         [TestMethod]

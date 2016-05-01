@@ -25,9 +25,9 @@ namespace FierceGalaxyServer
         // Constructor
         //======================================================
 
-        private TokenManager() : this(new TimeSpan(0, 0, 30)) { }
+        public TokenManager() : this(new TimeSpan(0, 0, 30)) { }
 
-        private TokenManager(TimeSpan tokenValidityTime)
+        public TokenManager(TimeSpan tokenValidityTime)
         {
             this.tokenValidityTime = tokenValidityTime;
         }
@@ -79,6 +79,26 @@ namespace FierceGalaxyServer
             dicValidityTime.Remove(player);
         }
 
+        public IReadOnlyPlayer GetPlayer(long token)
+        {
+            if(IsValid(token))
+            {
+                return dicPlayerToken.GetOther(token);
+            }
+            return null;
+        }
+
+        public void InvalidateToken(long token)
+        {
+            var p = GetPlayer(token);
+
+            if(p != null)
+            {
+                dicPlayerToken.Remove(p);
+                dicValidityTime.Remove(p);
+            }
+        }
+
         //======================================================
         // public
         //======================================================
@@ -117,6 +137,6 @@ namespace FierceGalaxyServer
             result = (result << 32);
             result = result | (long)rand.Next((Int32)min, (Int32)max);
             return result;
-        }        
+        }
     }
 }
