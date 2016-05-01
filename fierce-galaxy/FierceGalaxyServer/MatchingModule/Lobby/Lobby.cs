@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FierceGalaxyServer
 {
-    public class Lobby //: ILobby
+    public class Lobby : ILobby
     {
         //======================================================
         // Field
@@ -88,19 +88,19 @@ namespace FierceGalaxyServer
         public void Join(IReadOnlyPlayer player)
         {
             dictPlayers.Add(player, new GamePlayer(player));
-            PlayerJoin(player);
+            OnPlayerJoin(player);
         }
 
         public void KickUser(IReadOnlyPlayer player)
         {
             dictPlayers.Remove(player);
-            PlayerQuit(player);
+            OnPlayerQuit(player);
         }
 
         public void Leave(IReadOnlyPlayer player)
         {
             dictPlayers.Remove(player);
-            PlayerQuit(player);
+            OnPlayerQuit(player);
         }
 
         public void SetPlayerColor(IPlayer player, Color c)
@@ -130,7 +130,7 @@ namespace FierceGalaxyServer
 
             if (currentMap == null)
                 throw new ApplicationException("No map selected");
-            StartGame();
+            OnGameStart();
         }
 
         //======================================================
