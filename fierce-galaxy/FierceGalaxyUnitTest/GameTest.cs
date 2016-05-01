@@ -86,7 +86,7 @@ namespace FierceGalaxyUnitTest
 
             testLobby.StartGame();
 
-            testGame = new Game(testLobby.CurrentMap, testLobby.spawnAttribution());
+            testGame = new Game(testLobby.CurrentMap, testLobby.SpawnAttribution());
 
         }
 

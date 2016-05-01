@@ -134,6 +134,13 @@ namespace FierceGalaxyServer
             OnGameStart();
         }
 
+        public IDictionary<IReadOnlyNode, IReadOnlyPlayer> SpawnAttribution()
+        {
+            return dictPlayers.ToDictionary(
+                p => p.Value.SpawnNode,
+                p => p.Key);
+        }
+
         //======================================================
         // Internal
         //======================================================
