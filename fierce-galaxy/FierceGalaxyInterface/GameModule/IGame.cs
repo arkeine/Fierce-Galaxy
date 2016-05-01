@@ -2,11 +2,14 @@
 
 namespace FierceGalaxyInterface
 {
-    public delegate void NodeUpdateHandler(DateTime timestamp, IReadOnlyNode node, IReadOnlyPlayer owner, double ressourcesOffset);
-    public delegate void SquadLeavesHandler(DateTime timestamp, IReadOnlyNode sourceNode, IReadOnlyNode targetNode, IReadOnlyPlayer owner, double ressources);
-    public delegate void ManaUpdateHandler(DateTime timestamp, IReadOnlyPlayer player, double currentAmount);
-    public delegate void GameFinishHandler(DateTime timestamp);
-
+    public delegate void NodeUpdateHandler(IReadOnlyNode node, IReadOnlyPlayer owner, double ressourcesOffset);
+    public delegate void SquadLeavesHandler(IReadOnlyNode sourceNode, IReadOnlyNode targetNode, IReadOnlyPlayer owner, double ressources);
+    public delegate void ManaUpdateHandler(IReadOnlyPlayer player, double currentAmount);
+    public delegate void GameFinishHandler();
+    
+    /// <summary>
+    /// The game is a competitive round between severals players
+    /// </summary>
     public interface IGame
     {
         event NodeUpdateHandler NodeUpdated;

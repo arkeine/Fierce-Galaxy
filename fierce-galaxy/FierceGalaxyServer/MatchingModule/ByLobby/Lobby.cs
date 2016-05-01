@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace FierceGalaxyServer
 {
-    public class Lobby : ILobby
+    public class Lobby //: ILobby
     {
         //======================================================
         // Field
