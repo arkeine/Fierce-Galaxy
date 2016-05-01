@@ -9,7 +9,7 @@ namespace FierceGalaxyServer.MapModule
         // Field
         //======================================================
 
-        MultiMap<IReadOnlyNode, IReadOnlyNode> multiMapLinkedNodes;
+        private MultiMap<IReadOnlyNode, IReadOnlyNode> multiMapLinkedNodes;
 
         //======================================================
         // Constructor
@@ -17,7 +17,7 @@ namespace FierceGalaxyServer.MapModule
 
         public ListLinkedNodes()
         {
-            this.multiMapLinkedNodes = new MultiMap<IReadOnlyNode, IReadOnlyNode>();
+            multiMapLinkedNodes = new MultiMap<IReadOnlyNode, IReadOnlyNode>();
         }
 
         //======================================================
@@ -43,6 +43,7 @@ namespace FierceGalaxyServer.MapModule
         public void RemoveAllLinksForNode(IReadOnlyNode n)
         {
             multiMapLinkedNodes.RemoveKey(n);
+
             foreach(IReadOnlyNode key in multiMapLinkedNodes.Keys)
             {
                 multiMapLinkedNodes.RemoveValueInKey(key, n);

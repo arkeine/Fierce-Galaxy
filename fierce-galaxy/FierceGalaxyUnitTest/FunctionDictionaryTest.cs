@@ -1,5 +1,4 @@
-﻿using FierceGalaxyInterface;
-using FierceGalaxyServer;
+﻿using FierceGalaxyServer;
 using FierceGalaxyServer.GameModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

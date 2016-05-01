@@ -10,8 +10,7 @@ namespace FierceGalaxyServer
         //======================================================
         // Field
         //======================================================
-
-        //private IList<GamePlayer> listPlayers;
+        
         private IDictionary<IReadOnlyPlayer, GamePlayer> dictPlayers;
         private IReadOnlyMap currentMap;
         private GamePlayer owner;
@@ -65,8 +64,7 @@ namespace FierceGalaxyServer
         //======================================================
         // Override
         //======================================================
-
-        // Class: IReadOnlyLobby
+        
         public IReadOnlyMap CurrentMap { get { return currentMap; } set { currentMap = value; } }
         public IReadOnlyPlayer Owner { get { return owner; } }
         public int MaxCapacity { get; set; }
@@ -79,8 +77,7 @@ namespace FierceGalaxyServer
                 return (IReadOnlyList<IReadOnlyPlayer>)dictPlayers; 
             }
         }
-
-        // Class: ILobby
+        
         public bool IsPlayerReady(IReadOnlyPlayer player)
         {
             return dictPlayers[player].playerReady;
