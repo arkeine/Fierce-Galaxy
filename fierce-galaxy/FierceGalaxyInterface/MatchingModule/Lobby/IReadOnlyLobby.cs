@@ -10,12 +10,12 @@ namespace FierceGalaxyInterface
         event EventHandler OnMapChange;
         event EventHandler OnGameStart;
 
-        bool IsPlayerReady(IReadOnlyPlayer player);
-        IReadOnlyList<IReadOnlyPlayer> PlayerList { get; }
+        IReadOnlyList<IReadOnlyPlayer> ReadOnlylistPlayer { get; }
         IReadOnlyMap CurrentMap { get; }
+        IReadOnlyPlayer Owner { get; }
         int PlayerCount { get; }
         int MaxCapacity { get; }
         bool IsClosed { get; }
-        IReadOnlyPlayer Owner { get; }
+        bool IsPlayerReady(IReadOnlyPlayer player);
     }
 }

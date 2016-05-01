@@ -1,54 +1,71 @@
 ﻿using FierceGalaxyInterface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace FierceGalaxyServer.MatchingModule.ByLobby
+namespace FierceGalaxyServer
 {
     public class Lobby : ILobby
     {
-        public IReadOnlyMap CurrentMap
+        //======================================================
+        // Field
+        //======================================================
+
+        private IList<IReadOnlyPlayer> listPlayers;
+        private IReadOnlyMap currentMap;
+        private IReadOnlyPlayer owner;
+
+        public Lobby()
+        {
+            listPlayers = new List<IReadOnlyPlayer>();
+            currentMap = new Map();
+            owner = new Player();
+        }
+
+        public Lobby(string name, IReadOnlyPlayer gameOwner)
+        {
+            owner = gameOwner;
+            listPlayers = new List<IReadOnlyPlayer>();
+            listPlayers.Add(owner);
+            currentMap = null;
+            
+            PlayerCount = 1;
+            MaxCapacity = 2;
+            IsClosed = false;
+    }
+
+        //======================================================
+        // Override
+        //======================================================
+        
+        // IReadOnlyLobby
+        public IReadOnlyMap CurrentMap { get { return currentMap; } }
+        public IReadOnlyPlayer Owner { get { return owner; } }
+        public int PlayerCount { get; set; }
+        public int MaxCapacity { get; set; }
+        public bool IsClosed { get; set; }   
+        
+        public IReadOnlyList<IReadOnlyPlayer> ReadOnlylistPlayer
         {
             get
             {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
+                return (IReadOnlyList<IReadOnlyPlayer>)listPlayers; 
             }
         }
+        
+        public event EventHandler OnGameStart;
+        public event EventHandler OnMapChange;
+        public event EventHandler OnPlayerJoin;
+        public event EventHandler OnPlayerQuit;
 
-        public int MaxPlayers
+        // ILobby
+        public bool IsPlayerReady(IReadOnlyPlayer player)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            throw new NotImplementedException();
         }
-
-        public IReadOnlyList<IReadOnlyPlayer> PlayerList
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public event EventHandler MapChange;
-        public event EventHandler PlayerJoin;
-        public event EventHandler PlayerQuit;
 
         public void Join(IReadOnlyPlayer player)
         {
-            throw new NotImplementedException();
+            listPlayers.Add(player);
         }
 
         public void KickUser(IReadOnlyPlayer player)
@@ -66,7 +83,17 @@ namespace FierceGalaxyServer.MatchingModule.ByLobby
             throw new NotImplementedException();
         }
 
+        public void SetPlayerReady(IReadOnlyPlayer player, bool ready)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SetSpawn(IReadOnlyPlayer player, IReadOnlyNode node)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StartGame()
         {
             throw new NotImplementedException();
         }

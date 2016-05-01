@@ -37,7 +37,7 @@ namespace FierceGalaxyServer
         public string Description { get; set; }
         public string Name { get; set; }
         public IReadOnlyList<IReadOnlyNode> Nodes { get { return (IReadOnlyList<IReadOnlyNode>)listNode; } }
-        public IReadOnlyList<IReadOnlyNode> SpawnNodes { get { return (IReadOnlyList<IReadOnlyNode>)listNode; } }
+        public IReadOnlyList<IReadOnlyNode> SpawnNodes { get { return (IReadOnlyList<IReadOnlyNode>)listSpawnNode; } }
 
         public void AddNode(IReadOnlyNode node)
         {

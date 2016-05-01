@@ -9,24 +9,9 @@ namespace FierceGalaxyInterface
         /// </summary>
         IReadOnlyList<IReadOnlyNode> GetLinkFrom(IReadOnlyNode source);
 
-        string Name
-        {
-            get;
-        }
-
-        string Description
-        {
-            get;
-        }
-
-        IReadOnlyList<IReadOnlyNode> SpawnNodes
-        {
-            get;
-        }
-
-        IReadOnlyList<IReadOnlyNode> Nodes
-        {
-            get;
-        }
+        string Name { get; }
+        string Description { get; }
+        IReadOnlyList<IReadOnlyNode> SpawnNodes { get; }
+        IReadOnlyList<IReadOnlyNode> Nodes { get; }
     }
 }
