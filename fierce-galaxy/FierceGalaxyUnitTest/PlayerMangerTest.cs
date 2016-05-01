@@ -17,7 +17,7 @@ namespace FierceGalaxyUnitTest
             /*PlayerManager playerManager = new PlayerManager(CreateNewDB());
             
             playerManager.CreatePlayer(pseudo, playerPW, publicPseudo);
-            IPlayer p = playerManager.Login(pseudo, playerPW);
+            IReadOnlyPlayer p = playerManager.Login(pseudo, playerPW);
             Assert.AreEqual(playerManager.Login(pseudo, playerPW).PublicPseudo, publicPseudo);*/
         }
 
@@ -53,7 +53,7 @@ namespace FierceGalaxyUnitTest
         {
             string fileName = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + "\\DB.json";
   
-            return new DBJsonManager(fileName);            
+            return new DBJsonManager();            
         }
     }
 }

@@ -8,16 +8,20 @@ namespace FierceGalaxyServer
     {
         public Nullable<int> mapID { get; set; }
         public String Name { get; set; }
-        public IListLinkedNodes ListLinkedList { get; set; }
         public string Description { get; set; }
         public IList<IReadOnlyNode> ListNodes { get; set; }
         public IList<IReadOnlyNode> ListSpawnNodes { get; set; }
-        IReadOnlyList<IReadOnlyNode> Nodes { get; }
-        IReadOnlyList<IReadOnlyNode> SpawnNodes { get; }
+        public IListLinkedNodes ListLinkedNodes { get; set; }
 
         public DBMap()
         {
             mapID = null;
+        }
+
+        public DBMap(IReadOnlyMap map)
+        {
+            Name = map.Name;
+            Description = map.Description;
         }
 
         public DBMap(string name, IListLinkedNodes listLinkedNodes, string description, 
@@ -25,13 +29,11 @@ namespace FierceGalaxyServer
             IReadOnlyList<IReadOnlyNode> nodes, IReadOnlyList<IReadOnlyNode> spawnNodes)
         {
             Name = name;
-            ListLinkedList = listLinkedNodes;
+            ListLinkedNodes = listLinkedNodes;
             Description = description;
             ListNodes = listNodes;
             ListSpawnNodes = listSpawnNodes;
-            Nodes = Nodes;
-            SpawnNodes = spawnNodes;
-    }
+        }
     }
 
 }

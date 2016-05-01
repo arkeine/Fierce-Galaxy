@@ -2,22 +2,12 @@
 {
     public interface IReadOnlyNode
     {
-        int InitialCapacity
+        int InitialRessource
         {
             get;
         }
-
-        int MaxCapacity
-        {
-            get;
-        }
-
-        int CurrentCapacity
-        {
-            get;
-        }
-
-        IPlayer CurrentOwner
+        
+        int MaxRessource
         {
             get;
         }

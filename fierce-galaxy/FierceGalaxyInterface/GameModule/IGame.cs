@@ -2,26 +2,29 @@
 
 namespace FierceGalaxyInterface
 {
-    public delegate void OnNodeUpdate(DateTime timestamp, int nodeID, IReadOnlyPlayer owner, int ressourcesOffset);
-    public delegate void OnSquadLeaving(DateTime timestamp, int sourceNodeID, int targetNodeID, IReadOnlyPlayer owner, int ressources);
-    public delegate void OnUpdateMana(DateTime timestamp, IReadOnlyPlayer player, int currentAmount);
-    public delegate void OnGameFinish(DateTime timestamp);
-
+    public delegate void NodeUpdateHandler(IReadOnlyNode node, IReadOnlyPlayer owner, double ressourcesOffset);
+    public delegate void SquadLeavesHandler(IReadOnlyNode sourceNode, IReadOnlyNode targetNode, IReadOnlyPlayer owner, double ressources);
+    public delegate void ManaUpdateHandler(IReadOnlyPlayer player, double currentAmount);
+    public delegate void GameFinishHandler();
+    
+    /// <summary>
+    /// The game is a competitive round between severals players
+    /// </summary>
     public interface IGame
     {
-        event OnNodeUpdate NodeUpdateListener;
-        event OnSquadLeaving SquadLeavingListener;
-        event OnUpdateMana UpdateManaListener;
-        event OnGameFinish GameFinishListener;
+        event NodeUpdateHandler NodeUpdated;
+        event SquadLeavesHandler SquadLeaves;
+        event ManaUpdateHandler ManaUpdated;
+        event GameFinishHandler GameFinished;
 
-        void Move(IReadOnlyPlayer player, int sourceNodeID, int targetNodeID, int ressources);
+        void Move(IReadOnlyPlayer player, IReadOnlyNode sourceNode, IReadOnlyNode targetNode, double ressources);
 
-        void UsePowerDestroy(IReadOnlyPlayer player, int targetNodeID);
+        void UsePowerDestroy(IReadOnlyPlayer player, IReadOnlyNode targetNode);
 
-        void UsePowerInvincibility(IReadOnlyPlayer player, int targetNodeID);
+        void UsePowerInvincibility(IReadOnlyPlayer player, IReadOnlyNode targetNode);
 
-        void UsePowerArmor(IReadOnlyPlayer player, int targetNodeID);
+        void UsePowerArmor(IReadOnlyPlayer player, IReadOnlyNode targetNode);
 
-        void UsePowerTeleportation(IReadOnlyPlayer player, int sourceNodeID, int targetNodeID, int ressources);
+        void UsePowerTeleportation(IReadOnlyPlayer player, IReadOnlyNode sourceNode, IReadOnlyNode targetNode, double ressources);
     }
 }

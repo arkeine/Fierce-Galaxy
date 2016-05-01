@@ -13,25 +13,13 @@ namespace FierceGalaxyInterface
         event EventHandler PlayerQuit;
 
         void Join(IReadOnlyPlayer player);
+        void Leave(IReadOnlyPlayer player);
         void KickUser(IReadOnlyPlayer player);
         void SetPlayerColor(IPlayer player, Color c);
 
-        IReadOnlyList<IReadOnlyPlayer> PlayerList
-        {
-            get;
-        }
+        IReadOnlyList<IReadOnlyPlayer> PlayerList { get; }
 
-        int PlayerCount
-        {
-            get;
-            set;
-        }
-
-        int MaxCapacity
-        {
-            get;
-            set;
-        }
+        int MaxPlayers { get; set; }
 
         //======================================================
         // About map
@@ -39,11 +27,7 @@ namespace FierceGalaxyInterface
 
         event EventHandler MapChange;
 
-        IReadOnlyMap CurrentMap
-        {
-            get;
-            set;
-        }
+        IReadOnlyMap CurrentMap { get; set; }
 
         void SetSpawn(IReadOnlyPlayer player, IReadOnlyNode node);
     }

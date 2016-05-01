@@ -1,6 +1,5 @@
 ﻿namespace FierceGalaxyServer
 {
-
     /// <summary>
     /// Minimal interface that DB must implement in orde rto manage maps
     /// </summary>

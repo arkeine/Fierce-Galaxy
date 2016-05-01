@@ -21,6 +21,15 @@ namespace FierceGalaxyServer
             listNode = new List<IReadOnlyNode>();
             listSpawnNode = new List<IReadOnlyNode>();
         }
+
+        public Map(string name, string description)
+        {
+            listLinkedNodes = new ListLinkedNodes();
+            listNode = new List<IReadOnlyNode>();
+            listSpawnNode = new List<IReadOnlyNode>();
+            Name = name;
+            Description = description;
+        }
         //======================================================
         // Override
         //======================================================
@@ -28,7 +37,7 @@ namespace FierceGalaxyServer
         public string Description { get; set; }
         public string Name { get; set; }
         public IReadOnlyList<IReadOnlyNode> Nodes { get { return (IReadOnlyList<IReadOnlyNode>)listNode; } }
-        public IReadOnlyList<IReadOnlyNode> SpawnNodes { get { return (IReadOnlyList<IReadOnlyNode>)listNode; } }
+        public IReadOnlyList<IReadOnlyNode> SpawnNodes { get { return (IReadOnlyList<IReadOnlyNode>)listSpawnNode; } }
 
         public void AddNode(IReadOnlyNode node)
         {

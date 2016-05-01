@@ -15,60 +15,49 @@ namespace FierceGalaxyServer
         //======================================================
 
         //Link timestamp and player
-        private DoubleDictionary<IReadOnlyPlayer, Int64> mapPlayerToken = new DoubleDictionary<IReadOnlyPlayer, Int64>();
+        private DoubleDictionary<IReadOnlyPlayer, Int64> dicPlayerToken = new DoubleDictionary<IReadOnlyPlayer, Int64>();
         //Timestamp of the tokens
-        private IDictionary<IReadOnlyPlayer, DateTime> mapValidityTime = new Dictionary<IReadOnlyPlayer, DateTime>();
+        private IDictionary<IReadOnlyPlayer, DateTime> dicValidityTime = new Dictionary<IReadOnlyPlayer, DateTime>();
         //Validity time range of a new token
-        private TimeSpan maxGap = new TimeSpan(0, 0, 30);
+        private TimeSpan tokenValidityTime;
 
         //======================================================
-        // Singleton
+        // Constructor
         //======================================================
 
-        private static TokenManager singleton;
+        private TokenManager() : this(new TimeSpan(0, 0, 30)) { }
 
-        public static TokenManager GetInstance()
+        private TokenManager(TimeSpan tokenValidityTime)
         {
-            if (singleton == null)
-            {
-                singleton = new TokenManager();
-            }
-
-            return singleton;
-        }
-
-        private TokenManager()
-        {
-            // Nothing
+            this.tokenValidityTime = tokenValidityTime;
         }
 
         //======================================================
         // Override
         //======================================================
 
-        public bool ConsumeToken(long token)
+        public bool IsValid(long token)
         {
             bool result = false;
 
-            if (mapPlayerToken.Contains(token))
+            if (dicPlayerToken.Contains(token))
             {
-                IReadOnlyPlayer player = mapPlayerToken.GetOther(token);
+                IReadOnlyPlayer player = dicPlayerToken.GetOther(token);
                 
-                if (IsTimeValid(mapValidityTime[player]))
+                if (IsTimeValid(dicValidityTime[player]))
                 {
                     result = true;
                 }
 
-                mapPlayerToken.Remove(player);
-                mapValidityTime.Remove(player);
+                RemoveToken(player);
             }
 
             return result;
         }
 
-        public long GenerateToken(IPlayer player)
+        public long GenerateToken(IReadOnlyPlayer player)
         {
-            mapPlayerToken.Remove(player);
+            dicPlayerToken.Remove(player);
 
             bool tokenValid = false;
             long token;
@@ -76,18 +65,18 @@ namespace FierceGalaxyServer
             do
             {
                 token = GenerateRandomToken();
-                tokenValid = mapPlayerToken.Add(player, token);
+                tokenValid = dicPlayerToken.Add(player, token);
             } while (!tokenValid);
 
-            mapValidityTime[player] = DateTime.Now;
+            dicValidityTime[player] = DateTime.Now;
 
             return token;
         }
 
-        public void RemoveToken(IPlayer player)
+        public void RemoveToken(IReadOnlyPlayer player)
         {
-            mapPlayerToken.Remove(player);
-            mapValidityTime.Remove(player);
+            dicPlayerToken.Remove(player);
+            dicValidityTime.Remove(player);
         }
 
         //======================================================
@@ -96,14 +85,14 @@ namespace FierceGalaxyServer
 
         public void CleanToken()
         {
-            var list = mapValidityTime.ToList();
+            var list = dicValidityTime.ToList();
 
             foreach (var v in list)
             {
                 if(!IsTimeValid(v.Value))
                 {
-                    mapValidityTime.Remove(v.Key);
-                    mapPlayerToken.Remove(v.Key);
+                    dicValidityTime.Remove(v.Key);
+                    dicPlayerToken.Remove(v.Key);
                 }
             }
         }
@@ -114,7 +103,7 @@ namespace FierceGalaxyServer
 
         private bool IsTimeValid(DateTime t)
         {
-            return ((t - DateTime.Now) <= maxGap);
+            return ((t - DateTime.Now) <= tokenValidityTime);
         }
 
         private long GenerateRandomToken()

@@ -20,37 +20,37 @@ namespace FierceGalaxyServer
 
         public PlayerManager(IDBPlayerManager dBManager)
         {
-            this.dBPlayerManager = dBManager;
+            dBPlayerManager = dBManager;
         }
 
         //======================================================
         // Override
         //======================================================
 
-        public IReadOnlyPlayer CreatePlayer(string pseudo, string playerPW, string publicPseudo)
+        public IReadOnlyPlayer CreatePlayer(string userName, string password, string pseudo)
         {
-            CreatePlayerInDatabase(pseudo, playerPW, publicPseudo);
-            return Login(pseudo, playerPW);
+            CreatePlayerInDatabase(userName, password, pseudo);
+            return Login(userName, password);
         }
 
-        public IReadOnlyPlayer Login(string pseudo, string playerPW)
+        public IReadOnlyPlayer Login(string userName, string password)
         {
-            if (dBPlayerManager.ContainsPlayer(pseudo))
+            if (dBPlayerManager.ContainsPlayer(userName))
             {
-                var dbPlayer = dBPlayerManager.GetPlayer(pseudo);
+                var dbPlayer = dBPlayerManager.GetPlayer(userName);
 
-                if (dbPlayer.playerPW == playerPW)
+                if (dbPlayer.playerPW == password)
                 {
                     return CreatePlayerFromDBPlayer(dbPlayer);
                 }
                 else
                 {
-                    throw new System.ArgumentException("Password for pseudo '" + pseudo + "' is incorrect", "playerPW");
+                    throw new System.ArgumentException("Password for pseudo '" + userName + "' is incorrect", "playerPW");
                 }                    
             }
             else
             {
-                throw new System.ArgumentException("Pseudo '" + pseudo + "' does not exist", "pseudo");
+                throw new System.ArgumentException("Pseudo '" + userName + "' does not exist", "pseudo");
             }
         }
 

@@ -2,13 +2,14 @@
 
 namespace FierceGalaxyServer
 {
-    public class GameFacade : IGameFacade
+    public class GameFacade : IFierceGalaxyFacade
     {
         //======================================================
         // Field
         //======================================================
 
         private IPlayerManager playerManager;
+        //private IMapSerializer mapManager;
 
         //======================================================
         // Singleton
@@ -22,14 +23,12 @@ namespace FierceGalaxyServer
             {
                 singleton = new GameFacade();
             }
-
             return singleton;
         }
 
         private GameFacade()
         {
-            string dbFilePath = Properties.Settings.Default.JsonDBPath;
-            playerManager = new PlayerManager(new DBJsonManager(dbFilePath));
+            playerManager = new PlayerManager(new DBJsonManager());
         }
 
         //======================================================

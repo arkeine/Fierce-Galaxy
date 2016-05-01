@@ -12,6 +12,21 @@ namespace FierceGalaxyServer
         private Color color;
         private String publicPseudo = "";
         private bool valid = true;
+        
+        //======================================================
+        // Constructor
+        //======================================================
+
+        public Player()
+        {
+
+        }
+
+        public Player(IReadOnlyPlayer player)
+        {
+            publicPseudo = player.PublicPseudo;
+            color = player.Color;
+        }
 
         //======================================================
         // Override
