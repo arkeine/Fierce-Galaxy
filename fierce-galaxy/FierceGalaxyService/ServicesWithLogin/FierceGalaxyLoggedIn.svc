@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="FierceGalaxyService.ServicesWithLogin.FierceGalaxyLoggedIn" CodeBehind="FierceGalaxyLoggedIn.svc.cs" %>
