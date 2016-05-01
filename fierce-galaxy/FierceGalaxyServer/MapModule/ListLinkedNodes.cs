@@ -1,4 +1,5 @@
 ﻿using FierceGalaxyInterface;
+using System.Collections.Generic;
 
 namespace FierceGalaxyServer.MapModule
 {
@@ -22,6 +23,11 @@ namespace FierceGalaxyServer.MapModule
         //======================================================
         // Override
         //======================================================
+
+        public IReadOnlyList<IReadOnlyNode> LinkedNodes(IReadOnlyNode src)
+        {
+            return multiMapLinkedNodes[src];
+        }
 
         public void AddLink(IReadOnlyNode n1, IReadOnlyNode n2)
         {

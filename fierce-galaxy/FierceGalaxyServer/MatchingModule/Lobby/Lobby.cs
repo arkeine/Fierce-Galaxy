@@ -116,7 +116,10 @@ namespace FierceGalaxyServer
 
         public void SetPlayerSpawn(IReadOnlyPlayer player, IReadOnlyNode node)
         {
-            dictPlayers[player].SpawnNode = node;
+            if(currentMap.SpawnNodes.Contains(node))
+                dictPlayers[player].SpawnNode = node;
+            else
+                throw new ArgumentException("Spawn attribution is not correct");
         }
 
         public void StartGame()
