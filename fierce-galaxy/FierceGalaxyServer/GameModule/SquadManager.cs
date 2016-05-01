@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace FierceGalaxyServer
 {
-    public class SquadManager
+    class SquadManager
     {
         //======================================================
         // Static

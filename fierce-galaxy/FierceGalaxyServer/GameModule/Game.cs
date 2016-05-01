@@ -140,7 +140,38 @@ namespace FierceGalaxyServer
                 }
                 
                 dicGameNodeToMapNode.Add(n, gn);
-            }            
+            }
+        }
+
+        private bool IsThereMoreThanOnePLayer()
+        {
+            GameNode first = null;
+
+            foreach (IReadOnlyNode n in map.Nodes)
+            {
+                GameNode gn = dicGameNodeToMapNode[n];
+
+                //Get the first node with a owner
+                if (first == null && gn.CurrentOwner != null)
+                {
+                    first = gn;
+                }
+                //And compar if other node have different owner
+                else if (first.CurrentOwner != gn.CurrentOwner)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void CheckGameEnd()
+        {
+            if(!IsThereMoreThanOnePLayer())
+            {
+                OnGameFinish();
+            }
         }
 
     }

@@ -10,6 +10,7 @@ namespace FierceGalaxyServer
         }
 
         public IReadOnlyPlayer CurrentOwner { get; set; }
+
         public IReadOnlyNode NodeData { get; set; }
     }
 }
