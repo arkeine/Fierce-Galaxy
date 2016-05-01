@@ -60,7 +60,6 @@
     <Compile Include="Player.cs" />
     <Compile Include="ConnexionModule\PlayerManager.cs" />
     <Compile Include="ConnexionModule\TokenManager.cs" />
-    <Compile Include="FierceGalaxyFacade.cs" />
     <Compile Include="MapModule\ListLinkedNodes.cs" />
     <Compile Include="MapModule\IListLinkedNodes.cs" />
     <Compile Include="MapModule\Map.cs" />

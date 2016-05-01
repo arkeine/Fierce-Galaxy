@@ -1,7 +1,6 @@
 ﻿using FierceGalaxyInterface;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 
 namespace FierceGalaxyServer
@@ -137,14 +136,6 @@ namespace FierceGalaxyServer
                 throw new ApplicationException("No map selected");
             OnGameStart();
         }
-
-        public IDictionary<IReadOnlyNode, IReadOnlyPlayer> spawnAttribution()
-        {
-            return dictPlayers.ToDictionary( 
-                p=> p.Value.SpawnNode,
-                p => p.Key);
-        }
-
 
         //======================================================
         // Internal

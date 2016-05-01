@@ -1,20 +1,54 @@
-﻿using System;
+﻿using FierceGalaxyInterface;
+using FierceGalaxyServer;
+using System;
 
 namespace FierceGalaxyService
 {
+
+
     /// <summary>
     /// This service is accessible without connection or loggin
     /// </summary>
     public class FierceGalaxyConnexionService : IFierceGalaxyConnexionService
     {
-        public string Connect(string userName, string password)
+        //======================================================
+        // Field
+        //======================================================
+
+        private IPlayerManager playerManager;
+        private ITokenManager tokenManager;
+
+        //======================================================
+        // Constructor
+        //======================================================
+
+        public FierceGalaxyConnexionService()
         {
-            throw new NotImplementedException();
+            playerManager = new PlayerManager(new DBJsonManager());
+            tokenManager = new TokenManager();
         }
 
-        public string Disconnect(string token)
+        //======================================================
+        // Override
+        //======================================================
+
+        public string Connect(string userName, string password)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var p = playerManager.Login(userName, password);
+                var t = tokenManager.GenerateToken(p);
+                return ToJson(t);
+            }
+            catch(ArgumentException e)
+            {
+                return ToJson(e);
+            }
+        }
+
+        public void Disconnect(string token)
+        {
+            tokenManager.InvalidateToken(Int64.Parse(token));
         }
         
         public string GetGameFacadePort(string token)
@@ -22,9 +56,27 @@ namespace FierceGalaxyService
             throw new NotImplementedException();
         }
 
-        public string NewPlayer(string userName, string password, string pseudo)
+        public string CreatePlayer(string userName, string password, string pseudo)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var p = playerManager.CreatePlayer(userName, password, pseudo);
+                var t = tokenManager.GenerateToken(p);
+                return ToJson(t);
+            }
+            catch (ArgumentException e)
+            {
+                return ToJson(e);
+            }
+        }
+
+        //======================================================
+        // Private
+        //======================================================
+
+        private string ToJson(Object o)
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(o);
         }
     }
 }
