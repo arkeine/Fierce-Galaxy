@@ -54,7 +54,7 @@
     <Compile Include="DBModule\IDBMapManager.cs" />
     <Compile Include="GameModule\Game.cs" />
     <Compile Include="GameModule\GameNode.cs" />
-    <Compile Include="GameModule\TimestampManager.cs" />
+    <Compile Include="TimeModule\TimestampManager.cs" />
     <Compile Include="Tools\FunctionDictionary.cs" />
     <Compile Include="GameModule\SquadManager.cs" />
     <Compile Include="Global\Player.cs" />

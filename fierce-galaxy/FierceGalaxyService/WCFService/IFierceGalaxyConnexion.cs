@@ -1,46 +1,43 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 using System.ServiceModel.Web;
 
-namespace FierceGalaxyService.ServicesWithLogin
+namespace FierceGalaxyService
 {
-    /*[ServiceContract(
-        SessionMode = SessionMode.Required)]*/
     [ServiceContract]
-    public interface IFierceGalaxyLoggedIn
+    public interface IFierceGalaxyConnexionService
     {
+        /// <summary>
+        /// Create the player in database if conditions are met
+        /// </summary>
+        [OperationContract(IsInitiating = true)]
+        [WebInvoke(Method = "POST",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "create/player/")]
+        string NewPlayer(string userName, string password, string pseudo);
+
         /// <summary>
         /// Create the player's session if the credentials are correct
         /// </summary>
         [OperationContract]
-        //[OperationContract(IsInitiating = true)]
-        [WebInvoke(Method = "GET",
+        [WebInvoke(Method = "POST",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "connect/")]
-        void Connect();
-
-        /// <summary>
-        /// Generate a temporary authentification token for the game side
-        /// </summary>
-        [OperationContract]
-        [WebInvoke(Method = "GET",
-            RequestFormat = WebMessageFormat.Json,
-            ResponseFormat = WebMessageFormat.Json,
-            BodyStyle = WebMessageBodyStyle.Wrapped,
-            UriTemplate = "token/")]
-        string GenerateConnexionToken();
+        string Connect(string userName, string password);
 
         /// <summary>
         /// Disconnect the player and close the session
         /// </summary>
         [OperationContract]
-        //[OperationContract(IsTerminating = true)]
-        [WebInvoke(Method = "GET",
+        [WebInvoke(Method = "POST",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "disconnect/")]
-        void Disconnect();
+        string Disconnect(string token);
     }
 }

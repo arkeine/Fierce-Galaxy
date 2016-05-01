@@ -62,23 +62,17 @@
   <ItemGroup>
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
-    <Content Include="ServicesWithLogin\FierceGalaxyLoggedIn.svc" />
-    <Content Include="ServicesWithoutLogin\FierceGalaxyLoggedOut.svc" />
+    <Content Include="WCFService\FierceGalaxyLoggedOut.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserAuthentication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServicesWithLogin\FierceGalaxyLoggedIn.svc.cs">
-      <DependentUpon>FierceGalaxyLoggedIn.svc</DependentUpon>
-    </Compile>
-    <Compile Include="ServicesWithLogin\IFierceGalaxyLoggedIn.cs" />
-    <Compile Include="ServicesWithoutLogin\FierceGalaxyLoggedOut.svc.cs">
+    <Compile Include="WCFService\FierceGalaxyLoggedOut.svc.cs">
       <DependentUpon>FierceGalaxyLoggedOut.svc</DependentUpon>
     </Compile>
-    <Compile Include="ServicesWithoutLogin\IFierceGalaxyLoggedOut.cs" />
+    <Compile Include="WCFService\IFierceGalaxyConnexion.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

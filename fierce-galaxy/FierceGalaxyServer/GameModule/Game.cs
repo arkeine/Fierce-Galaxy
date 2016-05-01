@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace FierceGalaxyServer
 {
+    /// <summary>
+    /// Agregate the different game's objects behind the IGame interface
+    /// </summary>
     public class Game : IGame
     {
         //======================================================
@@ -16,7 +19,6 @@ namespace FierceGalaxyServer
         private IDictionary<IReadOnlyNode, GameNode> dicGameNodeToMapNode;
         private FunctionDictionary<GameNode> nodeManager;
         private SquadManager squadManager;
-        private TimestampManager timestamp;
 
         //======================================================
         // Constructor
@@ -27,8 +29,7 @@ namespace FierceGalaxyServer
         {
             this.map = map;
             this.spawnAttribution = spawnAttribution;
-
-            timestamp = new TimestampManager(new NetworkTime());
+            
             dicGameNodeToMapNode = new Dictionary<IReadOnlyNode, GameNode>();
             nodeManager = new FunctionDictionary<GameNode>();
             squadManager = new SquadManager(nodeManager);
@@ -49,19 +50,20 @@ namespace FierceGalaxyServer
 
         private void OnGameFinish()
         {
-            if (GameFinished != null) GameFinished(timestamp.GetNetworkTimeStamp());
+            if (GameFinished != null) GameFinished();
         }
 
         private void OnNodeUpdate(GameNode n)
         {
-            if (NodeUpdated != null) NodeUpdated(timestamp.GetNetworkTimeStamp(), 
-                n.NodeData, n.CurrentOwner, nodeManager.GetCurrentOffset(n));
+            if (NodeUpdated != null) NodeUpdated(n.NodeData, 
+                n.CurrentOwner, nodeManager.GetCurrentOffset(n));
         }
 
-        private void OnSquadLeaves(GameNode source, GameNode target, IReadOnlyPlayer owner, double ressources)
+        private void OnSquadLeaves(GameNode source, GameNode target,
+            IReadOnlyPlayer owner, double ressources)
         {
-            if (SquadLeaves != null) SquadLeaves(timestamp.GetNetworkTimeStamp(),
-                source.NodeData, target.NodeData, owner, ressources);
+            if (SquadLeaves != null) SquadLeaves(source.NodeData,
+                target.NodeData, owner, ressources);
         }
 
         private void OnManaUpdate()
