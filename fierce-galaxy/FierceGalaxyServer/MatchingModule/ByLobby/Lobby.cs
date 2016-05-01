@@ -23,7 +23,6 @@ namespace FierceGalaxyServer
         // Constructor
         //======================================================
         
-
         public Lobby(string lobbyName, IReadOnlyPlayer gameOwner)
         {
             dictPlayers = new Dictionary<IReadOnlyPlayer, GamePlayer>();
@@ -31,8 +30,7 @@ namespace FierceGalaxyServer
             name = lobbyName;
 
             dictPlayers.Add(gameOwner, owner);
-
-            PlayerCount = 1;
+            
             MaxCapacity = 2;
             IsClosed = false;
         }
@@ -73,7 +71,6 @@ namespace FierceGalaxyServer
         // Class: IReadOnlyLobby
         public IReadOnlyMap CurrentMap { get { return currentMap; } set { currentMap = value; } }
         public IReadOnlyPlayer Owner { get { return owner; } }
-        public int PlayerCount { get; set; }
         public int MaxCapacity { get; set; }
         public bool IsClosed { get; set; }   
         

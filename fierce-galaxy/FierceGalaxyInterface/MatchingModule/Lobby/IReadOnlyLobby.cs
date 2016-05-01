@@ -18,7 +18,6 @@ namespace FierceGalaxyInterface
         IReadOnlyList<IReadOnlyPlayer> ReadOnlylistPlayer { get; }
         IReadOnlyMap CurrentMap { get; }
         IReadOnlyPlayer Owner { get; }
-        int PlayerCount { get; }
         int MaxCapacity { get; }
         bool IsClosed { get; }
         bool IsPlayerReady(IReadOnlyPlayer player);
