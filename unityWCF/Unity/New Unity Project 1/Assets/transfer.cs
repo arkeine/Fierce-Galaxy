@@ -7,6 +7,11 @@ public class transfer : MonoBehaviour {
     private static Vector3? start;
     private static Vector3? stop;
 
+    public GameObject sphere;
+    public GameObject workingSphere;
+    public connectorAnimation cAnimation;
+    
+
     private static List<connectorAnimation> listConnectorAnimation = new List<connectorAnimation>();
 
     // Use this for initialization
@@ -19,10 +24,12 @@ public class transfer : MonoBehaviour {
 	void Update () {
         if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1) || Input.GetMouseButtonUp(2))
         {
-            checkWhereButtonReleased();    
-            
+            checkWhereButtonReleased();            
         }
-
+        if(workingSphere != null && cAnimation != null)
+        {
+            cAnimation.move(workingSphere);
+        }
     }
 
     void OnMouseDown()
@@ -72,6 +79,7 @@ public class transfer : MonoBehaviour {
 
     private void startAnimation(Vector3 start, Vector3 stop)
     {
-        var connectorAnimation = new connectorAnimation(start, stop);
+        cAnimation = new connectorAnimation(start, stop);
+        workingSphere = Instantiate(sphere, start, Quaternion.identity) as GameObject;
     }
 }
