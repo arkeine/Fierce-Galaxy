@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FierceGalaxyInterface
+﻿namespace FierceGalaxyInterface
 {
     public delegate void NodeUpdateHandler(IReadOnlyNode node, IReadOnlyPlayer owner, double ressourcesOffset);
     public delegate void SquadLeavesHandler(IReadOnlyNode sourceNode, IReadOnlyNode targetNode, IReadOnlyPlayer owner, double ressources);

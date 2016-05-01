@@ -1,72 +1,98 @@
-﻿// source: http://www.dotnetperls.com/multimap
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-public class MultiMap<K, V>
+namespace FierceGalaxyServer
 {
-    Dictionary<K, List<V>> _dictionary =
-    new Dictionary<K, List<V>>();
-    
-    public void Add(K key, V value)
+    /// <summary>
+    /// Dictionary with multiple value for a key
+    /// 
+    /// source: http://www.dotnetperls.com/multimap
+    /// </summary>
+    public class MultiMap<K, V>
     {
-        List<V> list;
-        if (this._dictionary.TryGetValue(key, out list))
-        {
-            list.Add(value);
-        }
-        else
-        {
-            list = new List<V>();
-            list.Add(value);
-            this._dictionary[key] = list;
-        }
-    }
+        //======================================================
+        // Field
+        //======================================================
 
-    public void RemoveValueInKey(K key, V value)
-    {
-        List<V> list;
-        if (this._dictionary.TryGetValue(key, out list))
-        {
-            list.Remove(value);
-        }
-    }
+        private Dictionary<K, List<V>> dictionary;
 
-    public void RemoveKey(K key)
-    {
-        _dictionary.Remove(key);
-    }
+        //======================================================
+        // Constructor
+        //======================================================
 
-    public bool Contains(K key, V value)
-    {
-        List<V> list;
-        if (this._dictionary.TryGetValue(key, out list))
+        public MultiMap()
         {
-            return list.Contains(value);
+            dictionary = new Dictionary<K, List<V>>();
         }
-        else
-        {
-            return false;
-        }
-    }
-    
-    public IEnumerable<K> Keys
-    {
-        get
-        {
-            return this._dictionary.Keys;
-        }
-    }
-    
-    public List<V> this[K key]
-    {
-        get
+
+        //======================================================
+        // Access
+        //======================================================
+
+        public void Add(K key, V value)
         {
             List<V> list;
-            if (!this._dictionary.TryGetValue(key, out list))
+
+            if (dictionary.TryGetValue(key, out list))
             {
-                list = new List<V>();
-                this._dictionary[key] = list;
+                list.Add(value);
             }
-            return list;
+            else
+            {
+                list = new List<V>(); //TODO check if necessary
+                list.Add(value);
+                dictionary[key] = list;
+            }
+        }
+
+        public void RemoveValueInKey(K key, V value)
+        {
+            List<V> list;
+
+            if (this.dictionary.TryGetValue(key, out list))
+            {
+                list.Remove(value);
+            }
+        }
+
+        public void RemoveKey(K key)
+        {
+            dictionary.Remove(key);
+        }
+
+        public bool Contains(K key, V value)
+        {
+            List<V> list;
+
+            if (dictionary.TryGetValue(key, out list))
+            {
+                return list.Contains(value);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public IEnumerable<K> Keys
+        {
+            get
+            {
+                return dictionary.Keys;
+            }
+        }
+
+        public List<V> this[K key]
+        {
+            get
+            {
+                List<V> list;
+                if (!dictionary.TryGetValue(key, out list))
+                {
+                    list = new List<V>();
+                    this.dictionary[key] = list;
+                }
+                return list;
+            }
         }
     }
 }

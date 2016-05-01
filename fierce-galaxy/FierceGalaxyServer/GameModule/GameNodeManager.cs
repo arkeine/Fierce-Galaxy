@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FierceGalaxyServer
+namespace FierceGalaxyServer.GameModule
 {
     /// <summary>
-    /// Manage a key-value pair where the value is function of 
-    /// time
+    /// Manage the value of node in function of time
     /// </summary>
-    public class FunctionDictionary<T>
+    class GameNodeManager
     {
         //======================================================
         // Delegate
@@ -19,7 +18,7 @@ namespace FierceGalaxyServer
         // Field
         //======================================================
 
-        private IDictionary<T, double> dicOffset;
+        private IDictionary<GameNode, double> dicOffset;
         private DateTime zero;
         private Fonction f;
 
@@ -27,14 +26,14 @@ namespace FierceGalaxyServer
         // Constructor
         //======================================================
 
-        public FunctionDictionary(Fonction f)
+        public GameNodeManager(Fonction f)
         {
-            dicOffset = new Dictionary<T, double>();
+            dicOffset = new Dictionary<GameNode, double>();
             Zero = DateTime.Now;
             Function = f;
         }
 
-        public FunctionDictionary() : this(delegate (double t) { return t; }) { }
+        public GameNodeManager() : this(delegate (double t) { return t; }) { }
 
         //======================================================
         // Access
@@ -66,25 +65,25 @@ namespace FierceGalaxyServer
             }
         }
 
-        public void SetCurrentValue(T k, double ressources)
+        public void SetCurrentValue(GameNode n, double ressources)
         {
             //Calculate the value to substract to offset
             double newOffset = GetValueFromZero() - ressources;
             
             //Update the offset
-            dicOffset[k] = newOffset;
+            dicOffset[n] = newOffset;
         }
 
-        public double GetCurrentValue(T k)
+        public double GetCurrentValue(GameNode n)
         {
             double absolutValue = Function((DateTime.Now - zero).TotalSeconds);
-            return GetValueFromZero() - GetCurrentOffset(k);
+            return GetValueFromZero() - GetCurrentOffset(n);
         }
 
-        public double GetCurrentOffset(T k)
+        public double GetCurrentOffset(GameNode n)
         {
             double currentOffset;
-            dicOffset.TryGetValue(k, out currentOffset);
+            dicOffset.TryGetValue(n, out currentOffset);
             return currentOffset;
         }
 

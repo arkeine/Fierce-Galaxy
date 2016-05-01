@@ -1,5 +1,4 @@
-﻿using System;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.ServiceModel.Web;
 
 namespace FierceGalaxyService
@@ -39,5 +38,16 @@ namespace FierceGalaxyService
             BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "disconnect/")]
         string Disconnect(string token);
+
+        /// <summary>
+        /// Disconnect the player and close the session
+        /// </summary>
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "game/port")]
+        string GetGameFacadePort(string token);
     }
 }

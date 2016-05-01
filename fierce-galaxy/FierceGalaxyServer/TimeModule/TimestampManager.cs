@@ -9,7 +9,7 @@ namespace FierceGalaxyServer
     /// 
     /// The purpose is to avoid to send NTP request for every timestamp
     /// </summary>
-    public class TimestampManager
+    public class TimestampManager : ITimestampManager
     {
         //======================================================
         // Field
@@ -38,6 +38,25 @@ namespace FierceGalaxyServer
         }
 
         //======================================================
+        // Override
+        //======================================================
+
+        public DateTime GetNetworkTimeStamp()
+        {
+            return DateTime.Now + GetDifferenceTime();
+        }
+
+        public DateTime NetworkTimeStampToLocalTimeStamp(DateTime t)
+        {
+            return t - GetDifferenceTime();
+        }
+
+        public DateTime LocalTimeStampToNetworkTimeStamp(DateTime t)
+        {
+            return t + GetDifferenceTime();
+        }
+
+        //======================================================
         // Access
         //======================================================
 
@@ -45,16 +64,6 @@ namespace FierceGalaxyServer
         {
             memoryLocalNow = DateTime.Now;
             memoryNetworkNow = ntp.GetNetworkTime();
-        }
-
-        public DateTime GetNetworkTimeStamp()
-        {
-            return DateTime.Now + GetDifferenceTime();
-        }
-
-        public DateTime NetworkTimeStampToLocalTime(DateTime t)
-        {
-            return t - GetDifferenceTime();
         }
 
         //======================================================

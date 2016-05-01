@@ -1,4 +1,5 @@
 ﻿using FierceGalaxyInterface;
+using FierceGalaxyServer.GameModule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace FierceGalaxyServer
         private IReadOnlyMap map;
         private IDictionary<IReadOnlyNode, IReadOnlyPlayer> spawnAttribution;
         private IDictionary<IReadOnlyNode, GameNode> dicGameNodeToMapNode;
-        private FunctionDictionary<GameNode> nodeManager;
+        private GameNodeManager nodeManager;
         private SquadManager squadManager;
 
         //======================================================
@@ -31,7 +32,7 @@ namespace FierceGalaxyServer
             this.spawnAttribution = spawnAttribution;
             
             dicGameNodeToMapNode = new Dictionary<IReadOnlyNode, GameNode>();
-            nodeManager = new FunctionDictionary<GameNode>();
+            nodeManager = new GameNodeManager();
             squadManager = new SquadManager(nodeManager);
 
             LoadMap(map);
