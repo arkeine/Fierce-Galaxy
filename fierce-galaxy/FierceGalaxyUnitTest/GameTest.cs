@@ -62,5 +62,14 @@ namespace FierceGalaxyUnitTest
             testGame = new Game(testLobby.CurrentMap, testLobby.spawnAttribution());
 
         }
+
+        [TestMethod]
+        public void GameStart()
+        {
+            testLobby.SetPlayerReady(p1, true);
+
+            testLobby.StartGame();
+        }
+
     }
 }

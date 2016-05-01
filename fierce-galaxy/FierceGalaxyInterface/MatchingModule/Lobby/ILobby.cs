@@ -7,7 +7,6 @@
         void SetPlayerSpawn(IReadOnlyPlayer player, IReadOnlyNode node);
         void SetPlayerColor(IPlayer player, Color c);
         void StartGame();
-        void SetPlayerReady(IReadOnlyPlayer player, bool ready);
-        
+        void SetPlayerReady(IReadOnlyPlayer player, bool ready);        
     }
 }
