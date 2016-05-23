@@ -1,6 +1,7 @@
 ﻿using FierceGalaxyInterface;
 using FierceGalaxyServer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace FierceGalaxyUnitTest
 {
@@ -12,10 +13,10 @@ namespace FierceGalaxyUnitTest
         //======================================================
 
         private static Player p1, p2, p3, p4;
-        private static Lobby testLobby;
         private static Node n1, n2, n3, n4, n5, n6;
         private static Map testMap;
         private static Game testGame;
+        private static IDictionary<IReadOnlyNode, IReadOnlyPlayer> spawnAttribution;
 
         //Global memory for the listeners
         private bool isGameFinishedCalled;
@@ -81,21 +82,10 @@ namespace FierceGalaxyUnitTest
             p3 = new Player();
             p4 = new Player();
 
-            testLobby = new Lobby("test lobby", p1);
-            testLobby.Join(p2);
-            testLobby.Join(p3);
-
-            testLobby.CurrentMap = testMap;
-
-            testLobby.SetPlayerReady(p1, true);
-            testLobby.SetPlayerReady(p2, true);
-            testLobby.SetPlayerReady(p3, true);
-
-            testLobby.SetPlayerSpawn(p1, n1);
-            testLobby.SetPlayerSpawn(p2, n2);
-            testLobby.SetPlayerSpawn(p3, n5);
-
-            testLobby.StartGame();
+            spawnAttribution = new Dictionary<IReadOnlyNode, IReadOnlyPlayer>();
+            spawnAttribution[n1] = p1;
+            spawnAttribution[n2] = p2;
+            spawnAttribution[n5] = p3;
         }
 
         [TestInitialize]
@@ -106,7 +96,11 @@ namespace FierceGalaxyUnitTest
             isManaupdateCalled = false;
             isGameFinishedCalled = false;
 
-            testGame = new Game(testLobby.CurrentMap, testLobby.SpawnAttribution());
+            testGame = new Game(testMap, spawnAttribution);
+            testGame.GameFinished += OnGameFinish;
+            testGame.NodeUpdated += OnNodeUpdate;
+            testGame.SquadLeaves += OnSquadLeaves;
+            testGame.ManaUpdated += OnManaUpdate;
         }
 
         //======================================================
@@ -117,18 +111,20 @@ namespace FierceGalaxyUnitTest
         public void FailNodesNotLinked()
         {
             testGame.Move(p1, n1, n2, 10);
-            
+
             Assert.IsFalse(isSquadLeavesCalled);
+            Assert.IsFalse(isNodeUpdateCalled);
         }
 
         [TestMethod]
-        public void FailRessourcesTooLow()
+        public void SuccessMove()
         {
-            testGame.Move(p1, n1, n3, 100);
+            testGame.Move(p1, n1, n3, 5);
 
-            Assert.IsFalse(isSquadLeavesCalled);
+            Assert.IsTrue(isSquadLeavesCalled);
+            Assert.IsTrue(isNodeUpdateCalled);
         }
-        
+
         //======================================================
         // Listeners
         //======================================================
