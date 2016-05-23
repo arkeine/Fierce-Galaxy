@@ -5,8 +5,12 @@ using FierceGalaxyServer;
 namespace FierceGalaxyUnitTest
 {
     [TestClass]
-    public class NetworkTimeTest 
+    public class NetworkTimeTest
     {
+        //======================================================
+        // Test case
+        //======================================================
+
         [TestMethod]
         public void CompareNetworkTimeToSystemTime()
         {

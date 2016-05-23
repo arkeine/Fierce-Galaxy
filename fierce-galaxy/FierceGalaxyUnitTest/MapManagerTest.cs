@@ -5,15 +5,21 @@ using System.Collections.Generic;
 
 namespace FierceGalaxyUnitTest
 {
-
     [TestClass]
     public class MapManagerTest
     {
-        private Node n1, n2, n3, n4, n5, n6, n7, n8, n9;
+        //======================================================
+        // Global tool
+        //======================================================
+
+        private Node n1, n2, n3;
         private List<Node> listNode;
         private Map map1, map2, map3, map4;
         static private MapManager mapManager;
 
+        //======================================================
+        // Test initialization
+        //======================================================
 
         [ClassInitialize]
         public static void ClassInit(TestContext context)
@@ -24,16 +30,25 @@ namespace FierceGalaxyUnitTest
         [TestInitialize]
         public void Init()
         {
+            n1 = new Node();
+            n2 = new Node();
+            n3 = new Node();
+
             listNode = new List<Node>(new Node[] { n1, n2, n3 });
             
             map1 = new Map();
             map2 = new Map();
             map3 = new Map();
             map4 = new Map();
+
             map1.AddNode(n1);
             map1.AddNode(n2);
             map1.AddNode(n3);
         }
+
+        //======================================================
+        // Test case
+        //======================================================
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException),

@@ -4,10 +4,18 @@ using FierceGalaxyServer;
 namespace FierceGalaxyUnitTest
 {
     [TestClass]
-    public class MapTest 
+    public class MapTest
     {
+        //======================================================
+        // Global tool
+        //======================================================
+
         private Node n1, n2, n3, n4;
         private Map testMap;
+
+        //======================================================
+        // Test initialization
+        //======================================================
 
         [TestInitialize]
         public void Init()
@@ -21,6 +29,10 @@ namespace FierceGalaxyUnitTest
             testMap.AddNode(n2);
             testMap.AddNode(n3);
         }
+
+        //======================================================
+        // Test case
+        //======================================================
 
         [TestMethod]
         public void AddRemoveLink()

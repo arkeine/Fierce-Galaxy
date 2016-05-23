@@ -8,8 +8,16 @@ namespace FierceGalaxyUnitTest
     [TestClass]
     public class FunctionDictionaryTest
     {
+        //======================================================
+        // Global tool
+        //======================================================
+
         private GameNode n;
         private GameNodeManager nm;
+
+        //======================================================
+        // Test initialization
+        //======================================================
 
         [TestInitialize]
         public void CreateLocalContext()
@@ -19,6 +27,10 @@ namespace FierceGalaxyUnitTest
                     delegate (double t) { return t; }
                 );
         }
+
+        //======================================================
+        // Test case
+        //======================================================
 
         [TestMethod]
         public void UseWithChangeTimeOffset()
@@ -75,6 +87,10 @@ namespace FierceGalaxyUnitTest
             System.Threading.Thread.Sleep(3000);
             CheckNodeValue(13);
         }
+
+        //======================================================
+        // Private
+        //======================================================
 
         private void CheckNodeValue(double expected)
         {

@@ -7,6 +7,10 @@ namespace FierceGalaxyUnitTest
     [TestClass]
     public class PlayerMangerTest
     {
+        //======================================================
+        // Test case
+        //======================================================
+
         [TestMethod]
         public void CreatePlayerAndLogin()
         {
@@ -42,6 +46,10 @@ namespace FierceGalaxyUnitTest
             playerManager.CreatePlayer(pseudo, playerPW, publicPseudo);
             playerManager.Login("Dani", playerPW);
         }
+
+        //======================================================
+        // Private
+        //======================================================
 
         private IDBPlayerManager CreateNewDB()
         {
