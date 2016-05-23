@@ -23,7 +23,7 @@ namespace FierceGalaxyUnitTest
         }
 
         [TestMethod]
-        public void ControlLink_1()
+        public void AddRemoveLink()
         {
             testMap.AddLink(n1, n2);
             
@@ -36,11 +36,7 @@ namespace FierceGalaxyUnitTest
             Assert.IsFalse(testMap.AreNodesLinked(n2, n1));
             Assert.IsFalse(testMap.AreNodesLinked(n4, n1));
             Assert.IsFalse(testMap.AreNodesLinked(n1, n4));
-        }
 
-        [TestMethod]
-        public void ControlLink_2()
-        {
             testMap.AddLink(n1, n2);
 
             Assert.IsFalse(testMap.AreNodesLinked(n1, n3));
