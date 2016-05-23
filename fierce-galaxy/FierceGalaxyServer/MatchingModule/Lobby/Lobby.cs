@@ -65,9 +65,21 @@ namespace FierceGalaxyServer
         // Override
         //======================================================
         
-        public IReadOnlyMap CurrentMap { get { return currentMap; } set { currentMap = value; } }
+        public IReadOnlyMap CurrentMap
+        {
+            get { return currentMap; }
+
+            set
+            {
+                currentMap = value;
+                OnMapChange(value);
+            }
+        }
+
         public IReadOnlyPlayer Owner { get { return owner; } }
+
         public int MaxCapacity { get; set; }
+
         public bool IsClosed { get; set; }   
         
         public IReadOnlyList<IReadOnlyPlayer> ReadOnlylistPlayer
