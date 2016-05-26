@@ -55,23 +55,21 @@ namespace FierceGalaxyUnitTest
             "Parameter 'Name' cannot be null")]
         public void SaveMapWithoutNameFail()
         {
-            DBMap dbMap1 = new DBMap(map1);
-            mapManager.SaveMap(dbMap1);
+            mapManager.SaveMap(map1);
         }
         
         [TestMethod]
         public void SaveMapSuccess()
         {
             int n = 1;
-            DBMap dbMap1 = new DBMap(map1);
             bool exist = true;
 
             while (exist)
             {
-                dbMap1.Name = "testname1 #" + n;
+                map1.Name = "testname1 #" + n;
                 try
                 {
-                    mapManager.SaveMap(dbMap1);
+                    mapManager.SaveMap(map1);
                     exist = false;
                 }
                 catch (ArgumentException e)
@@ -93,12 +91,10 @@ namespace FierceGalaxyUnitTest
             "Map name already exist")]
         public void SaveMapNameAlreadyExistFail()
         {
-            DBMap dbMap1 = new DBMap(map1);
-            dbMap1.Name = "testDoubleMapName";
-            DBMap dbMap2 = new DBMap(map2);
-            dbMap2.Name = "testDoubleMapName";
-            mapManager.SaveMap(dbMap1);
-            mapManager.SaveMap(dbMap2);
+            map1.Name = "testDoubleMapName";
+            map2.Name = "testDoubleMapName";
+            mapManager.SaveMap(map1);
+            mapManager.SaveMap(map2);
         }
     }
 }

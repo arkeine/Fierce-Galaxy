@@ -48,10 +48,6 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBModule\DBJsonManager.cs" />
-    <Compile Include="DBModule\IDBPlayerManager.cs" />
-    <Compile Include="DBModule\DBMap.cs" />
-    <Compile Include="DBModule\IDBMapManager.cs" />
     <Compile Include="GameModule\Game.cs" />
     <Compile Include="GameModule\GameNode.cs" />
     <Compile Include="TimeModule\TimestampManager.cs" />
@@ -72,7 +68,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Tools\DoubleDictionary.cs" />
-    <Compile Include="DBModule\DBPlayer.cs" />
     <Compile Include="Tools\JsonSerialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeModule\NetworkTime.cs" />
@@ -84,6 +79,13 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

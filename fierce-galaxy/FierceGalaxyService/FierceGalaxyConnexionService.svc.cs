@@ -24,7 +24,7 @@ namespace FierceGalaxyService
 
         public FierceGalaxyConnexionService()
         {
-            playerManager = new PlayerManager(new DBJsonManager());
+            playerManager = new PlayerManager();
             tokenManager = new TokenManager();
         }
 

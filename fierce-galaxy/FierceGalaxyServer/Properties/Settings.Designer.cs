@@ -25,28 +25,19 @@ namespace FierceGalaxyServer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\\\temp\\\\")]
-        public string JsonDBPath {
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp\\dbPlayersManager.json")]
+        public string PlayerDBPath {
             get {
-                return ((string)(this["JsonDBPath"]));
+                return ((string)(this["PlayerDBPath"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("dbPlayersManager.json")]
-        public string JsonDBPlayersFileName {
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp\\maps")]
+        public string MapsDBPath {
             get {
-                return ((string)(this["JsonDBPlayersFileName"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("maps")]
-        public string JsonDBMapsPath {
-            get {
-                return ((string)(this["JsonDBMapsPath"]));
+                return ((string)(this["MapsDBPath"]));
             }
         }
     }

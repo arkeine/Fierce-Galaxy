@@ -27,7 +27,7 @@ namespace FierceGalaxyUnitTest
             string pseudo = "Dany";
             string playerPW = "pass123";
             string publicPseudo = "shotgun";
-            PlayerManager playerManager = new PlayerManager(CreateNewDB());
+            PlayerManager playerManager = new PlayerManager();
 
             playerManager.CreatePlayer(pseudo, playerPW, publicPseudo);
             playerManager.Login(pseudo, "pass12");
@@ -41,21 +41,10 @@ namespace FierceGalaxyUnitTest
             string pseudo = "Dany";
             string playerPW = "pass123";
             string publicPseudo = "shotgun";
-            PlayerManager playerManager = new PlayerManager(CreateNewDB());
+            PlayerManager playerManager = new PlayerManager();
 
             playerManager.CreatePlayer(pseudo, playerPW, publicPseudo);
             playerManager.Login("Dani", playerPW);
-        }
-
-        //======================================================
-        // Private
-        //======================================================
-
-        private IDBPlayerManager CreateNewDB()
-        {
-            string fileName = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + "\\DB.json";
-  
-            return new DBJsonManager();            
         }
     }
 }

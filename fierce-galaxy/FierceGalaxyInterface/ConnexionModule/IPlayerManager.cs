@@ -16,7 +16,7 @@
         IReadOnlyPlayer Login(string userName, string password);
 
         /// <summary>
-        /// Create a new player acount, but dont login him
+        /// Create a new player acount and login him
         /// </summary>
         /// <param name="userName">User's acount name</param>
         /// <param name="playerPW">User's password</param>
@@ -25,5 +25,17 @@
         /// Return the new player or null if the creation fail
         /// </returns>
         IReadOnlyPlayer CreatePlayer(string userName, string password, string pseudo);
+
+        /// <summary>
+        /// Authenticate the player
+        /// </summary>
+        /// <param name="player">The player to disconnect</param>
+        void Disconnect(IReadOnlyPlayer player);
+
+        /// <summary>
+        /// Delete a new player acount
+        /// </summary>
+        /// <param name="player">The player to delete</param>
+        void DeletePlayer(IReadOnlyPlayer player);
     }
 }

@@ -12,9 +12,7 @@ namespace FierceGalaxyServer
         //======================================================
 
         private IDictionary<string, IReadOnlyMap> dicMaps;
-        private string dbFilePath;
-        private string mapsDirectory;
-        private DBMap dbMapJson;
+        private string mapsDBPath;
 
         //======================================================
         // Constructor
@@ -23,10 +21,10 @@ namespace FierceGalaxyServer
         public MapManager()
         {
             dicMaps = new Dictionary<string, IReadOnlyMap>();
+            mapsDBPath = Properties.Settings.Default.MapsDBPath;
 
-            dbFilePath = Properties.Settings.Default.JsonDBPath;
-
-            mapsDirectory = dbFilePath + Properties.Settings.Default.JsonDBMapsPath;
+            Console.WriteLine(mapsDBPath);
+            Directory.CreateDirectory(mapsDBPath);
 
             LoadMaps();
         }
@@ -43,43 +41,36 @@ namespace FierceGalaxyServer
         public void LoadMaps()
         {
             dicMaps = new Dictionary<string, IReadOnlyMap>();
-            Directory.CreateDirectory(mapsDirectory);
-            string[] fileEntries = Directory.GetFiles(mapsDirectory);
+
+            string[] fileEntries = Directory.GetFiles(mapsDBPath);
             foreach (string fileName in fileEntries)
             {
-                dbMapJson = JsonSerialization.ReadFromJsonFile<DBMap>(fileName);
-                var map = new Map(dbMapJson.Name, dbMapJson.Description);
-                dicMaps.Add(dbMapJson.Name, map);
+                Console.WriteLine(fileName);
+                var map = JsonSerialization.ReadFromJsonFile<Map>(fileName);
+                dicMaps.Add(fileName, map);
             }
         }
 
-        public void SaveMap(DBMap map)
+        public void SaveMap(Map map)
         {
-            if(map.Name == null)
+            if (!dicMaps.ContainsKey(map.Name))
             {
-                throw new System.ArgumentException("Parameter cannot be null", "map.name");
-            }
+                if(map.Name != "")
+                {
+                    JsonSerialization.WriteToJsonFile<Map>
+                        (mapsDBPath + Path.DirectorySeparatorChar + map.Name + ".json", map);
 
-            if (dicMaps.ContainsKey(map.Name))
+                    LoadMaps();
+                }
+                else
+                {
+                    throw new System.ArgumentException("Parameter 'Name' cannot be null");
+                }
+            }
+            else
             {
-                throw new System.ArgumentException("Map name already exist", "map.name");
+                throw new System.ArgumentException("Map name already exist", map.Name);
             }
-            Console.Write(mapsDirectory + map.Name);
-            JsonSerialization.WriteToJsonFile<DBMap>
-                (mapsDirectory + "\\" + map.Name + ".json", map);
-
-            LoadMaps();
-        }
-
-        //======================================================
-        // Private
-        //======================================================
-        
-        private IReadOnlyMap LoadSingleMap(string mapName)
-        {
-            IReadOnlyMap m = JsonSerialization.ReadFromJsonFile<Map>(
-                mapsDirectory + mapName);
-            return m;
         }
     }
 }

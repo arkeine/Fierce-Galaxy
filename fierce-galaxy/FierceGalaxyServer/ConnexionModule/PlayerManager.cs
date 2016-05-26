@@ -1,4 +1,7 @@
-﻿using FierceGalaxyInterface;
+﻿using System;
+using FierceGalaxyInterface;
+using System.Collections.Generic;
+using System.IO;
 
 namespace FierceGalaxyServer
 {
@@ -11,16 +14,17 @@ namespace FierceGalaxyServer
         //======================================================
         // Field
         //======================================================
-        
-        private IDBPlayerManager dBPlayerManager;
+
+        private Dictionary<string, Record> dictPlayers = new Dictionary<string, Record>();
+        private string playerDBPath = Properties.Settings.Default.PlayerDBPath;
 
         //======================================================
         // Constructor
         //======================================================
 
-        public PlayerManager(IDBPlayerManager dBManager)
+        public PlayerManager()
         {
-            dBPlayerManager = dBManager;
+            // nothing
         }
 
         //======================================================
@@ -29,19 +33,41 @@ namespace FierceGalaxyServer
 
         public IReadOnlyPlayer CreatePlayer(string userName, string password, string pseudo)
         {
-            CreatePlayerInDatabase(userName, password, pseudo);
-            return Login(userName, password);
+            if (!dictPlayers.ContainsKey(userName))
+            {
+                var k = new Record();
+                k.PlayerObject = new Player();
+                k.PlayerPassword = password;
+                k.PlayerPseudo = pseudo;
+                dictPlayers[userName] = k;
+                SaveDataBase();
+                return Login(userName, password);
+            }
+            else
+            {
+                throw new System.ArgumentException("Pseudo '" + pseudo + "' is already used", "pseudo");
+            }
+        }
+
+        public void DeletePlayer(IReadOnlyPlayer player)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Disconnect(IReadOnlyPlayer player)
+        {
+            throw new NotImplementedException();
         }
 
         public IReadOnlyPlayer Login(string userName, string password)
         {
-            if (dBPlayerManager.ContainsPlayer(userName))
+            if (dictPlayers.ContainsKey(userName))
             {
-                var dbPlayer = dBPlayerManager.GetPlayer(userName);
+                var player = dictPlayers[userName];
 
-                if (dbPlayer.playerPW == password)
+                if (player.PlayerPassword == password)
                 {
-                    return CreatePlayerFromDBPlayer(dbPlayer);
+                    return player.PlayerObject;
                 }
                 else
                 {
@@ -57,25 +83,49 @@ namespace FierceGalaxyServer
         //======================================================
         // Private
         //======================================================
-        
-        private IPlayer CreatePlayerFromDBPlayer(DBPlayer dbPlayer)
+
+        private void LoadDataBase()
         {
-            var player = new Player();
-            player.PublicPseudo = dbPlayer.publicPseudo;
-            return player;
+            foreach (var kpv in dictPlayers)
+            {
+                kpv.Value.PlayerObject.Invalidate();
+            }
+
+            ValidateDBExist();
+            dictPlayers = JsonSerialization.ReadFromJsonFile<Dictionary<string, Record>>(playerDBPath);
         }
 
-        private void CreatePlayerInDatabase(string pseudo, string playerPW, string publicPseudo)
+        private void SaveDataBase()
         {
-            if(!dBPlayerManager.ContainsPlayer(pseudo))
+            ValidateDBExist();
+            JsonSerialization.WriteToJsonFile<Dictionary<string, Record>>(playerDBPath, dictPlayers);
+        }
+
+        private void ValidateDBExist()
+        {
+            var dir = Path.GetDirectoryName(playerDBPath);
+
+            if (!Directory.Exists(dir))
             {
-                DBPlayer newPlayer = new DBPlayer(pseudo, playerPW, publicPseudo);
-                dBPlayerManager.SetPlayer(pseudo, newPlayer);
+                Directory.CreateDirectory(dir);
             }
             else
-            {
-                throw new System.ArgumentException("Pseudo '" + pseudo + "' is already used", "pseudo");
+            { 
+                // Trick to create file if not exist
+                using (File.Create(playerDBPath)) { }
             }
+        }
+
+
+        //======================================================
+        // Internal
+        //======================================================
+
+        private class Record
+        {
+            public Player PlayerObject { get; set; }
+            public string PlayerPassword { get; set; } 
+            public string PlayerPseudo { get; set; }
         }
     }
 }

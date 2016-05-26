@@ -2,14 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FierceGalaxyServer.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="JsonDBPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\\temp\\</Value>
+    <Setting Name="PlayerDBPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\temp\dbPlayersManager.json</Value>
     </Setting>
-    <Setting Name="JsonDBPlayersFileName" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">dbPlayersManager.json</Value>
-    </Setting>
-    <Setting Name="JsonDBMapsPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">maps</Value>
+    <Setting Name="MapsDBPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\temp\maps</Value>
     </Setting>
   </Settings>
 </SettingsFile>
