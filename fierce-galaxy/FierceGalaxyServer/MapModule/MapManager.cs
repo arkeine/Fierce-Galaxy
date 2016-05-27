@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace FierceGalaxyServer
 {
@@ -12,6 +13,7 @@ namespace FierceGalaxyServer
         //======================================================
 
         private IDictionary<string, IReadOnlyMap> dicMaps;
+        private const string extention = ".json";
         private string mapsDBPath;
 
         //======================================================
@@ -53,12 +55,12 @@ namespace FierceGalaxyServer
 
         public void SaveMap(Map map)
         {
-            if (!dicMaps.ContainsKey(map.Name))
+            if (dicMaps.ContainsKey(map.Name))
             {
                 if(map.Name != "")
                 {
                     JsonSerialization.WriteToJsonFile<Map>
-                        (mapsDBPath + Path.DirectorySeparatorChar + map.Name + ".json", map);
+                        (mapsDBPath + Path.DirectorySeparatorChar + map.Name + extention, map);
 
                     LoadMaps();
                 }
@@ -69,7 +71,7 @@ namespace FierceGalaxyServer
             }
             else
             {
-                throw new System.ArgumentException("Map name already exist", map.Name);
+                throw new System.ArgumentException("Map name already exist", "map.Name");
             }
         }
     }

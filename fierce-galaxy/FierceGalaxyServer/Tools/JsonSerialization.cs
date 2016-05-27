@@ -1,7 +1,9 @@
-﻿using System.IO;
+﻿using Newtonsoft.Json;
+using System.IO;
 
 /// <summary>
 /// Source: http://blog.danskingdom.com/saving-and-loading-a-c-objects-data-to-an-xml-json-or-binary-file/
+/// Updated to handle the type and serialize abstract classes and interfaces
 /// </summary>
 
 namespace FierceGalaxyServer
@@ -31,7 +33,13 @@ namespace FierceGalaxyServer
             TextWriter writer = null;
             try
             {
-                var contentsToWriteToFile = Newtonsoft.Json.JsonConvert.SerializeObject(objectToWrite);
+                var contentsToWriteToFile = JsonConvert.SerializeObject(
+                    objectToWrite,
+                    Formatting.Indented,
+                    new JsonSerializerSettings
+                    {
+                        TypeNameHandling = TypeNameHandling.All
+                    });
                 writer = new StreamWriter(filePath, append);
                 writer.Write(contentsToWriteToFile);
             }
@@ -56,7 +64,12 @@ namespace FierceGalaxyServer
             {
                 reader = new StreamReader(filePath);
                 var fileContents = reader.ReadToEnd();
-                var jsonResult = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(fileContents);
+                var jsonResult = JsonConvert.DeserializeObject<T>(
+                    fileContents, 
+                    new JsonSerializerSettings
+                    {
+                        TypeNameHandling = TypeNameHandling.All
+                    });
                 if (jsonResult == null)
                     jsonResult = new T();
                 return jsonResult;
