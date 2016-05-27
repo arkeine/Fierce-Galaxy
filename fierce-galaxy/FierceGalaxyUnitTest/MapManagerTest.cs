@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace FierceGalaxyUnitTest
 {
@@ -24,7 +25,8 @@ namespace FierceGalaxyUnitTest
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            mapManager = new MapManager();
+            string directory = Properties.Settings.Default.MapsDBPathTest;
+            mapManager = new MapManager(directory);
         }
 
         [TestInitialize]
@@ -44,6 +46,16 @@ namespace FierceGalaxyUnitTest
             map1.AddNode(n1);
             map1.AddNode(n2);
             map1.AddNode(n3);
+
+            string directory = Properties.Settings.Default.MapsDBPathTest;
+            if (Directory.Exists(directory))
+            {
+                foreach(var f in Directory.GetFiles(directory))
+                {
+                    File.Delete(f);
+                }
+                Directory.Delete(directory);
+            }
         }
 
         //======================================================
@@ -61,29 +73,8 @@ namespace FierceGalaxyUnitTest
         [TestMethod]
         public void SaveMapSuccess()
         {
-            int n = 1;
-            bool exist = true;
-
-            while (exist)
-            {
-                map1.Name = "testname1 #" + n;
-                try
-                {
-                    mapManager.SaveMap(map1);
-                    exist = false;
-                }
-                catch (ArgumentException e)
-                {
-                    if (e.Message.Contains("Map name already exist"))
-                    {
-                        n += 1;
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }                
-            }
+            map1.Name = "testname1";
+            mapManager.SaveMap(map1);
         }
 
         [TestMethod]

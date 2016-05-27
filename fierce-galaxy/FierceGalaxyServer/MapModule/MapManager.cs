@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace FierceGalaxyServer
 {
@@ -19,14 +18,11 @@ namespace FierceGalaxyServer
         //======================================================
         // Constructor
         //======================================================
-
-        public MapManager()
+        
+        public MapManager(string mapsDBPath)
         {
             dicMaps = new Dictionary<string, IReadOnlyMap>();
-            mapsDBPath = Properties.Settings.Default.MapsDBPath;
-
-            Console.WriteLine(mapsDBPath);
-            Directory.CreateDirectory(mapsDBPath);
+            this.mapsDBPath = mapsDBPath;
 
             LoadMaps();
         }
@@ -42,20 +38,23 @@ namespace FierceGalaxyServer
 
         public void LoadMaps()
         {
+            Directory.CreateDirectory(mapsDBPath); 
+
             dicMaps = new Dictionary<string, IReadOnlyMap>();
 
-            string[] fileEntries = Directory.GetFiles(mapsDBPath);
-            foreach (string fileName in fileEntries)
+            string[] pathEntries = Directory.GetFiles(mapsDBPath);
+            foreach (string pathName in pathEntries)
             {
-                Console.WriteLine(fileName);
-                var map = JsonSerialization.ReadFromJsonFile<Map>(fileName);
-                dicMaps.Add(fileName, map);
+                var map = JsonSerialization.ReadFromJsonFile<Map>(pathName);                
+                dicMaps.Add(Path.GetFileNameWithoutExtension(pathName), map);
             }
         }
 
         public void SaveMap(Map map)
         {
-            if (dicMaps.ContainsKey(map.Name))
+            Directory.CreateDirectory(mapsDBPath);
+
+            if (!dicMaps.ContainsKey(map.Name))
             {
                 if(map.Name != "")
                 {
@@ -63,15 +62,19 @@ namespace FierceGalaxyServer
                         (mapsDBPath + Path.DirectorySeparatorChar + map.Name + extention, map);
 
                     LoadMaps();
+                    foreach(var v in dicMaps)
+                    {
+                        Console.WriteLine(v.Key);
+                    }
                 }
                 else
                 {
-                    throw new System.ArgumentException("Parameter 'Name' cannot be null");
+                    throw new ArgumentException("Parameter 'Name' cannot be null");
                 }
             }
             else
             {
-                throw new System.ArgumentException("Map name already exist", "map.Name");
+                throw new ArgumentException("Map name already exist", "map.Name");
             }
         }
     }

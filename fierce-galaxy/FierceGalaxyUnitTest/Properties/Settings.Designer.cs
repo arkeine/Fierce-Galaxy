@@ -22,5 +22,29 @@ namespace FierceGalaxyUnitTest.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp\\test\\maps")]
+        public string MapsDBPathTest {
+            get {
+                return ((string)(this["MapsDBPathTest"]));
+            }
+            set {
+                this["MapsDBPathTest"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp\\test\\dbPlayersManager.json")]
+        public string PlayerDBPathTest {
+            get {
+                return ((string)(this["PlayerDBPathTest"]));
+            }
+            set {
+                this["PlayerDBPathTest"] = value;
+            }
+        }
     }
 }
